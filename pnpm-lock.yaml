@@ -585,7 +585,7 @@ importers:
         version: 3.7.0
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))
+        version: 1.0.7(tailwindcss@4.3.3)
       talkjs:
         specifier: ^0.46.0
         version: 0.46.0
@@ -610,7 +610,7 @@ importers:
     devDependencies:
       '@ariesclark/eslint-config':
         specifier: 'catalog:'
-        version: 3.2.1-canary.1(ba6478d721ee96844fd3890772a00887)
+        version: 3.2.1-canary.1(d218e2e37783f02ad733df0bc6780e50)
       '@capacitor/cli':
         specifier: 8.5.0
         version: 8.5.0(supports-color@10.2.2)
@@ -631,10 +631,10 @@ importers:
         version: 8.5.0(@react-router/serve@8.5.0(react-router@8.5.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)(typescript@5.9.3))(react-router@8.5.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)(typescript@5.9.3)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.106.1)(tsx@4.23.12)(yaml@2.9.1))(wrangler@4.151.3(@cloudflare/workers-types@5.20261022.1)(@types/node@24.19.2))
       '@tailwindcss/forms':
         specifier: 0.5.11
-        version: 0.5.11(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))
+        version: 0.5.11(tailwindcss@4.3.3)
       '@tailwindcss/typography':
         specifier: 0.5.20
-        version: 0.5.20(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))
+        version: 0.5.20(tailwindcss@4.3.3)
       '@types/ms':
         specifier: 2.1.0
         version: 2.1.0
@@ -667,7 +667,7 @@ importers:
         version: 0.4.26(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2))
       eslint-plugin-tailwindcss:
         specifier: 3.18.2
-        version: 3.18.2(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))
+        version: 3.18.2(tailwindcss@4.3.3)
       knip:
         specifier: 6.42.1
         version: 6.42.1
@@ -690,14 +690,14 @@ importers:
         specifier: 4.1.0
         version: 4.1.0
       tailwindcss:
-        specifier: 3.4.19
-        version: 3.4.19(tsx@4.23.12)(yaml@2.9.1)
+        specifier: 4.3.3
+        version: 4.3.3
       tailwindcss-hocus:
         specifier: 0.0.7
-        version: 0.0.7(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))
+        version: 0.0.7(tailwindcss@4.3.3)
       tailwindcss-motion:
         specifier: 1.1.1
-        version: 1.1.1(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))
+        version: 1.1.1(tailwindcss@4.3.3)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -743,7 +743,7 @@ importers:
     devDependencies:
       '@ariesclark/eslint-config':
         specifier: 'catalog:'
-        version: 3.2.1-canary.1(@typescript-eslint/typescript-estree@8.67.0(supports-color@10.2.2)(typescript@5.9.3))(@typescript-eslint/utils@8.67.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3))(@vue/compiler-sfc@3.5.41)(eslint-plugin-format@1.5.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2)))(eslint-plugin-tailwindcss@3.18.2(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1)))(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(jiti@2.7.0)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(vitest@4.1.12(@opentelemetry/api@1.9.1)(@types/node@24.19.2)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.106.1)(tsx@4.23.12)(yaml@2.9.1)))(yaml@2.9.1)
+        version: 3.2.1-canary.1(@typescript-eslint/typescript-estree@8.67.0(supports-color@10.2.2)(typescript@5.9.3))(@typescript-eslint/utils@8.67.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3))(@vue/compiler-sfc@3.5.41)(eslint-plugin-format@1.5.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2)))(eslint-plugin-tailwindcss@3.18.2(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1)))(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(jiti@2.7.0)(postcss@8.5.31)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(vitest@4.1.12(@opentelemetry/api@1.9.1)(@types/node@24.19.2)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.106.1)(tsx@4.23.12)(yaml@2.9.1)))(yaml@2.9.1)
       '@total-typescript/ts-reset':
         specifier: 'catalog:'
         version: 0.6.1
@@ -8777,6 +8777,9 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
+  tailwindcss@4.3.3:
+    resolution: {integrity: sha512-gOhV3P7ufE62QDGg1zVaTgCR+EtPv92k2nIhVcVKcLmxT1sUBsQGhnZj175j+MqRt4zLF7ic+sCYjfhxMxj7YQ==}
+
   talkjs@0.46.0:
     resolution: {integrity: sha512-99yMs9oiAV1JpkJlhzXu8TmYrGe1BcYeKw3XjzEns5Rz9YHZ34Fs2GwyX9rM8dukzvWB2MPXOi0vx7NX3qHbXw==}
 
@@ -9549,7 +9552,8 @@ snapshots:
 
   '@aegisjsproject/trusted-types@1.1.0': {}
 
-  '@alloc/quick-lru@5.2.0': {}
+  '@alloc/quick-lru@5.2.0':
+    optional: true
 
   '@antfu/eslint-config@4.19.0(@eslint-react/eslint-plugin@1.53.1(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2))(supports-color@10.2.2)(ts-api-utils@2.5.0(typescript@5.9.3))(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.67.0(supports-color@10.2.2)(typescript@5.9.3))(@typescript-eslint/utils@8.67.0(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3))(@vue/compiler-sfc@3.5.41)(eslint-plugin-format@1.5.0(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2)))(eslint-plugin-react-hooks@5.2.0(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2)))(eslint-plugin-react-refresh@0.4.26(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2)))(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)(vitest@4.1.12(@opentelemetry/api@1.9.1)(@types/node@24.19.2)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.106.1)(tsx@4.23.12)(yaml@2.9.1)))':
     dependencies:
@@ -9734,14 +9738,14 @@ snapshots:
       call-me-maybe: 1.0.2
       openapi-types: 12.1.3
 
-  '@ariesclark/eslint-config@3.2.1-canary.1(@typescript-eslint/typescript-estree@8.67.0(supports-color@10.2.2)(typescript@5.9.3))(@typescript-eslint/utils@8.67.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3))(@vue/compiler-sfc@3.5.41)(eslint-plugin-format@1.5.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2)))(eslint-plugin-tailwindcss@3.18.2(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1)))(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(jiti@2.7.0)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(vitest@4.1.12(@opentelemetry/api@1.9.1)(@types/node@24.19.2)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.106.1)(tsx@4.23.12)(yaml@2.9.1)))(yaml@2.9.1)':
+  '@ariesclark/eslint-config@3.2.1-canary.1(@typescript-eslint/typescript-estree@8.67.0(supports-color@10.2.2)(typescript@5.9.3))(@typescript-eslint/utils@8.67.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3))(@vue/compiler-sfc@3.5.41)(eslint-plugin-format@1.5.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2)))(eslint-plugin-tailwindcss@3.18.2(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1)))(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(jiti@2.7.0)(postcss@8.5.31)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(vitest@4.1.12(@opentelemetry/api@1.9.1)(@types/node@24.19.2)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.106.1)(tsx@4.23.12)(yaml@2.9.1)))(yaml@2.9.1)':
     dependencies:
       '@antfu/eslint-config': 4.19.0(@typescript-eslint/typescript-estree@8.67.0(supports-color@10.2.2)(typescript@5.9.3))(@typescript-eslint/utils@8.67.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3))(@vue/compiler-sfc@3.5.41)(eslint-plugin-format@1.5.0(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2)))(eslint@9.39.5(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)(vitest@4.1.12(@opentelemetry/api@1.9.1)(@types/node@24.19.2)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(sass@1.106.1)(tsx@4.23.12)(yaml@2.9.1)))
       eslint: 9.39.5(jiti@2.7.0)(supports-color@10.2.2)
       eslint-flat-config-utils: 2.1.4
       esno: 4.8.0
       local-pkg: 1.2.1
-      tsup: 8.5.1(jiti@2.7.0)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(yaml@2.9.1)
+      tsup: 8.5.1(jiti@2.7.0)(postcss@8.5.31)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(yaml@2.9.1)
     optionalDependencies:
       eslint-plugin-tailwindcss: 3.18.2(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))
     transitivePeerDependencies:
@@ -9780,9 +9784,9 @@ snapshots:
       eslint-flat-config-utils: 2.1.4
       esno: 4.8.0
       local-pkg: 1.2.1
-      tsup: 8.5.1(jiti@2.7.0)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(yaml@2.9.1)
+      tsup: 8.5.1(jiti@2.7.0)(postcss@8.5.31)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(yaml@2.9.1)
     optionalDependencies:
-      eslint-plugin-tailwindcss: 3.18.2(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))
+      eslint-plugin-tailwindcss: 3.18.2(tailwindcss@4.3.3)
     transitivePeerDependencies:
       - '@eslint-react/eslint-plugin'
       - '@eslint/json'
@@ -9812,7 +9816,7 @@ snapshots:
       - vitest
       - yaml
 
-  '@ariesclark/eslint-config@3.2.1-canary.1(ba6478d721ee96844fd3890772a00887)':
+  '@ariesclark/eslint-config@3.2.1-canary.1(d218e2e37783f02ad733df0bc6780e50)':
     dependencies:
       '@antfu/eslint-config': 4.19.0(@eslint-react/eslint-plugin@1.53.1(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2))(supports-color@10.2.2)(ts-api-utils@2.5.0(typescript@5.9.3))(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.67.0(supports-color@10.2.2)(typescript@5.9.3))(@typescript-eslint/utils@8.67.0(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3))(@vue/compiler-sfc@3.5.41)(eslint-plugin-format@1.5.0(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2)))(eslint-plugin-react-hooks@5.2.0(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2)))(eslint-plugin-react-refresh@0.4.26(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2)))(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@5.9.3)(vitest@4.1.12(@opentelemetry/api@1.9.1)(@types/node@24.19.2)(vite@8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@1.21.7)(sass@1.106.1)(tsx@4.23.12)(yaml@2.9.1)))
       eslint: 9.39.5(jiti@1.21.7)(supports-color@10.2.2)
@@ -9821,7 +9825,7 @@ snapshots:
       local-pkg: 1.2.1
       tsup: 8.5.1(jiti@1.21.7)(postcss@8.5.31)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(yaml@2.9.1)
     optionalDependencies:
-      eslint-plugin-tailwindcss: 3.18.2(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))
+      eslint-plugin-tailwindcss: 3.18.2(tailwindcss@4.3.3)
     transitivePeerDependencies:
       - '@eslint-react/eslint-plugin'
       - '@eslint/json'
@@ -13030,15 +13034,15 @@ snapshots:
       estraverse: 5.3.0
       picomatch: 4.0.7
 
-  '@tailwindcss/forms@0.5.11(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))':
+  '@tailwindcss/forms@0.5.11(tailwindcss@4.3.3)':
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.4.19(tsx@4.23.12)(yaml@2.9.1)
+      tailwindcss: 4.3.3
 
-  '@tailwindcss/typography@0.5.20(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1))':
+  '@tailwindcss/typography@0.5.20(tailwindcss@4.3.3)':
     dependencies:
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.19(tsx@4.23.12)(yaml@2.9.1)
+      tailwindcss: 4.3.3
 
   '@tanstack/query-core@5.101.4': {}
 
@@ -13905,10 +13909,12 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.2
+    optional: true
 
   are-docs-informative@0.0.2: {}
 
-  arg@5.0.2: {}
+  arg@5.0.2:
+    optional: true
 
   argparse@2.0.1: {}
 
@@ -13991,7 +13997,8 @@ snapshots:
       read-cmd-shim: 6.0.0
       write-file-atomic: 7.0.1
 
-  binary-extensions@2.3.0: {}
+  binary-extensions@2.3.0:
+    optional: true
 
   birecord@0.1.2: {}
 
@@ -14109,7 +14116,8 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  camelcase-css@2.0.1: {}
+  camelcase-css@2.0.1:
+    optional: true
 
   caniuse-lite@1.0.30001809: {}
 
@@ -14157,6 +14165,7 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+    optional: true
 
   chokidar@4.0.3:
     dependencies:
@@ -14360,11 +14369,13 @@ snapshots:
     dependencies:
       dequal: 2.0.3
 
-  didyoumean@1.2.2: {}
+  didyoumean@1.2.2:
+    optional: true
 
   diff-sequences@27.5.1: {}
 
-  dlv@1.1.3: {}
+  dlv@1.1.3:
+    optional: true
 
   dom-serializer@2.0.0:
     dependencies:
@@ -14973,6 +14984,13 @@ snapshots:
       fast-glob: 3.3.3
       postcss: 8.5.31
       tailwindcss: 3.4.19(tsx@4.23.12)(yaml@2.9.1)
+    optional: true
+
+  eslint-plugin-tailwindcss@3.18.2(tailwindcss@4.3.3):
+    dependencies:
+      fast-glob: 3.3.3
+      postcss: 8.5.31
+      tailwindcss: 4.3.3
 
   eslint-plugin-toml@0.12.0(eslint@9.39.5(jiti@1.21.7)(supports-color@10.2.2))(supports-color@10.2.2):
     dependencies:
@@ -15764,6 +15782,7 @@ snapshots:
   is-binary-path@2.1.0:
     dependencies:
       binary-extensions: 2.3.0
+    optional: true
 
   is-blob@2.1.0: {}
 
@@ -15774,6 +15793,7 @@ snapshots:
   is-core-module@2.16.2:
     dependencies:
       hasown: 2.0.4
+    optional: true
 
   is-docker@2.2.1: {}
 
@@ -15831,7 +15851,8 @@ snapshots:
 
   itty-router@5.0.24: {}
 
-  jiti@1.21.7: {}
+  jiti@1.21.7:
+    optional: true
 
   jiti@2.7.0: {}
 
@@ -16688,7 +16709,8 @@ snapshots:
       semver: 7.8.5
       validate-npm-package-license: 3.0.4
 
-  normalize-path@3.0.0: {}
+  normalize-path@3.0.0:
+    optional: true
 
   npm-bundled@5.0.0:
     dependencies:
@@ -16747,7 +16769,8 @@ snapshots:
 
   object-assign@4.1.1: {}
 
-  object-hash@3.0.0: {}
+  object-hash@3.0.0:
+    optional: true
 
   object-inspect@1.13.4: {}
 
@@ -17053,7 +17076,8 @@ snapshots:
 
   path-key@4.0.0: {}
 
-  path-parse@1.0.7: {}
+  path-parse@1.0.7:
+    optional: true
 
   path-scurry@2.0.2:
     dependencies:
@@ -17076,7 +17100,8 @@ snapshots:
 
   picomatch@4.0.7: {}
 
-  pify@2.3.0: {}
+  pify@2.3.0:
+    optional: true
 
   pino-abstract-transport@1.2.0:
     dependencies:
@@ -17156,11 +17181,13 @@ snapshots:
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.12
+    optional: true
 
   postcss-js@4.1.0(postcss@8.5.31):
     dependencies:
       camelcase-css: 2.0.1
       postcss: 8.5.31
+    optional: true
 
   postcss-load-config@6.0.1(jiti@1.21.7)(postcss@8.5.31)(tsx@4.23.12)(yaml@2.9.1):
     dependencies:
@@ -17171,11 +17198,12 @@ snapshots:
       tsx: 4.23.12
       yaml: 2.9.1
 
-  postcss-load-config@6.0.1(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.1):
+  postcss-load-config@6.0.1(jiti@2.7.0)(postcss@8.5.31)(tsx@4.23.12)(yaml@2.9.1):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
       jiti: 2.7.0
+      postcss: 8.5.31
       tsx: 4.23.12
       yaml: 2.9.1
 
@@ -17183,6 +17211,7 @@ snapshots:
     dependencies:
       postcss: 8.5.31
       postcss-selector-parser: 6.1.4
+    optional: true
 
   postcss-selector-parser@6.0.10:
     dependencies:
@@ -17193,6 +17222,7 @@ snapshots:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
+    optional: true
 
   postcss-selector-parser@7.1.5:
     dependencies:
@@ -17435,6 +17465,7 @@ snapshots:
   read-cache@1.0.0:
     dependencies:
       pify: 2.3.0
+    optional: true
 
   read-cmd-shim@6.0.0: {}
 
@@ -17455,6 +17486,7 @@ snapshots:
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.2
+    optional: true
 
   readdirp@4.1.2: {}
 
@@ -17504,6 +17536,7 @@ snapshots:
       is-core-module: 2.16.2
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
+    optional: true
 
   retry@0.12.0: {}
 
@@ -18009,7 +18042,8 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
-  supports-preserve-symlinks-flag@1.0.0: {}
+  supports-preserve-symlinks-flag@1.0.0:
+    optional: true
 
   svgo@4.1.0:
     dependencies:
@@ -18027,17 +18061,17 @@ snapshots:
 
   tailwind-merge@3.7.0: {}
 
-  tailwindcss-animate@1.0.7(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1)):
+  tailwindcss-animate@1.0.7(tailwindcss@4.3.3):
     dependencies:
-      tailwindcss: 3.4.19(tsx@4.23.12)(yaml@2.9.1)
+      tailwindcss: 4.3.3
 
-  tailwindcss-hocus@0.0.7(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1)):
+  tailwindcss-hocus@0.0.7(tailwindcss@4.3.3):
     dependencies:
-      tailwindcss: 3.4.19(tsx@4.23.12)(yaml@2.9.1)
+      tailwindcss: 4.3.3
 
-  tailwindcss-motion@1.1.1(tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1)):
+  tailwindcss-motion@1.1.1(tailwindcss@4.3.3):
     dependencies:
-      tailwindcss: 3.4.19(tsx@4.23.12)(yaml@2.9.1)
+      tailwindcss: 4.3.3
 
   tailwindcss@3.4.19(tsx@4.23.12)(yaml@2.9.1):
     dependencies:
@@ -18066,6 +18100,9 @@ snapshots:
     transitivePeerDependencies:
       - tsx
       - yaml
+    optional: true
+
+  tailwindcss@4.3.3: {}
 
   talkjs@0.46.0: {}
 
@@ -18179,7 +18216,7 @@ snapshots:
       - tsx
       - yaml
 
-  tsup@8.5.1(jiti@2.7.0)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(yaml@2.9.1):
+  tsup@8.5.1(jiti@2.7.0)(postcss@8.5.31)(supports-color@10.2.2)(tsx@4.23.12)(typescript@5.9.3)(yaml@2.9.1):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.28.2)
       cac: 6.7.14
@@ -18190,7 +18227,7 @@ snapshots:
       fix-dts-default-cjs-exports: 1.0.1
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1(jiti@2.7.0)(tsx@4.23.12)(yaml@2.9.1)
+      postcss-load-config: 6.0.1(jiti@2.7.0)(postcss@8.5.31)(tsx@4.23.12)(yaml@2.9.1)
       resolve-from: 5.0.0
       rollup: 4.62.4
       source-map: 0.7.6
@@ -18199,6 +18236,7 @@ snapshots:
       tinyglobby: 0.2.17
       tree-kill: 1.2.2
     optionalDependencies:
+      postcss: 8.5.31
       typescript: 5.9.3
     transitivePeerDependencies:
       - jiti
