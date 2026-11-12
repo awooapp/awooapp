@@ -8,7 +8,7 @@
 #   - https://hub.docker.com/_/debian?tab=tags - for the release image
 #   - https://pkgs.org/ - resource for finding needed packages
 
-FROM elixir:1.20.4-otp-29-slim@sha256:6245171c91cf90808437f203f22856738d0095d310f4f9030219e53111823ff8 AS builder
+FROM elixir:1.20.5-otp-29-slim@sha256:610dfb3dd85f9e23af58b431f4907ebce66ae59fca9b462eed2e02d9f0baef89 AS builder
 
 # install build dependencies
 RUN apt-get update -y && apt-get install -y build-essential cmake git \
@@ -51,7 +51,7 @@ RUN mix release
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
-FROM debian:stable-slim@sha256:13e0a2e78aa0554ad5ff66e4e260c6dbcdff807eb1f39d43b9fb0288aae88b04
+FROM debian:stable-slim@sha256:fbfb4059d2127120aa05b6e6064523d2102552f0cf0026ddf0701c12f1f8f3e0
 
 RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses6 locales ca-certificates \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*

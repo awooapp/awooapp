@@ -19,6 +19,27 @@ Other services, all under `apps/`:
 - **maintenance/**: Worker serving a 503 maintenance page; a `flirtual-maintenance` cookie matching `TOKEN` passes through. Also holds the static legal pages and `.well-known/` files.
 - **posthog-proxy/**: Worker proxying PostHog ingest and caching its static assets.
 - **preview-router/**: Worker routing preview hostnames (PR number or commit SHA) to the matching preview deployment.
+- **embed/**: Worker behind chat link embeds (`embed.flirtual.net`, `embed-beta.flirtual.net` for canary); see below.
+
+## Chat link embeds
+
+`apps/embed` unfurls links in chat messages for the TalkJS theme (`conversation-chatbox/link-embed.tsx`):
+domain rules adapted from Iframely, then oEmbed, then `twitter:player`/`og:video`, then an OpenGraph card.
+X and Bluesky posts skip all of that: `src/posts.ts` reads them from X's syndication endpoint and
+Bluesky's public API, and the app draws them itself, without either site's scripts.
+
+- **Allowlist**: `src/allowed-hosts.json` mirrors the TalkJS role's "Allowed hostnames" under link
+  suppression, and `src/allowed-matches.json` its "Suppression exceptions"; keep them in step. Hosts
+  are checked on the link and again where its redirects end; an exception covers its own redirects.
+- **Isolation**: players run in `/frame` on the embed origin, whose own CSP holds `frame-src` and
+  `script-src` to the allowlist and `frame-ancestors` to `ALLOWED_ORIGINS`. The app's CSP only ever
+  names the embed origin. The app frames it with `allow-scripts allow-same-origin` and no top
+  navigation, which is only safe on another registrable domain: never serve it from the app's.
+- **Proxying**: preview images and videos go through HMAC-signed `/image` and `/media` URLs
+  (`SIGNING_KEY` secret), so a recipient's IP never reaches arbitrary hosts.
+- **Klipy** (the GIF picker, `VITE_KLIPY_APP_KEY`): its terms require API calls and media loads
+  from the person's own client, unproxied and uncached, with results in the order returned. The
+  worker never fetches Klipy URLs; the app renders them itself.
 
 ## Data flow
 
@@ -34,7 +55,9 @@ only in the root `package.json`.
 
 - `packages/` holds libraries used by other members: `packages/pulumi-fly` and
   `packages/pulumi-listmonk` are the Fly.io and Listmonk dynamic providers behind the `pulumi`
-  submodule. CI doesn't check out the submodule, and a frozen install skips it.
+  submodule. CI doesn't check out the submodule, and a frozen install skips it once its empty
+  directory is removed; every job that installs the whole workspace runs `rmdir pulumi` first
+  until pnpm/pnpm#17712 is fixed.
 
 - Versions shared by more than one app (`typescript`, `eslint`, `wrangler`, `vitest`, …) live in
   the root `catalog:` and are referenced as `"typescript": "catalog:"`. Bump them there, not in the

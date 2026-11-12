@@ -44,7 +44,6 @@ export const sentryReportTo = import.meta.env.VITE_SENTRY_REPORT_TO as string | 
 export const sentryTraces = Number.parseFloat(
 	import.meta.env.VITE_SENTRY_TRACES as string || (production ? "0.1" : "0")
 );
-export const sentryLogs = (import.meta.env.VITE_SENTRY_LOGS as string || (production ? "1" : "0")) === "1";
 export const sentryProfiles = Number.parseFloat(
 	import.meta.env.VITE_SENTRY_PROFILES as string || (production ? "1" : "0")
 );
@@ -53,6 +52,16 @@ export const sentryProfiles = Number.parseFloat(
 export const posthogKey = import.meta.env.VITE_POSTHOG_KEY as string;
 export const posthogHost = import.meta.env.VITE_POSTHOG_HOST as string;
 export const posthogUiHost = import.meta.env.VITE_POSTHOG_UI_HOST as string || "https://us.posthog.com";
+
+// Link embeds in chat, served by apps/embed.
+export const embedOrigin = import.meta.env.VITE_EMBED_ORIGIN
+	? new URL(import.meta.env.VITE_EMBED_ORIGIN as string).origin
+	: undefined;
+// Embeds are framed with scripts and same-origin access, which only isolates them when they're
+// on another origin: framed from ours, they could lift their own sandbox.
+invariant(embedOrigin !== new URL(siteOrigin).origin, "VITE_EMBED_ORIGIN must not be the site's own origin");
+
+export const klipyAppKey = import.meta.env.VITE_KLIPY_APP_KEY as string || undefined;
 
 // Miscellaneous
 export const freshworksWidgetId = import.meta.env.VITE_FRESHWORKS_WIDGET_ID as string;

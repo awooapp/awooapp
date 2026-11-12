@@ -7,7 +7,9 @@
 	"semanticCommits": "enabled",
 	"semanticCommitScope": "{{#if parentDir}}{{parentDir}}{{else}}repo{{/if}}",
 	"osvVulnerabilityAlerts": true,
-	"dependencyDashboardOSVVulnerabilitySummary": "unresolved",
+	"dependencyDashboard": {
+		"osvVulnerabilitySummary": "unresolved"
+	},
 	"prConcurrentLimit": 0,
 	"prHourlyLimit": 0,
 	"labels": ["dependencies"],
@@ -200,7 +202,7 @@
 			"groupName": "listmonk"
 		},
 		{
-			"matchPackageNames": ["pnpm"],
+			"matchPackageNames": ["pnpm", "ghcr.io/pnpm/pnpm"],
 			"groupName": "pnpm"
 		},
 		{
