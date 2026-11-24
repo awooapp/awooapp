@@ -6,6 +6,10 @@
  * Variants like dark: can't reach in here, so colours come from variables set in theme.css.
  */
 
+.picker {
+	overflow-x: clip;
+}
+
 .search-wrapper {
 	@apply flex h-(--total-emoji-size) items-center gap-2 rounded-xl px-3 shadow-brand-1;
 	background: var(--input-background);
@@ -84,6 +88,10 @@ input.search:focus {
 
 .favorites {
 	padding-bottom: var(--favorites-padding-bottom, var(--emoji-padding));
+}
+
+:host([data-without-favorites]) .favorites {
+	@apply hidden;
 }
 
 .onscreen .custom-emoji::after {

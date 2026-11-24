@@ -59,6 +59,14 @@ export default configure({
 						name: "react-router",
 						importNames: ["Navigate", "useNavigate", "useMatch", "redirect"],
 						message: "Import from \"~/i18n\" instead."
+					},
+					{
+						name: "posthog-js",
+						message: "Import from \"~/analytics-posthog\" instead."
+					},
+					{
+						name: "react-dom/server",
+						message: "Render into a DOM node instead."
 					}
 				]
 			}

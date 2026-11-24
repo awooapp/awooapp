@@ -7,10 +7,10 @@ import type { User } from "~/api/user";
 import { UserImage } from "~/components/user-avatar";
 import { customEmojiNames } from "~/hooks/use-talkjs";
 
-import { ImageBlock, LocationBlock } from "./attachment-blocks";
 import { jumboEmojiSegments, splitEmoji } from "./custom-emoji";
 import type { EmojiSegment } from "./custom-emoji";
 import { CustomEmoji, Twemoji } from "./emoji";
+import { JumpToLatest } from "./jump-to-latest";
 import { LinkEmbeds } from "./link-embed";
 import { messageLinks, soleLink } from "./links";
 import type { Match } from "./match-card";
@@ -78,7 +78,7 @@ const TextBlock: FC<TextBlockProps> = ({ block, message, common }) => {
 	);
 };
 
-// Hides the typing indicator.
-const AfterMessages: FC = () => null;
+// Replaces the typing indicator.
+const AfterMessages = JumpToLatest;
 
-export const theme: Partial<Theme> = { AfterMessages, Avatar, ImageBlock, LocationBlock, Message, MessageDivider, MessageField, ReferencedMessage, ReplyBar, TextBlock };
+export const theme: Partial<Theme> = { AfterMessages, Avatar, Message, MessageDivider, MessageField, ReferencedMessage, ReplyBar, TextBlock };

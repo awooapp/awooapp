@@ -17,9 +17,12 @@ import { lazy } from "~/lazy";
 
 import { customEmojiPickerEntries, pickedCustomEmoji } from "./custom-emoji";
 import { followEditors, insertCustomEmoji } from "./custom-emoji-editor";
+import { reactionEmojiVersion } from "./emoji-favorites";
 import emojiPickerStyles from "./emoji-picker.css?inline";
+import { followTabSwipes } from "./emoji-tab-swipes";
+import { hideKeyboardOnScroll } from "./keyboard";
 import { followReactionPickers } from "./reaction-picker";
-import { followMessageListResizes } from "./scroll-anchor";
+import { anchorMessageLists } from "./scroll-anchor";
 import { followStickyAvatars } from "./sticky-avatars";
 
 const Chatbox = lazy(() => import("./chatbox").then(({ default: Chatbox }) => Chatbox));
@@ -27,6 +30,9 @@ const Chatbox = lazy(() => import("./chatbox").then(({ default: Chatbox }) => Ch
 const customEmojiPicker = customEmojiPickerEntries(customEmojis);
 
 const emojiVersion = twemoji.version;
+const reactionPickerEmojiVersion = String(Math.min(Number.parseFloat(emojiVersion), reactionEmojiVersion));
+
+const swipeable = new WeakSet<Picker>();
 
 // TalkJS mounts <emoji-picker> elements (message field, reactions) without a way to pass custom
 // emoji (https://github.com/nolanlawson/emoji-picker-element#custom-emoji) or styles for their
@@ -38,7 +44,13 @@ function followEmojiPickers(element: HTMLElement) {
 	const setUpPickers = () => {
 		for (const picker of element.querySelectorAll<Picker>("emoji-picker")) {
 			if (picker.customEmoji !== customEmojiPicker) picker.customEmoji = customEmojiPicker;
-			if (picker.getAttribute("emoji-version") !== emojiVersion) picker.setAttribute("emoji-version", emojiVersion);
+			const version = picker.closest(".t-reaction-picker") ? reactionPickerEmojiVersion : emojiVersion;
+			if (picker.getAttribute("emoji-version") !== version) picker.setAttribute("emoji-version", version);
+			picker.toggleAttribute("data-without-favorites", !!picker.closest("[data-message-menu]"));
+			if (!swipeable.has(picker)) {
+				swipeable.add(picker);
+				followTabSwipes(picker);
+			}
 
 			const root = picker.shadowRoot;
 			if (root && !root.adoptedStyleSheets.includes(styles))
@@ -75,15 +87,17 @@ function followChatbox(element: HTMLDivElement) {
 	const stopEmoji = followEmojiPickers(element);
 	const stopAvatars = followStickyAvatars(element);
 	const stopReactionPickers = followReactionPickers(element);
-	const stopResizes = followMessageListResizes(element);
+	const stopAnchors = anchorMessageLists(element);
 	const stopEditors = followEditors(element);
+	const stopKeyboard = hideKeyboardOnScroll(element);
 
 	return () => {
 		stopEmoji();
 		stopAvatars();
 		stopReactionPickers();
-		stopResizes();
+		stopAnchors();
 		stopEditors();
+		stopKeyboard();
 	};
 }
 
@@ -97,7 +111,7 @@ const height = [
 	"native-nav:[--chatbox-below:max(calc(var(--safe-area-inset-bottom,0rem)_-_0.75rem_+_var(--tab-bar-gap,0rem)),0rem)]",
 	// The layout pulls the page up under a banner, into the top safe area the banner already pads.
 	"[--chatbox-banner:max(0rem,calc(var(--banner-height,0rem)_+_min(0rem,calc(0.5rem_-_var(--safe-area-inset-top,0rem)))))]",
-	"h-[calc(100dvh_-_var(--chatbox-banner)_-_var(--chatbox-header)_-_var(--chatbox-below))]",
+	"h-[calc(var(--viewport-height,100dvh)_-_var(--chatbox-banner)_-_var(--chatbox-header)_-_var(--chatbox-below))]",
 	"vision:h-[calc(100dvh_-_8.125rem)]"
 ].join(" ");
 
