@@ -21,8 +21,8 @@ defmodule Flirtual.Search.Document do
     privacy = user.preferences.privacy
 
     attributes =
-      profile.attributes
-      |> Attribute.normalize_aliases()
+      (profile.attributes ++ Attribute.normalize_aliases(profile.attributes))
+      |> Enum.uniq_by(& &1.id)
       |> then(&if(nsfw, do: &1, else: exclude_by(&1, :type, "kink")))
 
     attributes_lf =
@@ -95,6 +95,10 @@ defmodule Flirtual.Search.Document do
       Enum.map(profile.relationships || [], &Tokens.relationship/1),
       if(profile.monopoly, do: [Tokens.monopoly(profile.monopoly)], else: []),
       if(nsfw && profile.domsub, do: [Tokens.domsub(profile.domsub)], else: []),
+      if(nsfw && profile.domsub && not private?(privacy, :kinks),
+        do: [Tokens.public_domsub(profile.domsub)],
+        else: []
+      ),
       if(profile.country, do: [Tokens.country(profile.country)], else: []),
       # Personality poles are only filter tokens; hide them when private
       # (personality scoring factor reads the numeric traits, not these).
