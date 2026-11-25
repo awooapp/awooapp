@@ -5,30 +5,22 @@ import { Preferences } from "~/api/user/preferences";
 import { Profile, ProfileDomsubList } from "~/api/user/profile";
 import { Form } from "~/components/forms";
 import { FormButton } from "~/components/forms/button";
+import { InputLabel, InputRadioList, InputSwitch } from "~/components/inputs";
 import {
-	InputAutocomplete,
-	InputLabel,
-	InputRadioList,
-	InputSwitch
-} from "~/components/inputs";
-import { InputPrivacySelect } from "~/components/inputs/specialized";
-import {
-
-	useAttributes,
-	useAttributeTranslation
-} from "~/hooks/use-attribute";
-import type { AttributeTranslation } from "~/hooks/use-attribute";
+	InputAttributeCategorySelect,
+	InputPrivacySelect
+} from "~/components/inputs/specialized";
 import { useSession } from "~/hooks/use-session";
 import { useToast } from "~/hooks/use-toast";
 import { invalidate, mutate, sessionKey } from "~/query";
+
+const maximumKinks = 8;
 
 export const NsfwForm: React.FC = () => {
 	const session = useSession();
 	const toasts = useToast();
 
 	const { t } = useTranslation();
-	const tAttribute = useAttributeTranslation();
-	const kinks = useAttributes("kink");
 
 	if (!session) return null;
 	const { user } = session;
@@ -106,26 +98,23 @@ export const NsfwForm: React.FC = () => {
 							</FormField>
 							<FormField name="kinks">
 								{(field) => (
-									<>
-										<InputLabel {...field.labelProps}>{t("kinks")}</InputLabel>
-										<InputAutocomplete
-											{...field.props}
-											options={kinks.map(({ id, definitionLink }) => {
-												const { name } = (tAttribute[
-													id
-												] as AttributeTranslation<"kink">) ?? {
-													name: id
-												};
+									<InputAttributeCategorySelect
+										maximum={maximumKinks}
+										selected={field.props.value}
+										type="kink"
+										onSelected={(value) => {
+											if (
+												value.length > maximumKinks
+												&& value.length > field.props.value.length
+											)
+												return toasts.add({
+													type: "warning",
+													value: t("kinks_limit_reached", { number: maximumKinks })
+												});
 
-												return {
-													key: id,
-													label: name,
-													definitionLink
-												};
-											})}
-											limit={8}
-										/>
-									</>
+											field.props.onChange(value);
+										}}
+									/>
 								)}
 							</FormField>
 							<FormField name="kinksPrivacy">

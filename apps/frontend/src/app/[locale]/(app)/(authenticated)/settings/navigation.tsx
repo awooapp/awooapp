@@ -121,7 +121,7 @@ export const SettingsNavigation: FC = () => {
 							</NavigationLink>
 						)}
 						<NavigationLink href={urls.settings.nsfw} Icon={Flame}>
-							{t("nsfw")}
+							{t("kinks")}
 						</NavigationLink>
 						<NavigationLink
 							newBadge

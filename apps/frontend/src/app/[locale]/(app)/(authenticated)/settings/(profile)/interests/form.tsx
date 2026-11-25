@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import type { Dispatch, FC } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { groupBy } from "remeda";
 import { twMerge } from "tailwind-merge";
 
 import type { Session } from "~/api/auth";
@@ -27,9 +26,8 @@ import {
 	InputLabelHint,
 	InputText
 } from "~/components/inputs";
-import { Pill } from "~/components/profile/pill/pill";
+import { InputAttributeCategorySelect } from "~/components/inputs/specialized";
 import { customInterests as customInterestsEnabled } from "~/features";
-import { useAttributes, useAttributeTranslation } from "~/hooks/use-attribute";
 import { useDevice } from "~/hooks/use-device";
 import { useSession } from "~/hooks/use-session";
 import { useToast } from "~/hooks/use-toast";
@@ -49,115 +47,18 @@ const categoryIcons: Record<string, React.ReactNode> = {
 	tmQbiXNw7d9Ys2DG9Ddg28: <Star />
 };
 
-const HighlightedText: FC<{ children: string; snippet: string }> = ({
-	children,
-	snippet
-}) => {
-	const parts = children.split(new RegExp(`(${snippet})`, "gi"));
-	if (!snippet || parts.length === 1) return children;
-
-	return (
-		<span>
-			{parts.map((part, index) => {
-				if (part.toLowerCase() !== snippet.toLowerCase()) return part;
-				return (
-					// eslint-disable-next-line react/no-array-index-key
-					<span key={`${part}-${index}`} className="font-bold">
-						{part}
-					</span>
-				);
-			})}
-		</span>
-	);
-};
-
 export const InterestSelectList: FC<{
 	filter: string;
 	selected: Array<string>;
 	onSelected: Dispatch<Array<string>>;
 	maximum: number;
-}> = ({ filter, selected, onSelected, maximum }) => {
-	const interestCategories = useAttributes("interest-category");
-	const interests = useAttributes("interest");
-
-	const categorizedInterests = groupBy(interests, ({ category }) => category);
-
-	const tAttribute = useAttributeTranslation();
-
-	return (
-		<div className="flex flex-col gap-8">
-			{interestCategories.map((categoryId) => {
-				const { name: categoryName } = tAttribute[categoryId] || {
-					name: categoryId
-				};
-				const categoryIcon = categoryIcons[categoryId];
-
-				const filteredInterests = categorizedInterests[categoryId]
-					?.filter((interest) => {
-						if (!filter) return true;
-
-						const interestName = tAttribute[interest.id]?.name || interest.id;
-						return (
-							interestName.toLowerCase().includes(filter.toLowerCase())
-							|| interest.synonyms?.some((synonym) =>
-								synonym.toLowerCase().includes(filter.toLowerCase())
-							)
-						);
-					})
-					.sort(({ id: a }, { id: b }) => {
-						const aName = tAttribute[a]?.name || a;
-						const bName = tAttribute[b]?.name || b;
-
-						return aName.localeCompare(bName);
-					});
-
-				if (!filteredInterests || filteredInterests.length === 0) return null;
-
-				return (
-					<div key={categoryId} className="flex flex-col gap-4">
-						<InputLabel className="flex flex-row items-center gap-2">
-							{categoryIcon}
-							{" "}
-							{categoryName}
-						</InputLabel>
-						<div className="flex flex-wrap gap-2">
-							{filteredInterests.map(({ id: interestId }) => {
-								const { name: interestName } = tAttribute[interestId] || {
-									name: interestId
-								};
-								const active = selected.includes(interestId);
-
-								return (
-									<Pill
-										key={interestId}
-										className={twMerge(
-											"data-active:bg-brand-gradient",
-											!active && selected.length >= maximum
-												? "cursor-default opacity-50"
-												: "hover:bg-white-40 data-active:text-white-10 dark:hover:bg-black-50"
-										)}
-										active={active}
-										hocusable={false}
-										onClick={() =>
-											onSelected(
-												active
-													? selected.filter((id) => id !== interestId)
-													: [...selected, interestId]
-											)}
-									>
-										<HighlightedText snippet={filter}>
-											{interestName}
-										</HighlightedText>
-									</Pill>
-								);
-							})}
-						</div>
-					</div>
-				);
-			})}
-		</div>
-	);
-};
+}> = (props) => (
+	<InputAttributeCategorySelect
+		{...props}
+		categoryIcons={categoryIcons}
+		type="interest"
+	/>
+);
 
 export const InterestSelectCustomInput: FC<{
 	value: Array<string>;

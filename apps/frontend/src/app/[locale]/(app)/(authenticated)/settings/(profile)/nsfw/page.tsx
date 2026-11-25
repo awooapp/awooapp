@@ -16,15 +16,15 @@ export const meta: Route.MetaFunction = (options) => {
 
 	return metaMerge([
 		...rootMeta(options),
-		{ title: t("page_title", { name: t("nsfw") }) }
+		{ title: t("page_title", { name: t("kinks") }) }
 	]);
 };
 
 export const handle = {
-	preload: () => queryClient.prefetchQuery({
-		queryKey: attributeKey("kink"),
-		queryFn: attributeFetcher
-	})
+	preload: () => Promise.all([
+		queryClient.prefetchQuery({ queryKey: attributeKey("kink"), queryFn: attributeFetcher }),
+		queryClient.prefetchQuery({ queryKey: attributeKey("kink-category"), queryFn: attributeFetcher })
+	])
 };
 
 export default function SettingsProfileNsfwPage() {
@@ -34,7 +34,7 @@ export default function SettingsProfileNsfwPage() {
 		<ModelCard
 			className="shrink desktop:w-full desktop:max-w-2xl"
 			inset={false}
-			title={t("nsfw")}
+			title={t("kinks")}
 		>
 			<NsfwForm />
 		</ModelCard>

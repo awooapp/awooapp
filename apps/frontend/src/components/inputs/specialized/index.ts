@@ -1,3 +1,4 @@
+export * from "./attribute-category-select";
 export * from "./country-select";
 export * from "./geolocation-input";
 export * from "./language-autocomplete";

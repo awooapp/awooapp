@@ -30,6 +30,7 @@ defmodule Flirtual.Attribute do
     interest
     interest-category
     kink
+    kink-category
     platform
     prompt
     report-reason

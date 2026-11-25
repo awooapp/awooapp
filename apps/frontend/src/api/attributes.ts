@@ -29,6 +29,7 @@ export const attributeTypes = [
 	"interest",
 	"interest-category",
 	"kink",
+	"kink-category",
 	"language",
 	"platform",
 	"prompt",
@@ -84,11 +85,13 @@ export interface AttributeMetadata {
 	};
 	country: undefined;
 	kink: {
+		category?: string;
 		kind: KinkAttributeKind;
 		pair: string;
 		// definition?: string;
 		definitionLink: string;
 	};
+	"kink-category": undefined;
 	prompt: undefined;
 	"report-reason"?: {
 		fallback?: boolean;
