@@ -10,11 +10,7 @@ import {
 import { ButtonLink } from "~/components/button";
 import { Form } from "~/components/forms";
 import { FormButton } from "~/components/forms/button";
-import {
-	InputAutocomplete,
-	InputLabel,
-	InputSelect
-} from "~/components/inputs";
+import { InputAutocomplete, InputLabel } from "~/components/inputs";
 import { InputCheckboxList } from "~/components/inputs/checkbox-list";
 import { InputLanguageAutocomplete } from "~/components/inputs/specialized";
 import type { AttributeTranslation } from "~/hooks/use-attribute";
@@ -42,7 +38,7 @@ export const Onboarding4Form: FC = () => {
 		<Form
 			fields={{
 				relationships: profile.relationships ?? [],
-				monopoly: profile.monopoly,
+				monopoly: profile.monopoly ?? [],
 				languages: user.profile.languages ?? [],
 				sexualityId: user.profile.attributes.sexuality || []
 			}}
@@ -52,7 +48,7 @@ export const Onboarding4Form: FC = () => {
 				const newProfile = await Profile.update(user.id, {
 					...values,
 					relationships: values.relationships ?? [],
-					monopoly: values.monopoly ?? "none",
+					monopoly: values.monopoly ?? [],
 					languages: values.languages
 				});
 
@@ -119,12 +115,11 @@ export const Onboarding4Form: FC = () => {
 						{(field) => (
 							<>
 								<InputLabel>{t("relationship_type")}</InputLabel>
-								<InputSelect
+								<InputCheckboxList
 									{...field.props}
-									optional
-									options={ProfileMonopolyList.map((value) => ({
-										id: value,
-										name: t(value)
+									items={ProfileMonopolyList.map((value) => ({
+										key: value,
+										label: t(value)
 									}))}
 								/>
 							</>

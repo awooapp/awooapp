@@ -90,7 +90,7 @@ struct Profile: Decodable, Sendable {
     let prompts: [Prompt]
     let relationships: [String]
     let languages: [String]
-    let monopoly: String?
+    let monopoly: [String]
     let domsub: String?
     let country: String?
     let discord: String?
@@ -115,7 +115,7 @@ struct Profile: Decodable, Sendable {
         prompts = try container.decodeIfPresent([Prompt].self, forKey: .prompts) ?? []
         relationships = try container.decodeIfPresent([String].self, forKey: .relationships) ?? []
         languages = try container.decodeIfPresent([String].self, forKey: .languages) ?? []
-        monopoly = try container.decodeIfPresent(String.self, forKey: .monopoly)
+        monopoly = try container.decodeIfPresent([String].self, forKey: .monopoly) ?? []
         domsub = try container.decodeIfPresent(String.self, forKey: .domsub)
         country = try container.decodeIfPresent(String.self, forKey: .country)
         discord = try? container.decodeIfPresent(String.self, forKey: .discord)

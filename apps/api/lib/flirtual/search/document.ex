@@ -93,7 +93,7 @@ defmodule Flirtual.Search.Document do
       Enum.map(profile.custom_interests || [], &Tokens.custom_interest/1),
       Enum.map(profile.languages || [], &Tokens.language/1),
       Enum.map(profile.relationships || [], &Tokens.relationship/1),
-      if(profile.monopoly, do: [Tokens.monopoly(profile.monopoly)], else: []),
+      Enum.map(profile.monopoly || [], &Tokens.monopoly/1),
       if(nsfw && profile.domsub, do: [Tokens.domsub(profile.domsub)], else: []),
       if(nsfw && profile.domsub && not private?(privacy, :kinks),
         do: [Tokens.public_domsub(profile.domsub)],

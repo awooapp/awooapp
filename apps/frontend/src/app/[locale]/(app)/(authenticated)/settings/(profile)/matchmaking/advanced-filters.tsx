@@ -277,7 +277,7 @@ export function ownFilterKeys(user: User): Set<string> {
 		...(profile.languages ?? []).map((language) => `language:${language}`),
 		...(profile.country ? [`country:${profile.country.toLowerCase()}`] : []),
 		...(profile.relationships ?? []).map((value) => `relationships:${value}`),
-		...(profile.monopoly ? [`monopoly:${profile.monopoly}`] : []),
+		...(profile.monopoly ?? []).map((value) => `monopoly:${value}`),
 		...(profile.domsub ? [`domsub:${profile.domsub}`] : []),
 		...pole(profile.openness, "openminded", "practical"),
 		...pole(profile.conscientiousness, "reliable", "freespirited"),

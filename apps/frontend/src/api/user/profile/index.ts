@@ -37,7 +37,7 @@ export type Profile = {
 	new?: boolean;
 	relationships: Array<ProfileRelationship>;
 	domsub?: ProfileDomsub;
-	monopoly?: ProfileMonopoly;
+	monopoly?: Array<ProfileMonopoly>;
 	country?: string;
 	vrchat?: string | null;
 	vrchatName?: string | null;
@@ -77,7 +77,7 @@ export type UpdateProfileOptions = {
 	[K in ProfileAttribute as `${K}Id`]?: Array<string>;
 } & {
 	domsub?: "none" | ProfileDomsub;
-	monopoly?: "none" | ProfileMonopoly;
+	monopoly?: Array<ProfileMonopoly>;
 } & Partial<
 	Pick<
 		Profile,

@@ -170,7 +170,11 @@ defmodule Flirtual.Faker do
                      )
                  ),
                domsub: Enum.random([nil | Ecto.Enum.values(Flirtual.User.Profile, :domsub)]),
-               monopoly: Enum.random([nil | Ecto.Enum.values(Flirtual.User.Profile, :monopoly)]),
+               monopoly:
+                 Enum.take_random(
+                   Ecto.Enum.values(Flirtual.User.Profile, :monopoly),
+                   Enum.random(0..2)
+                 ),
                languages:
                  if(Enum.random(1..5) === 1,
                    do: random_n_of(1..3, Languages.list(:bcp_47)),

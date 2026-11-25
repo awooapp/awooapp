@@ -89,7 +89,7 @@ defmodule Flirtual.Profiles do
       field(:facetime, :string, default: "")
       field(:playlist, :string, default: "")
       field(:domsub, Ecto.Enum, values: [:none | Ecto.Enum.values(Profile, :domsub)])
-      field(:monopoly, Ecto.Enum, values: [:none | Ecto.Enum.values(Profile, :monopoly)])
+      field(:monopoly, {:array, Ecto.Enum}, values: Ecto.Enum.values(Profile, :monopoly))
       field(:country, Ecto.Enum, values: [:none | Countries.list(:iso_3166_1)])
       field(:relationships, {:array, :string})
       field(:new, :boolean)

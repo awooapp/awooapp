@@ -161,18 +161,21 @@ export const PillCollection: FC<{ user: User }> = (props) => {
 					</Pill>
 				</div>
 			)}
-			{user.profile.monopoly && (
+			{!!user.profile.monopoly?.length && (
 				<div className="flex w-full flex-wrap gap-2">
-					<Pill
-						active={
-							session.user.id !== user.id
-							&& session.user.profile.monopoly === user.profile.monopoly
-						}
-						className="vision:bg-white-30/70"
-						href={editable ? urls.settings.matchmaking() : undefined}
-					>
-						{t(user.profile.monopoly)}
-					</Pill>
+					{user.profile.monopoly.map((monopoly) => (
+						<Pill
+							key={monopoly}
+							active={
+								session.user.id !== user.id
+								&& !!session.user.profile.monopoly?.includes(monopoly)
+							}
+							className="vision:bg-white-30/70"
+							href={editable ? urls.settings.matchmaking() : undefined}
+						>
+							{t(monopoly)}
+						</Pill>
+					))}
 				</div>
 			)}
 			<PillAttributeList

@@ -411,10 +411,12 @@ defmodule Flirtual.Matchmaking.Query do
     ]
   end
 
-  defp monopoly(%User{profile: %{monopoly: nil}}, _cw), do: nil
+  defp monopoly(%User{profile: %{monopoly: monopoly}}, cw) when monopoly not in [nil, []],
+    do:
+      {:in_field, "boosts", Enum.map(monopoly, &Search.Tokens.monopoly/1),
+       5 * weight(cw, :monopoly)}
 
-  defp monopoly(%User{profile: %{monopoly: monopoly}}, cw),
-    do: {:token, Search.Tokens.monopoly(monopoly), 5 * weight(cw, :monopoly)}
+  defp monopoly(_user, _cw), do: nil
 
   defp relationships(%User{profile: profile}, cw) do
     Enum.map(

@@ -79,7 +79,7 @@ defmodule Flirtual.User.Profile do
     field(:display_name, :string)
     field(:biography, :string)
     field(:domsub, Ecto.Enum, values: @domsub_values)
-    field(:monopoly, Ecto.Enum, values: @monopoly_values)
+    field(:monopoly, {:array, Ecto.Enum}, values: @monopoly_values, default: [])
     field(:country, Ecto.Enum, values: Countries.list(:iso_3166_1))
     field(:openness, :integer)
     field(:conscientiousness, :integer)

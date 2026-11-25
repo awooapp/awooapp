@@ -61,9 +61,9 @@ struct Tag: Identifiable {
             add("domsub", [Tag(id: "domsub", name: t.message(domsub) ?? domsub, shared: other && shared)])
         }
 
-        if let monopoly = profile.monopoly {
-            add("monopoly", [Tag(id: "monopoly", name: t.message(monopoly) ?? monopoly, shared: other && mine?.monopoly == monopoly)])
-        }
+        add("monopoly", profile.monopoly.map { monopoly in
+            Tag(id: "monopoly:\(monopoly)", name: t.message(monopoly) ?? monopoly, shared: other && mine?.monopoly.contains(monopoly) == true)
+        })
 
         if nsfw {
             add("kink", attributes("kink"))

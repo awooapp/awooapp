@@ -30,7 +30,7 @@ import {
 import { DialogFooter } from "~/components/dialog/dialog";
 import { Form } from "~/components/forms";
 import { FormButton } from "~/components/forms/button";
-import { InputLabel, InputLabelHint, InputSelect } from "~/components/inputs";
+import { InputLabel, InputLabelHint } from "~/components/inputs";
 import { InputCheckboxList } from "~/components/inputs/checkbox-list";
 import { Slider } from "~/components/inputs/slider";
 import { advancedFilters, customInterests, personality, vrTags } from "~/features";
@@ -98,7 +98,7 @@ export const MatchmakingForm: FC = () => {
 					preferences?.agemax ?? absMaxAge
 				],
 				relationships: user.profile.relationships ?? [],
-				monopoly: user.profile.monopoly,
+				monopoly: user.profile.monopoly ?? [],
 				languages: user.profile.languages,
 				weightLocation: customWeights.location,
 				weightCustomInterests: customWeights.customInterests,
@@ -122,7 +122,7 @@ export const MatchmakingForm: FC = () => {
 					Profile.update(user.id, {
 						required: ["relationships"],
 						relationships: values.relationships ?? [],
-						monopoly: values.monopoly ?? "none"
+						monopoly: values.monopoly ?? []
 					}),
 					Profile.updatePreferences(user.id, {
 						requiredAttributes: ["gender"],
@@ -236,12 +236,11 @@ export const MatchmakingForm: FC = () => {
 						{(field) => (
 							<>
 								<InputLabel>{t("relationship_type")}</InputLabel>
-								<InputSelect
+								<InputCheckboxList
 									{...field.props}
-									optional
-									options={ProfileMonopolyList.map((value) => ({
-										id: value,
-										name: t(value)
+									items={ProfileMonopolyList.map((value) => ({
+										key: value,
+										label: t(value)
 									}))}
 								/>
 							</>
@@ -354,7 +353,7 @@ export const MatchmakingForm: FC = () => {
 					</div>
 					{CustomWeightList.map((key) => {
 						if (
-							(key === "monopoly" && !fields.monopoly.props.value)
+							(key === "monopoly" && !fields.monopoly.props.value?.length)
 							|| (key === "relationships" && !fields.relationships.props.value)
 							|| (["domsub", "kinks"].includes(key) && !user.preferences?.nsfw)
 							|| (key === "personality" && !personality)
@@ -390,9 +389,9 @@ export const MatchmakingForm: FC = () => {
 														personality: t("personality_match"),
 														relationships: t("relationship_types"),
 														monopoly:
-															fields.monopoly.props.value === "monogamous"
-																? t("monogamous")
-																: t("nonmonogamous"),
+															fields.monopoly.props.value.length === 1
+																? t(fields.monopoly.props.value[0]!)
+																: t("relationship_type"),
 														languages: t("shared_languages"),
 														domsub:
 															user.profile.domsub === "dominant"
