@@ -66,7 +66,6 @@ export type UserPasskey = {
 
 export const UserStatuses = [
 	"registered",
-	"finished_profile",
 	"onboarded",
 	"visible"
 ] as const;

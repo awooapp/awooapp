@@ -6,140 +6,133 @@ import { Profile } from "~/api/user/profile";
 import { ButtonLink } from "~/components/button";
 import { Form } from "~/components/forms";
 import { FormButton } from "~/components/forms/button";
-import { FormGameAutocomplete } from "~/components/forms/game-autocomplete";
-import {
-	InputAutocomplete,
-	InputLabel,
-	InputLabelHint,
-	InputSwitch
-} from "~/components/inputs";
-import { vrTags } from "~/features";
+import { InputLabel } from "~/components/inputs";
+import { InputCheckboxList } from "~/components/inputs/checkbox-list";
+import { Slider } from "~/components/inputs/slider";
 import {
 	useAttributes,
 	useAttributeTranslation
 } from "~/hooks/use-attribute";
+import type { AttributeTranslation } from "~/hooks/use-attribute";
 import { useSession } from "~/hooks/use-session";
 import { useNavigate } from "~/i18n";
 import { useOptimisticRoute } from "~/preload";
 import { invalidate, sessionKey } from "~/query";
-import { urls } from "~/urls";
 
-const AttributeKeys = [...(["game", "interest", "platform"] as const)];
+import { nextOnboardingStepUrl, previousOnboardingStepUrl } from "../navigation";
+
+const absMinAge = 18;
+const absMaxAge = 60;
 
 export const Onboarding2Form: FC = () => {
 	const { user } = useSession();
-	const { profile } = user;
+	const { preferences } = user.profile;
 
-	const { t } = useTranslation();
 	const navigate = useNavigate();
 
-	const interests = useAttributes("interest");
-	const platforms = useAttributes("platform");
+	const genders = useAttributes("gender").filter(
+		({ simple, fallback }) => simple || fallback
+	);
 
+	const { t } = useTranslation();
 	const tAttribute = useAttributeTranslation();
 
-	useOptimisticRoute(urls.onboarding(3));
+	const next = nextOnboardingStepUrl("preferences")!;
+	useOptimisticRoute(next);
 
 	return (
 		<Form
 			fields={{
-				new: profile.new ?? false,
-				game: profile.attributes.game || [],
-				interest: profile.attributes.interest || [],
-				platform: profile.attributes.platform || []
+				gender: preferences?.attributes.gender || [],
+				age: [
+					preferences?.agemin ?? absMinAge,
+					preferences?.agemax ?? absMaxAge
+				]
 			}}
 			className="flex flex-col gap-8"
 			requireChange={false}
 			onSubmit={async (values) => {
-				await Profile.update(user.id, {
-					new: values.new,
-					...Object.fromEntries(
-						AttributeKeys.map((type) => [`${type}Id`, values[type]])
-					)
+				const [agemin, agemax] = values.age;
+				const { gender: _, ...preferenceAttributes }
+					= preferences?.attributes ?? {};
+
+				await Profile.updatePreferences(user.id, {
+					requiredAttributes: ["gender"],
+					agemin: agemin === absMinAge ? null : agemin,
+					agemax: agemax === absMaxAge ? null : agemax,
+					attributes: [
+						...Object.values(preferenceAttributes).flat().filter(Boolean),
+						...values.gender
+					]
 				});
 
 				await invalidate({ queryKey: sessionKey() });
-				navigate(urls.onboarding(3));
+				navigate(next);
 			}}
 		>
 			{({ FormField }) => (
 				<>
-					{vrTags && (
-						<>
-							<FormField name="new">
-								{(field) => (
-									<>
-										<InputLabel>{t("new_to_vr_question")}</InputLabel>
-										<InputSwitch {...field.props} />
-									</>
-								)}
-							</FormField>
-							<FormField name="platform">
-								{(field) => (
-									<>
-										<InputLabel>{t("vr_setup")}</InputLabel>
-										<InputAutocomplete
-											{...field.props}
-											options={platforms.map((platform) => {
-												const id = typeof platform === "string" ? platform : platform.id;
-												return {
-													key: id,
-													label: tAttribute[id]?.name || id,
-													example: tAttribute[id]?.example
-												};
-											})}
-											limit={8}
-											placeholder={t("select_the_platforms_you_use")}
-										/>
-									</>
-								)}
-							</FormField>
-							<FormField name="game">
-								{() => (
-									<>
-										<InputLabel hint={t("up_to_number", { number: 5 })}>{t("vr_apps_games")}</InputLabel>
-										<InputLabelHint className="-mt-2">
-											{t("game_hint")}
-										</InputLabelHint>
-										<FormGameAutocomplete />
-									</>
-								)}
-							</FormField>
-						</>
-					)}
-					<FormField name="interest">
+					<FormField name="gender">
 						{(field) => (
 							<>
-								<InputLabel hint={t("up_to_number", { number: 10 })}>{t("interests")}</InputLabel>
-								<InputLabelHint className="-mt-2">
-									{t("onboarding_interests_hint")}
-								</InputLabelHint>
-								<InputAutocomplete
+								<InputLabel {...field.labelProps}>
+									{t("im_interested_in")}
+								</InputLabel>
+								<InputCheckboxList
 									{...field.props}
-									options={interests
-										.filter(
-											(interest) =>
-												interest.category === "iiCe39JvGQAAtsrTqnLddb"
-										)
-										.map((interest) => ({
-											key: interest.id,
-											label: tAttribute[interest.id]?.name ?? interest.id
-										}))
-										.sort((a, b) => {
-											if (a.label > b.label) return 1;
-											return -1;
-										})}
-									limit={10}
-									placeholder={t("select_interests")}
-									value={field.props.value || []}
+									items={genders.map((gender) => {
+										const { name, plural } = (tAttribute[
+											gender.id
+										] as AttributeTranslation<"gender">) ?? {
+											name: gender.id
+										};
+
+										return {
+											key: gender.id,
+											label: gender.fallback
+												? t("other_genders")
+												: (plural ?? name)
+										};
+									})}
 								/>
 							</>
 						)}
 					</FormField>
+					<FormField name="age">
+						{({ labelProps, props: { value, onChange, ...props } }) => {
+							const [min, max] = value as [number, number];
+
+							return (
+								<>
+									<InputLabel
+										{...labelProps}
+										hint={
+											min === absMinAge && max === absMaxAge
+												? t("number_range_plus", { from: min, to: max })
+												: max === absMaxAge
+													? t("number_plus", { number: min })
+													: min === max
+														? min
+														: t("number_range", { from: min, to: max })
+										}
+									>
+										{t("age_range")}
+									</InputLabel>
+									<Slider
+										{...props}
+										max={absMaxAge}
+										min={absMinAge}
+										value={value}
+										onValueChange={onChange}
+									/>
+								</>
+							);
+						}}
+					</FormField>
 					<div className="ml-auto flex gap-2">
 						<ButtonLink
 							className="flex w-fit flex-row gap-2 opacity-75"
-							href={urls.onboarding(1)}
+							href={previousOnboardingStepUrl("preferences")!}
 							kind="tertiary"
 							size="sm"
 						>

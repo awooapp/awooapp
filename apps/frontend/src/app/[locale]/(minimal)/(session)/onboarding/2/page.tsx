@@ -16,15 +16,13 @@ export const meta: Route.MetaFunction = (options) => {
 
 	return metaMerge([
 		...rootMeta(options),
-		{ title: t("page_title", { name: t("more_about_you") }) }
+		{ title: t("page_title", { name: t("want_to_meet") }) }
 	]);
 };
 
 export const handle = {
 	preload: () => Promise.all(([
-		"game",
-		"interest",
-		"platform",
+		"gender"
 	] as const).map((type) => queryClient.prefetchQuery({
 		queryKey: attributeKey(type),
 		queryFn: attributeFetcher
@@ -37,12 +35,7 @@ export default function Onboarding2Page() {
 	const { t } = useTranslation();
 
 	return (
-		<ModelCard
-			branded
-			miniFooter
-			className="shrink-0 desktop:max-w-2xl"
-			title={t("more_about_you")}
-		>
+		<ModelCard branded miniFooter className="desktop:max-w-2xl" title={t("want_to_meet")}>
 			<Onboarding2Form />
 		</ModelCard>
 	);

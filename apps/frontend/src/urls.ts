@@ -122,7 +122,7 @@ export function hrefWithQuery<T extends Page>(
 	return `${pathname}?${searchParameters.toString()}`;
 }
 
-export type FinishPage = number;
+export type OnboardingPage = number;
 
 export const bucketNames = [
 	"static",
@@ -199,8 +199,7 @@ export const urls = {
 		of: (conversationId: string) => `/matches/${conversationId}`
 	},
 	likes: "/likes",
-	onboarding: (onboardingIndex: 1 | 2 | 3) => `/onboarding/${onboardingIndex}`,
-	finish: (finishIndex: FinishPage) => `/finish/${finishIndex}`,
+	onboarding: (onboardingIndex: OnboardingPage) => `/onboarding/${onboardingIndex}`,
 	subscription: {
 		default: "/subscription",
 		success: url("/subscription", { success: "true" })

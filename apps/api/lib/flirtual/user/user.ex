@@ -55,7 +55,6 @@ defmodule Flirtual.User do
 
   @statuses [
     "visible",
-    "finished_profile",
     "onboarded",
     "registered"
   ]
@@ -236,7 +235,6 @@ defmodule Flirtual.User do
   def get_status(%User{} = user) do
     cond do
       visible?(user) -> :visible
-      finished_profile?(user) -> :finished_profile
       onboarded?(user) -> :onboarded
       true -> :registered
     end
@@ -251,28 +249,20 @@ defmodule Flirtual.User do
         |> filter_by(:type, "gender")
         |> Attribute.reject_pronouns()
       ) and
-      (not Flirtual.Features.vr_tags?() or
-         not Enum.empty?(filter_by(profile.attributes, :type, "game"))) and
-      not Enum.empty?(
-        filter_by(profile.attributes, :type, "interest") ++ profile.custom_interests
-      ) and
-      not Enum.empty?(filter_by(profile.preferences.attributes, :type, "gender"))
-  end
-
-  def finished_profile?(%User{} = user) do
-    %{profile: profile} = user
-
-    onboarded?(user) and
+      not Enum.empty?(filter_by(profile.preferences.attributes, :type, "gender")) and
       not is_nil(profile.display_name) and
       not is_nil(profile.biography) and String.length(profile.biography) >= 48 and
-      not Enum.empty?(profile.images)
+      not Enum.empty?(profile.images) and
+      not Enum.empty?(
+        filter_by(profile.attributes, :type, "interest") ++ profile.custom_interests
+      )
   end
 
   def contact_confirmed?(%User{} = user),
     do: not is_nil(user.email_confirmed_at) or not is_nil(user.phone_confirmed_at)
 
   def visible?(%User{} = user) do
-    finished_profile?(user) and
+    onboarded?(user) and
       contact_confirmed?(user) and
       is_nil(user.banned_at) and
       is_nil(user.shadowbanned_at) and

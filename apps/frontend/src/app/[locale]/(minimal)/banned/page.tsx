@@ -1,6 +1,7 @@
 import { Trans, useTranslation } from "react-i18next";
 import invariant from "tiny-invariant";
 
+import { resumeOnboardingUrl } from "~/app/[locale]/(minimal)/(session)/onboarding/navigation";
 import { ButtonLink } from "~/components/button";
 import { InlineLink } from "~/components/inline-link";
 import { ModelCard } from "~/components/model-card";
@@ -37,7 +38,7 @@ export default function BannedPage() {
 
 	if (!ban)
 		throwRedirect(session.user.status === "registered"
-			? urls.onboarding(1)
+			? resumeOnboardingUrl(session.user)
 			: urls.discover("dates"));
 
 	if (verifyAgeDirect(ban)) throwRedirect(urls.verifyAge);

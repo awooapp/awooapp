@@ -117,27 +117,6 @@ export const AppBanner: FC = () => {
 
 	if (!session || session.user.ban) return null;
 
-	if (!["finished_profile", "visible"].includes(session.user.status)) {
-		return (
-			<Banner>
-				<Trans
-					components={{
-						bannerLink: (
-							<BannerLink
-								href={
-									session.user.status === "registered"
-										? "/onboarding/1"
-										: "/finish/1"
-								}
-							/>
-						)
-					}}
-					i18nKey="finish_profile_banner"
-				/>
-			</Banner>
-		);
-	}
-
 	if (!session.user.emailConfirmedAt) {
 		return (
 			<Banner>

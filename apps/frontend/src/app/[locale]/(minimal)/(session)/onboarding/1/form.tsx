@@ -33,6 +33,8 @@ import { useOptimisticRoute } from "~/preload";
 import { invalidate, sessionKey } from "~/query";
 import { urls } from "~/urls";
 
+import { nextOnboardingStepUrl } from "../navigation";
+
 export const Onboarding1Form: FC = () => {
 	const { user } = useSession();
 	const { profile } = user;
@@ -50,7 +52,8 @@ export const Onboarding1Form: FC = () => {
 
 	const tAttribute = useAttributeTranslation();
 
-	useOptimisticRoute(urls.onboarding(2));
+	const next = nextOnboardingStepUrl("about")!;
+	useOptimisticRoute(next);
 
 	return (
 		<Form
@@ -83,7 +86,7 @@ export const Onboarding1Form: FC = () => {
 				])
 					.then(async () => {
 						await invalidate({ queryKey: sessionKey() });
-						navigate(urls.onboarding(2));
+						navigate(next);
 					})
 					.catch((reason) => {
 						if (isWretchError(reason) && reason.json?.error === "banned_underage") {

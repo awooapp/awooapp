@@ -1,7 +1,6 @@
 import { MoveLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import type { Session } from "~/api/auth";
 import { Profile } from "~/api/user/profile";
 import { ButtonLink } from "~/components/button";
 import { ConnectionError } from "~/components/connection-error";
@@ -13,11 +12,10 @@ import { connectionProvider } from "~/features";
 import { useDevice } from "~/hooks/use-device";
 import { useSession } from "~/hooks/use-session";
 import { useNavigate } from "~/i18n";
-import { mutate, sessionKey } from "~/query";
 
-import { nextFinishStepUrl, previousFinishStepUrl } from "../navigation";
+import { continueOnboardingUrl, previousOnboardingStepUrl } from "../navigation";
 
-export const Finish5Form: React.FC = () => {
+export const Onboarding7Form: React.FC = () => {
 	const { vision } = useDevice();
 	const navigate = useNavigate();
 	const { user } = useSession();
@@ -39,20 +37,12 @@ export const Finish5Form: React.FC = () => {
 					className="flex flex-col gap-8"
 					requireChange={false}
 					onSubmit={async ({ vrchat, facetime }, form) => {
-						const profile = await Profile.update(user.id, {
+						await Profile.update(user.id, {
 							vrchat: form.fields.vrchat.changed ? (vrchat.trim() || null) : undefined,
 							facetime: facetime.trim() || null
 						});
 
-						await mutate<Session>(sessionKey(), (session) => ({
-							...session,
-							user: {
-								...user,
-								profile
-							}
-						}));
-
-						navigate(nextFinishStepUrl("connections", user));
+						await navigate(await continueOnboardingUrl("connections", user));
 					}}
 				>
 					{({ FormField }) => (
@@ -91,7 +81,7 @@ export const Finish5Form: React.FC = () => {
 							<div className="flex justify-end gap-2">
 								<ButtonLink
 									className="flex w-fit flex-row gap-2 opacity-75"
-									href={previousFinishStepUrl("connections")}
+									href={previousOnboardingStepUrl("connections")!}
 									kind="tertiary"
 									size="sm"
 								>

@@ -6,139 +6,200 @@ import { Profile } from "~/api/user/profile";
 import { ButtonLink } from "~/components/button";
 import { Form } from "~/components/forms";
 import { FormButton } from "~/components/forms/button";
-import { InputLabel } from "~/components/inputs";
-import { InputCheckboxList } from "~/components/inputs/checkbox-list";
-import { Slider } from "~/components/inputs/slider";
+import { InputImageSet } from "~/components/forms/input-image-set";
+import type { ImageSetValue } from "~/components/forms/input-image-set";
+import { InputPrompts } from "~/components/forms/prompts";
 import {
-
-	useAttributes,
-	useAttributeTranslation
-} from "~/hooks/use-attribute";
-import type { AttributeTranslation } from "~/hooks/use-attribute";
-import { useSession } from "~/hooks/use-session";
+	InputEditor,
+	InputLabel,
+	InputLabelHint,
+	InputText
+} from "~/components/inputs";
+import { useAttributeTranslation } from "~/hooks/use-attribute";
+import { invalidateQueues } from "~/hooks/use-queue";
+import { useOptionalSession } from "~/hooks/use-session";
+import {
+	biographyCounterThreshold,
+	biographyMaxLength,
+	contentLength,
+	html
+} from "~/html";
 import { useNavigate } from "~/i18n";
 import { invalidate, sessionKey } from "~/query";
 import { urls } from "~/urls";
 
-const absMinAge = 18;
-const absMaxAge = 60;
+import { nextOnboardingStepUrl, previousOnboardingStepUrl } from "../navigation";
 
 export const Onboarding3Form: FC = () => {
-	const { user } = useSession();
-	const { preferences } = user.profile;
-
+	const session = useOptionalSession();
 	const navigate = useNavigate();
-
-	const genders = useAttributes("gender").filter(
-		({ simple, fallback }) => simple || fallback
-	);
 
 	const { t } = useTranslation();
 	const tAttribute = useAttributeTranslation();
 
+	if (!session) return null;
+	const { user } = session;
+
+	const favoriteGameId = (user.profile.attributes.game || []).filter(
+		(gameId) => gameId !== "3nzcXDoMySRrPn6jHC8n3o"
+	)[0] || "mkyAHUgKDWFiqkZcgZD6pS";
+
 	return (
 		<Form
 			fields={{
-				gender: preferences?.attributes.gender || [],
-				age: [
-					preferences?.agemin ?? absMinAge,
-					preferences?.agemax ?? absMaxAge
-				]
+				displayName: user.profile.displayName || "",
+				images: user.profile.images.map((image): ImageSetValue => ({
+					id: image.id,
+					src: urls.image(image),
+					fullSrc: urls.image(image, "full"),
+					blurHash: image.blurHash,
+					authorId: image.authorId,
+					authorName: image.authorName,
+					worldId: image.worldId,
+					worldName: image.worldName
+				})),
+				biography: html(user.profile.biography || ""),
+				prompts: user.profile.prompts
 			}}
 			className="flex flex-col gap-8"
 			requireChange={false}
 			onSubmit={async (values) => {
-				const [agemin, agemax] = values.age;
-				const { gender: _, ...preferenceAttributes }
-					= preferences?.attributes ?? {};
+				if (values.images.length === 0)
+					throw new Error(`${t("profile_pictures")}: ${t("errors.cant_be_blank")}`);
 
-				await Profile.updatePreferences(user.id, {
-					requiredAttributes: ["gender"],
-					agemin: agemin === absMinAge ? null : agemin,
-					agemax: agemax === absMaxAge ? null : agemax,
-					attributes: [
-						...Object.values(preferenceAttributes).flat().filter(Boolean),
-						...values.gender
-					]
-				});
+				await Promise.all([
+					Profile.update(user.id, {
+						biography: html(values.biography),
+						displayName: values.displayName,
+						required: ["biography", "displayName"]
+					}),
+					Profile.Image.create(
+						user.id,
+						values.images.map((image) => ({
+							id: image.id,
+							stereo: image.stereo,
+							authorId: image.authorId,
+							authorName: image.authorName,
+							worldId: image.worldId,
+							worldName: image.worldName
+						})).filter((file) => file.id)
+					).then((images) =>
+						images.length === 0
+							? null
+							: Profile.Image.update(
+									user.id,
+									images.map((image) => image.id)
+								)
+					),
+					Profile.updatePrompts(user.id, values.prompts)
+				]);
 
-				await invalidate({ queryKey: sessionKey() });
-				navigate(urls.discover("dates"));
+				await Promise.all([
+					invalidate({ queryKey: sessionKey() }),
+					invalidateQueues()
+				]);
+				await navigate(nextOnboardingStepUrl("bio")!);
 			}}
 		>
-			{({ FormField }) => (
-				<>
-					<FormField name="gender">
-						{(field) => (
-							<>
-								<InputLabel {...field.labelProps}>
-									{t("im_interested_in")}
-								</InputLabel>
-								<InputCheckboxList
-									{...field.props}
-									items={genders.map((gender) => {
-										const { name, plural } = (tAttribute[
-											gender.id
-										] as AttributeTranslation<"gender">) ?? {
-											name: gender.id
-										};
+			{({ FormField, fields, buttonProps }) => {
+				const bioInvalid
+					= contentLength(fields.biography.props.value) > biographyMaxLength;
 
-										return {
-											key: gender.id,
-											label: gender.fallback
-												? t("other_genders")
-												: (plural ?? name)
-										};
-									})}
-								/>
-							</>
-						)}
-					</FormField>
-					<FormField name="age">
-						{({ labelProps, props: { value, onChange, ...props } }) => {
-							const [min, max] = value as [number, number];
-
-							return (
+				return (
+					<>
+						<FormField name="displayName">
+							{(field) => (
 								<>
 									<InputLabel
-										{...labelProps}
-										hint={
-											min === absMinAge && max === absMaxAge
-												? t("number_range_plus", { from: min, to: max })
-												: max === absMaxAge
-													? t("number_plus", { number: min })
-													: min === max
-														? min
-														: t("number_range", { from: min, to: max })
-										}
+										inline
+										hint={t("bio_discord_warning")}
+										{...field.labelProps}
 									>
-										{t("age_range")}
+										{t("display_name")}
 									</InputLabel>
-									<Slider
-										{...props}
-										max={absMaxAge}
-										min={absMinAge}
-										value={value}
-										onValueChange={onChange}
+									<InputText {...field.props} />
+								</>
+							)}
+						</FormField>
+						<FormField name="images">
+							{(field) => (
+								<>
+									<InputLabel
+										{...field.labelProps}
+										inline
+										hint={(
+											<InputLabelHint>
+												{t("picture_upload_hint", { game: tAttribute[favoriteGameId]!.name })}
+												<details>
+													<summary className="text-pink opacity-75 transition-opacity hover:cursor-pointer hover:opacity-100">
+														{t("guidelines")}
+													</summary>
+													{t("picture_guidelines")}
+												</details>
+											</InputLabelHint>
+										)}
+									>
+										{t("profile_pictures")}
+									</InputLabel>
+									<InputImageSet {...field.props} max={15} />
+								</>
+							)}
+						</FormField>
+						<FormField name="biography">
+							{(field) => (
+								<>
+									<InputLabel
+										{...field.labelProps}
+										inline
+										hint={(
+											<InputLabelHint>
+												{t("bio_hint")}
+												<details>
+													<summary className="text-pink opacity-75 transition-opacity hover:cursor-pointer hover:opacity-100">
+														{t("guidelines")}
+													</summary>
+													{t("bio_guidelines")}
+												</details>
+											</InputLabelHint>
+										)}
+									>
+										{t("bio")}
+									</InputLabel>
+									<InputEditor
+										{...field.props}
+										maxLength={biographyMaxLength}
+										showCountAbove={biographyCounterThreshold}
 									/>
 								</>
-							);
-						}}
-					</FormField>
-					<div className="ml-auto flex gap-2">
-						<ButtonLink
-							className="flex w-fit flex-row gap-2 opacity-75"
-							href={urls.onboarding(2)}
-							kind="tertiary"
-							size="sm"
-						>
-							<MoveLeft className="size-5 shrink-0" />
-							<span>{t("back")}</span>
-						</ButtonLink>
-						<FormButton className="min-w-36" size="sm">{t("finish")}</FormButton>
-					</div>
-				</>
-			)}
+							)}
+						</FormField>
+						<FormField name="prompts">
+							{(field) => (
+								<InputPrompts
+									labelId={field.labelProps.htmlFor}
+									{...field.props}
+								/>
+							)}
+						</FormField>
+						<div className="flex flex-wrap justify-end gap-2">
+							<ButtonLink
+								className="flex w-fit flex-row gap-2 opacity-75"
+								href={previousOnboardingStepUrl("bio")!}
+								kind="tertiary"
+								size="sm"
+							>
+								<MoveLeft className="size-5" />
+								<span>{t("back")}</span>
+							</ButtonLink>
+							<FormButton
+								className="w-36"
+								disabled={buttonProps.disabled || bioInvalid}
+								size="sm"
+							/>
+						</div>
+					</>
+				);
+			}}
 		</Form>
 	);
 };

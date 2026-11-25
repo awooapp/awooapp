@@ -3,6 +3,12 @@ import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Profile } from "~/api/user/profile";
+import {
+	InterestSelectCount,
+	InterestSelectCustomInput,
+	InterestSelectList,
+	maximumInterests
+} from "~/app/[locale]/(app)/(authenticated)/settings/(profile)/interests/form";
 import { ButtonLink } from "~/components/button";
 import { Form } from "~/components/forms";
 import { FormButton } from "~/components/forms/button";
@@ -11,15 +17,9 @@ import { useOptionalSession } from "~/hooks/use-session";
 import { useToast } from "~/hooks/use-toast";
 import { useNavigate } from "~/i18n";
 
-import {
-	InterestSelectCount,
-	InterestSelectCustomInput,
-	InterestSelectList,
-	maximumInterests
-} from "../../settings/(profile)/interests/form";
-import { isLastFinishStep, nextFinishStepUrl, previousFinishStepUrl } from "../navigation";
+import { continueOnboardingUrl, isLastOnboardingStep, previousOnboardingStepUrl } from "../navigation";
 
-export const Finish3Form: FC = () => {
+export const Onboarding5Form: FC = () => {
 	const session = useOptionalSession();
 	const toasts = useToast();
 	const navigate = useNavigate();
@@ -39,13 +39,14 @@ export const Finish3Form: FC = () => {
 			className="flex flex-col gap-8"
 			requireChange={false}
 			onSubmit={async ({ defaultInterests, customInterests }) => {
+				if (defaultInterests.length + customInterests.length === 0)
+					throw new Error(`${t("interests")}: ${t("errors.cant_be_blank")}`);
+
 				await Profile.update(user.id, {
 					customInterests,
 					interestId: defaultInterests
 				})
-					.then(() => {
-						return navigate(nextFinishStepUrl("interests", user));
-					})
+					.then(async () => navigate(await continueOnboardingUrl("interests", user)))
 					.catch(toasts.addError);
 			}}
 		>
@@ -122,7 +123,7 @@ export const Finish3Form: FC = () => {
 						<div className="flex justify-end gap-2">
 							<ButtonLink
 								className="flex w-fit flex-row gap-2 opacity-75"
-								href={previousFinishStepUrl("interests")}
+								href={previousOnboardingStepUrl("interests")!}
 								kind="tertiary"
 								size="sm"
 							>
@@ -130,11 +131,11 @@ export const Finish3Form: FC = () => {
 								<span>{t("back")}</span>
 							</ButtonLink>
 							<FormButton className="min-w-36" size="sm">
-								{isLastFinishStep("interests") ? t("finish") : undefined}
+								{isLastOnboardingStep("interests") ? t("finish") : undefined}
 							</FormButton>
 						</div>
 						<InterestSelectCount
-							className="mb-11 desktop:mb-0"
+							className="bottom-[max(calc(var(--safe-area-inset-bottom,0rem)+1rem),1rem)] native-nav:bottom-[max(calc(var(--safe-area-inset-bottom,0rem)+1rem),1rem)]"
 							current={totalInterests}
 							maximum={maximumInterests}
 						/>

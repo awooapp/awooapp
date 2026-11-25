@@ -94,7 +94,7 @@ defmodule Flirtual.ScreenshotSeeds do
       ip: 15,
       gender: @woman,
       timezone: "America/New_York",
-      status: "onboarded",
+      status: "registered",
       biography: nil,
       images: 0,
       colors: {"#f5c2e7", "#ea76cb"}

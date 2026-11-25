@@ -131,11 +131,9 @@ const ColumnStatus: FC<{ userId: string }> = ({ userId }) => {
 						"size-5",
 						user?.status === "visible"
 							? "text-green-500"
-							: user?.status === "finished_profile"
+							: user?.status === "onboarded"
 								? "text-yellow-500"
-								: user?.status === "onboarded"
-									? "text-orange-500"
-									: "text-red-500"
+								: "text-red-500"
 					)}
 				/>
 			</MinimalTooltip>

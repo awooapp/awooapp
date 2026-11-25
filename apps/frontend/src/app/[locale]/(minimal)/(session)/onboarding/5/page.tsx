@@ -6,10 +6,8 @@ import { i18n } from "~/i18n";
 import { isLocale } from "~/i18n/languages";
 import { metaMerge, rootMeta } from "~/meta";
 
-import { FinishProgress } from "../progress";
-import { finishStepNumber } from "../steps";
 import type { Route } from "./+types/page";
-import { Finish3Form } from "./form";
+import { Onboarding5Form } from "./form";
 
 export const meta: Route.MetaFunction = (options) => {
 	invariant(isLocale(options.params.locale));
@@ -18,18 +16,17 @@ export const meta: Route.MetaFunction = (options) => {
 	return metaMerge([...rootMeta(options), { title: t("page_title", { name: t("interests") }) }]);
 };
 
-export default function Finish3Page() {
+export default function Onboarding5Page() {
 	const { t } = useTranslation();
 
 	return (
-		<>
-			<FinishProgress page={finishStepNumber("interests")} />
-			<ModelCard
-				className="shrink-0 pb-[max(calc(var(--safe-area-inset-bottom,0rem)+4.5rem),6rem)] native-nav:pb-[calc(var(--safe-area-inset-bottom,0rem)+2.75rem)] desktop:max-w-2xl desktop:pb-0"
-				title={t("interests")}
-			>
-				<Finish3Form />
-			</ModelCard>
-		</>
+		<ModelCard
+			branded
+			miniFooter
+			className="shrink-0 desktop:max-w-2xl"
+			title={t("interests")}
+		>
+			<Onboarding5Form />
+		</ModelCard>
 	);
 }

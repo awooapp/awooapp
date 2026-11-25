@@ -20,7 +20,7 @@ defmodule Flirtual.Matchmaking do
   @daily_likes_limit 15
   @daily_browses_limit 30
 
-  # Users with an incomplete profile or unconfirmed email.
+  # Onboarded users without a confirmed email or phone.
   @trial_likes_limit 7
   @trial_browses_limit 15
 
@@ -50,40 +50,44 @@ defmodule Flirtual.Matchmaking do
   def reduce_kind(a, b) when a === :friend or b === :friend, do: :friend
   def reduce_kind(_, _), do: :love
 
-  defp trial_user?(%User{} = user) do
-    user.status in [:registered, :onboarded] || not User.contact_confirmed?(user)
-  end
+  defp trial_user?(%User{} = user), do: not User.contact_confirmed?(user)
 
   defp trial_exhausted?(%User{} = user) do
     user.likes_count + user.passes_count >= @trial_browses_limit ||
       user.likes_count >= @trial_likes_limit
   end
 
-  defp trial_error(%User{status: :finished_profile}), do: :confirm_email
-  defp trial_error(_), do: :finish_profile
-
   def queue_information(%User{} = user, kind) do
-    if trial_user?(user) and trial_exhausted?(user) do
-      {:error, {:forbidden, trial_error(user)}}
-    else
-      queue = Queue.get(user.id, kind)
-      uncompleted = Prospect.list_uncompleted(user.id, kind, @foresight)
-      remaining = Prospect.count_uncompleted(user.id, kind)
-      previous = Prospect.last_completed(user.id, kind)
+    cond do
+      user.status == :registered ->
+        {:error, {:forbidden, :finish_profile}}
 
-      enqueued = maybe_enqueue_compute(user.id, kind, queue, remaining)
+      trial_user?(user) and trial_exhausted?(user) ->
+        {:error, {:forbidden, :confirm_email}}
 
-      {:ok,
-       %{
-         previous: previous && previous.target_id,
-         next: uncompleted |> Enum.take(@visible_prospects) |> Enum.map(& &1.target_id),
-         fallback: fallback_head?(uncompleted),
-         notice: fallback_notice(queue, uncompleted),
-         limits: limits(user, queue),
-         can_undo: not queue.undone and not is_nil(previous),
-         pending: remaining == 0 and enqueued == :enqueued
-       }}
+      true ->
+        queue_state(user, kind)
     end
+  end
+
+  defp queue_state(%User{} = user, kind) do
+    queue = Queue.get(user.id, kind)
+    uncompleted = Prospect.list_uncompleted(user.id, kind, @foresight)
+    remaining = Prospect.count_uncompleted(user.id, kind)
+    previous = Prospect.last_completed(user.id, kind)
+
+    enqueued = maybe_enqueue_compute(user.id, kind, queue, remaining)
+
+    {:ok,
+     %{
+       previous: previous && previous.target_id,
+       next: uncompleted |> Enum.take(@visible_prospects) |> Enum.map(& &1.target_id),
+       fallback: fallback_head?(uncompleted),
+       notice: fallback_notice(queue, uncompleted),
+       limits: limits(user, queue),
+       can_undo: not queue.undone and not is_nil(previous),
+       pending: remaining == 0 and enqueued == :enqueued
+     }}
   end
 
   defp fallback_head?([%Prospect{fallback: fallback} | _]), do: fallback
@@ -447,13 +451,16 @@ defmodule Flirtual.Matchmaking do
 
   defp check_limits(%User{} = user, %Queue{} = queue, type) do
     cond do
+      user.status == :registered ->
+        {:error, {:forbidden, :finish_profile}}
+
       Entitlement.premium?(user.entitlements) ->
         :ok
 
       trial_user?(user) ->
         if trial_exhausted?(user) or
              (type == :like and user.likes_count >= @trial_likes_limit) do
-          {:error, {:forbidden, trial_error(user)}}
+          {:error, {:forbidden, :confirm_email}}
         else
           :ok
         end

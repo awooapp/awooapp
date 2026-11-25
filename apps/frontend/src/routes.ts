@@ -7,7 +7,7 @@ import {
 } from "@react-router/dev/routes";
 import type { RouteConfig, RouteConfigEntry } from "@react-router/dev/routes";
 
-import { finishStepDirectory, finishSteps } from "./app/[locale]/(app)/(authenticated)/finish/steps";
+import { onboardingStepDirectory, onboardingSteps } from "./app/[locale]/(minimal)/(session)/onboarding/steps";
 import { events, fun, homieMode, landing, news, personality, press } from "./features";
 
 const filePrefix = "./app/[locale]";
@@ -50,15 +50,12 @@ export default [
 				page("forgot", "(minimal)/(guest)/forgot"),
 			]),
 			layout("(minimal)/(session)", [
-				page("onboarding/1", "(minimal)/(session)/onboarding/1"),
-				page("onboarding/2", "(minimal)/(session)/onboarding/2"),
-				page("onboarding/3", "(minimal)/(session)/onboarding/3"),
+				...onboardingSteps.map((step, index) =>
+					page(`onboarding/${index + 1}`, `(minimal)/(session)/onboarding/${onboardingStepDirectory[step]}`)),
 			])
 		]),
 		layout("(app)", [
 			layout("(app)/(authenticated)", [
-				...finishSteps.map((step, index) =>
-					page(`finish/${index + 1}`, `(app)/(authenticated)/finish/${finishStepDirectory[step]}`)),
 				page("subscription", "(app)/(authenticated)/subscription"),
 				layout("(app)/(authenticated)/(onboarded)", [
 					page(":slug", "(app)/(authenticated)/(onboarded)/[slug]"),

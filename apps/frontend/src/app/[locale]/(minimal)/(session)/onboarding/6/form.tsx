@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { keys, shuffle } from "remeda";
 
 import { Profile } from "~/api/user/profile";
+import { usePersonality } from "~/app/[locale]/(app)/(authenticated)/settings/(profile)/personality/form";
 import { ButtonLink } from "~/components/button";
 import { Form } from "~/components/forms";
 import { FormButton } from "~/components/forms/button";
@@ -12,10 +13,9 @@ import { useOptionalSession } from "~/hooks/use-session";
 import { useNavigate } from "~/i18n";
 import { invalidate, personalityKey, sessionKey } from "~/query";
 
-import { usePersonality } from "../../settings/(profile)/personality/form";
-import { isLastFinishStep, nextFinishStepUrl, previousFinishStepUrl } from "../navigation";
+import { continueOnboardingUrl, isLastOnboardingStep, previousOnboardingStepUrl } from "../navigation";
 
-export const Finish4Form: React.FC = () => {
+export const Onboarding6Form: React.FC = () => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 
@@ -39,7 +39,7 @@ export const Finish4Form: React.FC = () => {
 					invalidate({ queryKey: personalityKey(user.id) }),
 					invalidate({ queryKey: sessionKey() })
 				]);
-				await navigate(nextFinishStepUrl("personality", user));
+				await navigate(await continueOnboardingUrl("personality", user));
 			}}
 		>
 			{({ FormField }) => (
@@ -62,7 +62,7 @@ export const Finish4Form: React.FC = () => {
 					<div className="flex justify-end gap-2">
 						<ButtonLink
 							className="flex w-fit flex-row gap-2 opacity-75"
-							href={previousFinishStepUrl("personality")}
+							href={previousOnboardingStepUrl("personality")!}
 							kind="tertiary"
 							size="sm"
 						>
@@ -70,7 +70,7 @@ export const Finish4Form: React.FC = () => {
 							<span>{t("back")}</span>
 						</ButtonLink>
 						<FormButton className="min-w-36" size="sm">
-							{isLastFinishStep("personality") ? t("finish") : undefined}
+							{isLastOnboardingStep("personality") ? t("finish") : undefined}
 						</FormButton>
 					</div>
 				</>

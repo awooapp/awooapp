@@ -82,7 +82,8 @@ Likes-you 40, interests 3/5/20 by strength, custom interests 25, games 1, locati
 
 - Browses (like/homie + pass) 30/day; likes/homies 15/day (lazy reset 9am UTC via `queues.reset_at`; errors `out_of_browses`/`out_of_likes`).
 - Blocking a queued prospect spends a pass in each queue they appeared in.
-- Incomplete profiles (not visible to others): 15 browses / 7 likes total across modes, lifetime (`users.likes_count/passes_count`, not undo-refunded).
+- Unconfirmed email/phone (status `onboarded`, not visible to others): 15 browses / 7 likes total across modes, lifetime (`users.likes_count/passes_count`, not undo-refunded), then `confirm_email`.
+- Unfinished onboarding (status `registered`): no browsing at all (`finish_profile`). The web app keeps them in onboarding; the error is for the watch.
 - Premium is unlimited; undo refunds the daily counters.
 
 ## Moderation

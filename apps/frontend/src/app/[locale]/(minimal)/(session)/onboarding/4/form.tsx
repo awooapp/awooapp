@@ -1,6 +1,6 @@
-import { CheckCircle2, MoveLeft } from "lucide-react";
+import { MoveLeft } from "lucide-react";
 import type { FC } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import {
 	Profile,
@@ -23,9 +23,9 @@ import { useOptionalSession } from "~/hooks/use-session";
 import { useNavigate } from "~/i18n";
 import { mutate, sessionKey } from "~/query";
 
-import { nextFinishStepUrl, previousFinishStepUrl } from "../navigation";
+import { nextOnboardingStepUrl, previousOnboardingStepUrl } from "../navigation";
 
-export const Finish2Form: FC = () => {
+export const Onboarding4Form: FC = () => {
 	const sexualities = useAttributes("sexuality");
 
 	const session = useOptionalSession();
@@ -64,20 +64,11 @@ export const Finish2Form: FC = () => {
 					}
 				});
 
-				navigate(nextFinishStepUrl("details", user));
+				navigate(nextOnboardingStepUrl("details")!);
 			}}
 		>
 			{({ FormField }) => (
 				<>
-					<div className="flex flex-col">
-						<div className="flex gap-4 pb-6 desktop:pb-6">
-							<CheckCircle2 className="mt-1.5 size-7 shrink-0 text-pink" />
-							<span>
-								<Trans i18nKey={user.emailConfirmedAt ? "finish_visible_notice" : "finish_ready_notice"} />
-							</span>
-						</div>
-						<hr className="border-t-2 border-white-30 dark:border-black-60" />
-					</div>
 					<FormField name="relationships">
 						{(field) => (
 							<>
@@ -150,7 +141,7 @@ export const Finish2Form: FC = () => {
 					<div className="flex justify-end gap-2">
 						<ButtonLink
 							className="flex w-fit flex-row gap-2 opacity-75"
-							href={previousFinishStepUrl("details")}
+							href={previousOnboardingStepUrl("details")!}
 							kind="tertiary"
 							size="sm"
 						>

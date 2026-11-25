@@ -82,27 +82,6 @@ export const OutOfProspects: FC<OutOfProspectsProps> = ({ mode }) => {
 	);
 };
 
-export const FinishProfileError: React.FC = () => {
-	const { t } = useTranslation();
-
-	return (
-		<ModelCard
-			branded
-			title={t("complete_your_profile")}
-			titleProps={{ className: "desktop:text-3xl" }}
-		>
-			<div className="flex flex-col gap-4">
-				<p>{t("hidden_profile_finish")}</p>
-				<div className="flex gap-4">
-					<ButtonLink href={urls.finish(1)}>
-						{t("finish_profile")}
-					</ButtonLink>
-				</div>
-			</div>
-		</ModelCard>
-	);
-};
-
 export const ConfirmEmailError: React.FC = () => {
 	const { t } = useTranslation();
 

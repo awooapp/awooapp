@@ -6,6 +6,7 @@ import invariant from "tiny-invariant";
 
 import type { AgeVerificationMethods } from "~/api/age-verification";
 import { AgeVerification } from "~/api/age-verification";
+import { resumeOnboardingUrl } from "~/app/[locale]/(minimal)/(session)/onboarding/navigation";
 import { Button, ButtonLink } from "~/components/button";
 import { InlineLink } from "~/components/inline-link";
 import { ModelCard } from "~/components/model-card";
@@ -83,7 +84,7 @@ export default function VerifyAgePage() {
 		throwRedirect(session.user.ban
 			? urls.banned
 			: session.user.status === "registered"
-				? urls.onboarding(1)
+				? resumeOnboardingUrl(session.user)
 				: urls.discover("dates"));
 
 	if (!required && verified) {

@@ -6,6 +6,7 @@ import { useSearchParams } from "react-router";
 import type { Session } from "~/api/auth";
 import { Authentication } from "~/api/auth";
 import type { UserBan } from "~/api/user";
+import { resumeOnboardingUrl } from "~/app/[locale]/(minimal)/(session)/onboarding/navigation";
 import type {
 	MinimalQueryOptions
 } from "~/query";
@@ -86,7 +87,7 @@ export function useGuest() {
 
 	if (!next)
 		next = session?.user.status === "registered"
-			? urls.onboarding(1)
+			? resumeOnboardingUrl(session.user)
 			: urls.discover("dates");
 
 	if (session) {

@@ -19,9 +19,10 @@ import { useQueue } from "~/hooks/use-queue";
 import { useDefaultTour } from "~/hooks/use-tour";
 import { useUser } from "~/hooks/use-user";
 import { invalidate, mutate, queryClient, queueKey, useMutation, userKey } from "~/query";
+import { throwRedirect } from "~/redirect";
 import { urls } from "~/urls";
 
-import { ConfirmEmailError, FinishProfileError, OutOfProspects } from "./out-of-prospects";
+import { ConfirmEmailError, OutOfProspects } from "./out-of-prospects";
 import { QueueActions } from "./queue-actions";
 
 function DefaultTour() {
@@ -193,7 +194,7 @@ export const Queue: FC<{ kind: ProspectKind }> = ({ kind }) => {
 	if (shown.kind === kind && shown.profile !== displayed) setShown({ kind, profile: displayed });
 
 	if (error === "finish_profile")
-		return <FinishProfileError />;
+		return throwRedirect(urls.onboarding(1));
 
 	if (error === "confirm_email")
 		return <ConfirmEmailError />;

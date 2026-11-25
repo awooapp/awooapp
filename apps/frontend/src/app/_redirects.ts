@@ -1,3 +1,4 @@
+import { onboardingStepNumber } from "~/app/[locale]/(minimal)/(session)/onboarding/steps";
 import { homieMode } from "~/features";
 import Favicon from "~/static/icon-color.svg?w=48&h=48&fit=contain&background=transparent&format=png&no-inline&imagetools";
 import { urls } from "~/urls";
@@ -39,6 +40,10 @@ const pages: Array<Redirect> = [
 	{
 		source: "/onboarding/0",
 		destination: "/sign-up"
+	},
+	{
+		source: "/finish/*",
+		destination: urls.onboarding(onboardingStepNumber("bio"))
 	},
 	{
 		source: "/discover/homies",

@@ -248,9 +248,9 @@ export const scenarios: Record<string, ManualScreen | Scenario> = {
 			await waitForImages(page);
 		}
 	},
-	"/finish/1": { account: "onboarding", run: ({ open }) => open("/finish/1") },
-	"/finish/2": { account: "onboarding", run: ({ open }) => open("/finish/2") },
-	"/finish/3": { account: "onboarding", run: ({ open }) => open("/finish/3") },
+	"/onboarding/3": { account: "onboarding", run: ({ open }) => open("/onboarding/3") },
+	"/onboarding/4": { account: "onboarding", run: ({ open }) => open("/onboarding/4") },
+	"/onboarding/5": { account: "onboarding", run: ({ open }) => open("/onboarding/5") },
 
 	// On desktop /settings redirects to its first page; the list itself (with its "New" badges and
 	// social links) is the phone layout.

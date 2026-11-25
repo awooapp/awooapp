@@ -327,11 +327,9 @@ export const ProfileModeratorInfo: FC<{
 									"inline-flex gap-2",
 									user.status === "visible"
 										? "text-green-600"
-										: user.status === "finished_profile"
+										: user.status === "onboarded"
 											? "text-yellow-600"
-											: user.status === "onboarded"
-												? "text-orange-600"
-												: "text-red-600"
+											: "text-red-600"
 								)}
 							>
 								{capitalize(user.status).replace("_", " ")}
