@@ -35,7 +35,7 @@ import { mutate, sessionKey } from "~/query";
 import { urls } from "~/urls";
 
 const AttributeKeys = [
-	...(["gender", "sexuality", "platform", "game"] as const)
+	...(["gender", "sexuality", "fursona", "platform", "game"] as const)
 ];
 
 export const InfoForm: FC = () => {
@@ -44,6 +44,7 @@ export const InfoForm: FC = () => {
 
 	const platforms = useAttributes("platform");
 	const sexualities = useAttributes("sexuality");
+	const fursonas = useAttributes("fursona");
 	const genders = useAttributes("gender");
 
 	const { t } = useTranslation();
@@ -66,6 +67,7 @@ export const InfoForm: FC = () => {
 				languages: profile.languages ?? [],
 				gender: profile.attributes.gender || [],
 				sexuality: profile.attributes.sexuality || [],
+				fursona: profile.attributes.fursona || [],
 				platform: profile.attributes.platform || [],
 				game: profile.attributes.game || []
 			}}
@@ -228,6 +230,23 @@ export const InfoForm: FC = () => {
 
 									limit={3}
 									placeholder={t("select_your_sexualities")}
+									value={field.props.value || []}
+								/>
+							</>
+						)}
+					</FormField>
+					<FormField name="fursona">
+						{(field) => (
+							<>
+								<InputLabel>{t("main_fursona_species")}</InputLabel>
+								<InputAutocomplete
+									{...field.props}
+									options={fursonas.map((id) => ({
+										key: id,
+										label: tAttribute[id]?.name ?? id
+									}))}
+									limit={3}
+									placeholder={t("select_your_fursona_species")}
 									value={field.props.value || []}
 								/>
 							</>

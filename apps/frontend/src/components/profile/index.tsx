@@ -37,6 +37,7 @@ import { ProfileVerificationBadge } from "./verification-badge";
 export async function preloadProfileAttributes() {
 	await Promise.all(([
 		"country",
+		"fursona",
 		"game",
 		"gender",
 		"interest",

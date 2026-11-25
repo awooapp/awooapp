@@ -25,6 +25,7 @@ defmodule Flirtual.Attribute do
   @types ~w(
     ban-reason
     delete-reason
+    fursona
     game
     gender
     interest

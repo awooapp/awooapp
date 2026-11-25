@@ -23,6 +23,7 @@ import { nextOnboardingStepUrl, previousOnboardingStepUrl } from "../navigation"
 
 export const Onboarding4Form: FC = () => {
 	const sexualities = useAttributes("sexuality");
+	const fursonas = useAttributes("fursona");
 
 	const session = useOptionalSession();
 	const { t } = useTranslation();
@@ -40,7 +41,8 @@ export const Onboarding4Form: FC = () => {
 				relationships: profile.relationships ?? [],
 				monopoly: profile.monopoly ?? [],
 				languages: user.profile.languages ?? [],
-				sexualityId: user.profile.attributes.sexuality || []
+				sexualityId: user.profile.attributes.sexuality || [],
+				fursonaId: user.profile.attributes.fursona || []
 			}}
 			className="flex flex-col gap-8"
 			requireChange={false}
@@ -107,6 +109,23 @@ export const Onboarding4Form: FC = () => {
 									})}
 									limit={3}
 									placeholder={t("select_your_sexualities")}
+								/>
+							</>
+						)}
+					</FormField>
+					<FormField name="fursonaId">
+						{(field) => (
+							<>
+								<InputLabel>{t("main_fursona_species")}</InputLabel>
+								<InputAutocomplete
+									{...field.props}
+									options={fursonas.map((id) => ({
+										key: id,
+										label: tAttribute[id]?.name ?? id
+									}))}
+									limit={3}
+									placeholder={t("select_your_fursona_species")}
+									value={field.props.value || []}
 								/>
 							</>
 						)}

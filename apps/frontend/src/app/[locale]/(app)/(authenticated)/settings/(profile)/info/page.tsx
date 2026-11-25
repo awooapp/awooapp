@@ -27,6 +27,7 @@ export const handle = {
 			"game",
 			"platform",
 			"sexuality",
+			"fursona",
 			"gender",
 			"country",
 			"language",

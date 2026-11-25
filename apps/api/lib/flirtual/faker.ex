@@ -96,6 +96,7 @@ defmodule Flirtual.Faker do
     genders = Attribute.list(type: "gender")
     simple_genders = genders |> Enum.filter(&(&1.metadata["simple"] === true))
     sexualities = Attribute.list(type: "sexuality")
+    fursonas = Attribute.list(type: "fursona")
     kinks = Attribute.list(type: "kink")
     games = Attribute.list(type: "game")
     platforms = Attribute.list(type: "platform")
@@ -183,6 +184,7 @@ defmodule Flirtual.Faker do
                custom_interests: random_n_of(0..3, @custom_interests),
                gender_id: random_gender_ids(genders),
                sexuality_id: random_n_of(0..3, sexualities |> Enum.map(& &1.id)),
+               fursona_id: random_n_of(0..3, fursonas |> Enum.map(& &1.id)),
                kink_id: random_n_of(0..8, kinks |> Enum.map(& &1.id)),
                game_id: random_n_of(1..5, games |> Enum.map(& &1.id)),
                platform_id:

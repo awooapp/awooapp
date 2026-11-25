@@ -113,6 +113,12 @@ export const PillCollection: FC<{ user: User }> = (props) => {
 				href={editable ? urls.settings.info("sexuality") : undefined}
 				user={user}
 			/>
+			<PillAttributeList
+				activeIds={session.user.profile.attributes.fursona}
+				attributes={user.profile.attributes.fursona}
+				href={editable ? urls.settings.info("fursona") : undefined}
+				user={user}
+			/>
 			{personalityLabels.length > 0 && (
 				<PillRows editable={editable}>
 					{personalityLabels.map((personalityLabel) => (

@@ -65,6 +65,7 @@ export type Profile = {
 export const ProfileAttributes = [
 	"gender",
 	"sexuality",
+	"fursona",
 	"kink",
 	"game",
 	"platform",

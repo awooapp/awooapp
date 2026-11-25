@@ -48,6 +48,7 @@ defmodule Flirtual.Profiles do
     @attribute_keys [
       :gender_id,
       :sexuality_id,
+      :fursona_id,
       :kink_id,
       :game_id,
       :platform_id,
@@ -236,6 +237,8 @@ defmodule Flirtual.Profiles do
       |> validate_gender_conflicts()
       |> validate_attributes(:sexuality_id, "sexuality")
       |> validate_length(:sexuality, max: 3)
+      |> validate_attributes(:fursona_id, "fursona")
+      |> validate_length(:fursona, max: 3)
       |> validate_attributes(:kink_id, "kink")
       |> validate_length(:kink, min: 0, max: 8)
       |> validate_attributes(:game_id, "game")

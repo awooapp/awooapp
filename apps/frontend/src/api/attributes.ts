@@ -24,6 +24,7 @@ export const attributeTypes = [
 	"ban-reason",
 	"country",
 	"delete-reason",
+	"fursona",
 	"game",
 	"gender",
 	"interest",
@@ -62,6 +63,7 @@ export interface AttributeMetadata {
 		definitionLink?: string;
 	};
 	relationship: undefined;
+	fursona: undefined;
 	language: undefined;
 	game?: {
 		pcvr?: string;
