@@ -254,7 +254,8 @@ defmodule Flirtual.User do
       not is_nil(profile.biography) and String.length(profile.biography) >= 48 and
       not Enum.empty?(profile.images) and
       not Enum.empty?(
-        filter_by(profile.attributes, :type, "interest") ++ profile.custom_interests
+        filter_by(profile.attributes, :type, "interest") ++
+          if(Flirtual.Features.custom_interests?(), do: profile.custom_interests, else: [])
       )
   end
 
