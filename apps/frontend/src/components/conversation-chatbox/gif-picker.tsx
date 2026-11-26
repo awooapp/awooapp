@@ -13,7 +13,7 @@ import { useLocale } from "~/i18n";
 import { queryClient } from "~/query";
 
 const columnWidth = 160;
-const pinnedQueries = ["vrchat", "cats"];
+const pinnedQueries = ["furry"];
 
 // Inner ring, or else the scroll area clips it.
 const tile = "relative overflow-hidden rounded-lg outline-none after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:ring-theme-1 after:ring-inset focus-visible:after:ring-2";
