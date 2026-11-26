@@ -8,6 +8,7 @@ const allSteps = [
 	"bio",
 	"details",
 	"interests",
+	"kinks",
 	"personality",
 	"connections"
 ] as const;
@@ -28,6 +29,7 @@ export const onboardingStepDirectory: Record<OnboardingStep, string> = {
 	bio: "3",
 	details: "4",
 	interests: "5",
+	kinks: "8",
 	personality: "6",
 	connections: "7"
 };

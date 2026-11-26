@@ -1,3 +1,4 @@
+import type { Dispatch, FC } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { Session } from "~/api/auth";
@@ -14,9 +15,34 @@ import { useSession } from "~/hooks/use-session";
 import { useToast } from "~/hooks/use-toast";
 import { invalidate, mutate, sessionKey } from "~/query";
 
-const maximumKinks = 8;
+export const maximumKinks = 8;
 
-export const NsfwForm: React.FC = () => {
+export const KinkSelect: FC<{
+	value: Array<string>;
+	onChange: Dispatch<Array<string>>;
+}> = ({ value, onChange }) => {
+	const toasts = useToast();
+	const { t } = useTranslation();
+
+	return (
+		<InputAttributeCategorySelect
+			maximum={maximumKinks}
+			selected={value}
+			type="kink"
+			onSelected={(newValue) => {
+				if (newValue.length > maximumKinks && newValue.length > value.length)
+					return toasts.add({
+						type: "warning",
+						value: t("kinks_limit_reached", { number: maximumKinks })
+					});
+
+				onChange(newValue);
+			}}
+		/>
+	);
+};
+
+export const NsfwForm: FC = () => {
 	const session = useSession();
 	const toasts = useToast();
 
@@ -97,25 +123,7 @@ export const NsfwForm: React.FC = () => {
 								)}
 							</FormField>
 							<FormField name="kinks">
-								{(field) => (
-									<InputAttributeCategorySelect
-										maximum={maximumKinks}
-										selected={field.props.value}
-										type="kink"
-										onSelected={(value) => {
-											if (
-												value.length > maximumKinks
-												&& value.length > field.props.value.length
-											)
-												return toasts.add({
-													type: "warning",
-													value: t("kinks_limit_reached", { number: maximumKinks })
-												});
-
-											field.props.onChange(value);
-										}}
-									/>
-								)}
+								{(field) => <KinkSelect {...field.props} />}
 							</FormField>
 							<FormField name="kinksPrivacy">
 								{(field) => (
