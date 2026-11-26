@@ -182,7 +182,16 @@ export const InterestsForm: FC = () => {
 
 				return (
 					<>
-						<InputLabel>{t("interests_hint")}</InputLabel>
+						<InputLabel>
+							<span>
+								{t("interests_hint")}
+								{customInterestsEnabled && (
+									<span className="sentence-space">
+										{t("interests_hint_custom_interests")}
+									</span>
+								)}
+							</span>
+						</InputLabel>
 						<FormField name="filter">
 							{(field) => (
 								<InputText

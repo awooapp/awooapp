@@ -29,12 +29,12 @@ import { twMerge } from "tailwind-merge";
 import { useEmailLogin } from "~/app/[locale]/(minimal)/(guest)/login/last-connection";
 import { InlineLink } from "~/components/inline-link";
 import { IdeasDialog } from "~/components/modals/ideas";
-import { freshworksWidgetId, version } from "~/const";
+import { supportWidget, version } from "~/const";
 import { events, news, personality, press } from "~/features";
 import { useDevice } from "~/hooks/use-device";
 import { useDialog } from "~/hooks/use-dialog";
-import { useFreshworks } from "~/hooks/use-freshworks";
 import { logout, revokeImpersonate, useSession } from "~/hooks/use-session";
+import { useSupport } from "~/hooks/use-support";
 import { urls } from "~/urls";
 
 import { NavigationCategory } from "./navigation-category";
@@ -48,7 +48,7 @@ export const SettingsNavigation: FC = () => {
 	const matches = useMatches();
 	const listOnly = matches.at(-1)?.pathname.endsWith(urls.settings.list()) || false;
 
-	const { openFreshworks } = useFreshworks();
+	const { openSupport } = useSupport();
 	const { t } = useTranslation();
 	const dialogs = useDialog();
 	const emailLogin = useEmailLogin();
@@ -199,10 +199,10 @@ export const SettingsNavigation: FC = () => {
 						)}
 					</div>
 					<div className="desktop:hidden">
-						{(freshworksWidgetId || urls.socials.discord || urls.resources.networkStatus) && (
+						{(supportWidget || urls.socials.discord || urls.resources.networkStatus) && (
 							<NavigationCategory name={t("help")}>
-								{freshworksWidgetId && (
-									<NavigationLink onClick={openFreshworks}>{t("support")}</NavigationLink>
+								{supportWidget && (
+									<NavigationLink onClick={openSupport}>{t("support")}</NavigationLink>
 								)}
 								{urls.socials.discord && (
 									<NavigationLink

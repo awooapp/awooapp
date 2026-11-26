@@ -68,7 +68,14 @@ export const Onboarding5Form: FC = () => {
 				return (
 					<>
 						<InputLabel>
-							{t("interests_hint")}
+							<span>
+								{t("interests_hint")}
+								{customInterestsEnabled && (
+									<span className="sentence-space">
+										{t("interests_hint_custom_interests")}
+									</span>
+								)}
+							</span>
 						</InputLabel>
 						<FormField name="filter">
 							{(field) => (
