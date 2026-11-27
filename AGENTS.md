@@ -106,7 +106,7 @@ vars, read separately by each app:
 
 - **Brand**: `VITE_BRAND_*` → `apps/frontend/src/brand.ts` (defaults in `src/brand.defaults.json`,
   also read by tailwind, capacitor, gradle and watchOS); `BRAND_*` → `Flirtual.Brand`
-  (defaults in `config/runtime.exs`). Only the name, colours and background have defaults. `VITE_BRAND_ASSET_DOMAIN` and `VITE_BRAND_REPOSITORY_URL` (AGPL) are required; every
+  (defaults in `config/runtime.exs`). Only the name, colours, background and GIF searches have defaults. `VITE_BRAND_ASSET_DOMAIN` and `VITE_BRAND_REPOSITORY_URL` (AGPL) are required; every
   other value is optional, and whatever links to an unset one must disappear, not break.
 - **Flags**: `VITE_FEATURE_*` → `src/features.ts`; `FEATURE_*` → `Flirtual.Features`. Homie Mode,
   personality, VR tags (platform + game), VRChat, playlists, timezones, custom interests, advanced filters, the list of connection providers, and (frontend
@@ -125,7 +125,9 @@ vars, read separately by each app:
   loads it where `~/` doesn't resolve.
 - **Native**: xcodebuild doesn't read shell env vars, so `ios.yaml` passes brand and flag values
   as build settings (watchOS and visionOS read them from Info.plist); Android takes the brand
-  colour as a gradle `resValue`. Mobile workflows only see repository-level variables.
+  colour as a gradle `resValue`. Mobile workflows only see repository-level variables; per-channel
+  ones (`*_PRODUCTION`/`*_BETA`, e.g. `APP_SCHEME_*`, `APP_LINK_HOSTS_*`, `GOOGLE_SERVICES_JSON_*`)
+  override Flirtual's committed values when set.
 
 ## Development workflow
 
