@@ -171,7 +171,8 @@ jobs:
   release:
     name: Release
     needs: changes
-    if: (needs.changes.outputs.native == 'true' && github.event_name == 'push') || github.event_name == 'workflow_dispatch'
+    # Awoo has no beta app on Apple yet, so only manual runs release.
+    if: github.event_name == 'workflow_dispatch'
     runs-on: xcode-27
     environment: mobile
     defaults:
