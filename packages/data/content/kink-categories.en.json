@@ -35,6 +35,9 @@
 	"restraint_and_sensation": {
 		"name": "Restraint and Sensation"
 	},
+	"roles": {
+		"name": "Roles"
+	},
 	"sex_position": {
 		"name": "Sex position"
 	},

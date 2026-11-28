@@ -23,6 +23,14 @@
 	"bottom": {
 		"name": "Bottom"
 	},
+	"brat": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Brat,change%20this%20behavior.",
+		"name": "Brat"
+	},
+	"brat_tamer": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Brat%20tamer,the%20first%20place).",
+		"name": "Brat tamer"
+	},
 	"breath_control_choking": {
 		"name": "Breath control/Choking"
 	},
@@ -68,6 +76,18 @@
 	"cut": {
 		"name": "Cut"
 	},
+	"daddy_mommy": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Daddy/Mommy,littles%20into%20obedience.",
+		"name": "Daddy/Mommy"
+	},
+	"degradee": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Degradee,they%20consider%20degrading.",
+		"name": "Degradee"
+	},
+	"degrader": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Degrader,they%20consider%20degrading.",
+		"name": "Degrader"
+	},
 	"diapers": {
 		"name": "Diapers"
 	},
@@ -88,6 +108,10 @@
 	},
 	"exhibitionism": {
 		"name": "Exhibitionism"
+	},
+	"exhibitionist": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Exhibitionist,to%20other%20people.",
+		"name": "Exhibitionist"
 	},
 	"face_sitting": {
 		"name": "Face-sitting"
@@ -131,6 +155,10 @@
 	"humiliation_public": {
 		"name": "Humiliation (public)"
 	},
+	"hunter": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Primal%20(Hunter),its%20predator%20(you).",
+		"name": "Hunter"
+	},
 	"hyper": {
 		"name": "Hyper"
 	},
@@ -170,6 +198,14 @@
 	"licking_balls": {
 		"name": "Licking balls"
 	},
+	"masochist": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Masochist,levels%20of%20pain.",
+		"name": "Masochist"
+	},
+	"master": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Master/Mistress,allow%20optimal%20servitude.",
+		"name": "Master"
+	},
 	"micro_macro": {
 		"name": "Micro/Macro"
 	},
@@ -185,14 +221,26 @@
 	"orgasm_control_denial": {
 		"name": "Orgasm control/Denial"
 	},
+	"owner": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Owner,for%20the%20pet).",
+		"name": "Owner"
+	},
 	"paws": {
 		"name": "Paws"
+	},
+	"pet": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=its%20predator%20(you).-,Pet,play%20(puppy%2C%20kitten%2C%20etc.)%2C%20although%20that%20is%20not%20a%20strict%20necessity.,-Primal%20(Prey)",
+		"name": "Pet"
 	},
 	"piercings": {
 		"name": "Piercings"
 	},
 	"praise": {
 		"name": "Praise"
+	},
+	"prey": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Primal%20(Prey),from%20its%20predator.",
+		"name": "Prey"
 	},
 	"primal": {
 		"name": "Primal"
@@ -209,8 +257,20 @@
 	"recording": {
 		"name": "Recording"
 	},
+	"rigger": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Rigger,at%20their%20mercy.",
+		"name": "Rigger"
+	},
 	"rimming": {
 		"name": "Rimming"
+	},
+	"rope_bunny": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Rope%20bunny,their%20partner(s).",
+		"name": "Rope bunny"
+	},
+	"sadist": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Sadist,a%20sexual%20context.",
+		"name": "Sadist"
 	},
 	"scratching": {
 		"name": "Scratching"
@@ -229,6 +289,10 @@
 	},
 	"size_difference": {
 		"name": "Size difference"
+	},
+	"slave": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=a%20sexual%20context.-,Slave,primary%20focus%20in%20life%20and%20they%20rarely%20have%20limits%20for%20them.,-Submissive",
+		"name": "Slave"
 	},
 	"sloppy_seconds": {
 		"name": "Sloppy seconds"
@@ -283,6 +347,10 @@
 	},
 	"vore": {
 		"name": "Vore"
+	},
+	"voyeur": {
+		"definition_link": "https://bdsmtest.org/info#:~:text=Voyeur,of%20other%20people.",
+		"name": "Voyeur"
 	},
 	"watersports": {
 		"name": "Watersports"

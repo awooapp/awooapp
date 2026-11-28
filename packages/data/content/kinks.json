@@ -8,7 +8,7 @@
 	"balloons": {
 		"category": "other",
 		"internal": {
-			"curated": 95
+			"curated": 112
 		}
 	},
 	"biting": {
@@ -47,6 +47,22 @@
 			"curated": 2
 		},
 		"pair": "top"
+	},
+	"brat": {
+		"category": "roles",
+		"internal": {
+			"curated": 96
+		},
+		"kind": "submissive",
+		"pair": "brat_tamer"
+	},
+	"brat_tamer": {
+		"category": "roles",
+		"internal": {
+			"curated": 95
+		},
+		"kind": "dominant",
+		"pair": "brat"
 	},
 	"breath_control_choking": {
 		"category": "pain_and_roughness",
@@ -138,6 +154,29 @@
 			"curated": 88
 		}
 	},
+	"daddy_mommy": {
+		"category": "roles",
+		"internal": {
+			"curated": 107
+		},
+		"kind": "dominant"
+	},
+	"degradee": {
+		"category": "roles",
+		"internal": {
+			"curated": 104
+		},
+		"kind": "submissive",
+		"pair": "degrader"
+	},
+	"degrader": {
+		"category": "roles",
+		"internal": {
+			"curated": 103
+		},
+		"kind": "dominant",
+		"pair": "degradee"
+	},
 	"diapers": {
 		"category": "gear",
 		"internal": {
@@ -180,6 +219,13 @@
 			"curated": 77
 		}
 	},
+	"exhibitionist": {
+		"category": "roles",
+		"internal": {
+			"curated": 99
+		},
+		"pair": "voyeur"
+	},
 	"face_sitting": {
 		"category": "touch_and_oral",
 		"internal": {
@@ -189,13 +235,13 @@
 	"feet": {
 		"category": "other",
 		"internal": {
-			"curated": 91
+			"curated": 108
 		}
 	},
 	"femboy": {
 		"category": "other",
 		"internal": {
-			"curated": 97
+			"curated": 114
 		}
 	},
 	"fingering": {
@@ -264,6 +310,14 @@
 			"curated": 50
 		}
 	},
+	"hunter": {
+		"category": "roles",
+		"internal": {
+			"curated": 93
+		},
+		"kind": "dominant",
+		"pair": "prey"
+	},
 	"hyper": {
 		"category": "fantasy_and_roleplay",
 		"internal": {
@@ -285,13 +339,13 @@
 	"inexperienced_partners": {
 		"category": "other",
 		"internal": {
-			"curated": 96
+			"curated": 113
 		}
 	},
 	"inflatables": {
 		"category": "other",
 		"internal": {
-			"curated": 94
+			"curated": 111
 		}
 	},
 	"inflation": {
@@ -342,6 +396,22 @@
 			"curated": 17
 		}
 	},
+	"masochist": {
+		"category": "roles",
+		"internal": {
+			"curated": 102
+		},
+		"kind": "submissive",
+		"pair": "sadist"
+	},
+	"master": {
+		"category": "roles",
+		"internal": {
+			"curated": 97
+		},
+		"kind": "dominant",
+		"pair": "slave"
+	},
 	"micro_macro": {
 		"category": "fantasy_and_roleplay",
 		"internal": {
@@ -372,11 +442,27 @@
 			"curated": 48
 		}
 	},
+	"owner": {
+		"category": "roles",
+		"internal": {
+			"curated": 91
+		},
+		"kind": "dominant",
+		"pair": "pet"
+	},
 	"paws": {
 		"category": "furry",
 		"internal": {
 			"curated": 4
 		}
+	},
+	"pet": {
+		"category": "roles",
+		"internal": {
+			"curated": 92
+		},
+		"kind": "submissive",
+		"pair": "owner"
 	},
 	"piercings": {
 		"category": "body_preferences",
@@ -389,6 +475,14 @@
 		"internal": {
 			"curated": 46
 		}
+	},
+	"prey": {
+		"category": "roles",
+		"internal": {
+			"curated": 94
+		},
+		"kind": "submissive",
+		"pair": "hunter"
 	},
 	"primal": {
 		"category": "furry",
@@ -420,11 +514,35 @@
 			"curated": 79
 		}
 	},
+	"rigger": {
+		"category": "roles",
+		"internal": {
+			"curated": 105
+		},
+		"kind": "dominant",
+		"pair": "rope_bunny"
+	},
 	"rimming": {
 		"category": "touch_and_oral",
 		"internal": {
 			"curated": 14
 		}
+	},
+	"rope_bunny": {
+		"category": "roles",
+		"internal": {
+			"curated": 106
+		},
+		"kind": "submissive",
+		"pair": "rigger"
+	},
+	"sadist": {
+		"category": "roles",
+		"internal": {
+			"curated": 101
+		},
+		"kind": "dominant",
+		"pair": "masochist"
 	},
 	"scratching": {
 		"category": "pain_and_roughness",
@@ -461,6 +579,14 @@
 		"internal": {
 			"curated": 37
 		}
+	},
+	"slave": {
+		"category": "roles",
+		"internal": {
+			"curated": 98
+		},
+		"kind": "submissive",
+		"pair": "master"
 	},
 	"sloppy_seconds": {
 		"category": "cum_play",
@@ -501,7 +627,7 @@
 	"sweat": {
 		"category": "other",
 		"internal": {
-			"curated": 92
+			"curated": 109
 		}
 	},
 	"tattoos": {
@@ -571,10 +697,17 @@
 			"curated": 40
 		}
 	},
+	"voyeur": {
+		"category": "roles",
+		"internal": {
+			"curated": 100
+		},
+		"pair": "exhibitionist"
+	},
 	"watersports": {
 		"category": "other",
 		"internal": {
-			"curated": 93
+			"curated": 110
 		}
 	},
 	"whipping": {

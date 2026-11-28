@@ -36,7 +36,7 @@
 	},
 	"other": {
 		"internal": {
-			"curated": 14
+			"curated": 15
 		}
 	},
 	"pain_and_roughness": {
@@ -57,6 +57,11 @@
 	"restraint_and_sensation": {
 		"internal": {
 			"curated": 8
+		}
+	},
+	"roles": {
+		"internal": {
+			"curated": 14
 		}
 	},
 	"sex_position": {
