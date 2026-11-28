@@ -15,7 +15,7 @@ import { useSession } from "~/hooks/use-session";
 import { useToast } from "~/hooks/use-toast";
 import { invalidate, mutate, sessionKey } from "~/query";
 
-export const maximumKinks = 8;
+export const maximumKinks = 64;
 
 export const KinkSelect: FC<{
 	value: Array<string>;

@@ -253,7 +253,7 @@ defmodule Flirtual.Profiles do
       |> validate_entries(:fursona_id, Fursona)
       |> validate_length(:fursona, max: 3)
       |> validate_entries(:kink_id, Kink)
-      |> validate_length(:kink, min: 0, max: 8)
+      |> validate_length(:kink, min: 0, max: 64)
       |> validate_entries(:game_id, Game)
       |> validate_length(:game, min: 1, max: 5)
       |> validate_entries(:platform_id, Platform)
