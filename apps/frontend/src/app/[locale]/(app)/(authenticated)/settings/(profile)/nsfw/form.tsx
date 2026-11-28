@@ -111,7 +111,7 @@ export const NsfwForm: FC = () => {
 							<FormField name="domsub">
 								{(field) => (
 									<>
-										<InputLabel {...field.labelProps}>{t("i_am")}</InputLabel>
+										<InputLabel {...field.labelProps}>{t("dynamic")}</InputLabel>
 										<InputRadioList
 											{...field.props}
 											items={ProfileDomsubList.map((value) => ({

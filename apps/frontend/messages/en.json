@@ -894,6 +894,7 @@
 	"show_nsfw_hint": "Choose whether to display kinks on other people's profiles.",
 	"show_nsfw": "Show kinks on profiles?",
 	"i_am": "I am…",
+	"dynamic": "Dynamic",
 	"kinks": "Kinks",
 	"kinks_limit_reached": "You've reached the maximum of {number} kinks",
 	"nsfw_privacy": "Kink privacy",
