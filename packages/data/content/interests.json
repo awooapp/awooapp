@@ -644,6 +644,10 @@
 		},
 		"strength": 1
 	},
+	"minecraft": {
+		"category": "games",
+		"strength": 1
+	},
 	"mirror_dweller": {
 		"category": "identity",
 		"internal": {
@@ -835,6 +839,10 @@
 		},
 		"strength": 1,
 		"synonyms": ["rhythm and blues"]
+	},
+	"roblox": {
+		"category": "games",
+		"strength": 1
 	},
 	"rock": {
 		"category": "music",
@@ -1045,6 +1053,11 @@
 			"legacy_id": "XyLtoquzjjLdYyGHtojCo5"
 		},
 		"strength": 1
+	},
+	"vrchat": {
+		"category": "games",
+		"strength": 1,
+		"synonyms": ["vrc"]
 	},
 	"vtuber": {
 		"category": "general",

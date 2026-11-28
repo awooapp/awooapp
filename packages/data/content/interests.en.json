@@ -278,6 +278,9 @@
 	"military": {
 		"name": "Military"
 	},
+	"minecraft": {
+		"name": "Minecraft"
+	},
 	"mirror_dweller": {
 		"name": "Mirror dweller 🪞"
 	},
@@ -349,6 +352,9 @@
 	},
 	"rnb": {
 		"name": "R&B 🎤"
+	},
+	"roblox": {
+		"name": "Roblox"
 	},
 	"rock": {
 		"name": "Rock 🥁"
@@ -436,6 +442,9 @@
 	},
 	"voice_acting": {
 		"name": "Voice acting 🎙️"
+	},
+	"vrchat": {
+		"name": "VRChat"
 	},
 	"vtuber": {
 		"name": "VTuber"
