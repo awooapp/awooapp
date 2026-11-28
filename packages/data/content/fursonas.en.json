@@ -1,0 +1,56 @@
+{
+	"bear": {
+		"name": "Bear"
+	},
+	"bunny": {
+		"name": "Bunny"
+	},
+	"cat": {
+		"name": "Cat"
+	},
+	"coyote": {
+		"name": "Coyote"
+	},
+	"deer": {
+		"name": "Deer"
+	},
+	"dog": {
+		"name": "Dog"
+	},
+	"dragon": {
+		"name": "Dragon"
+	},
+	"fox": {
+		"name": "Fox"
+	},
+	"husky": {
+		"name": "Husky"
+	},
+	"hyena": {
+		"name": "Hyena"
+	},
+	"lion": {
+		"name": "Lion"
+	},
+	"other": {
+		"name": "Other"
+	},
+	"otter": {
+		"name": "Otter"
+	},
+	"protogen": {
+		"name": "Protogen"
+	},
+	"raccoon": {
+		"name": "Raccoon"
+	},
+	"snow_leopard": {
+		"name": "Snow Leopard"
+	},
+	"tiger": {
+		"name": "Tiger"
+	},
+	"wolf": {
+		"name": "Wolf"
+	}
+}

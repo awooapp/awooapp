@@ -56,14 +56,14 @@ export const NsfwForm: FC = () => {
 			fields={{
 				nsfw: user.preferences?.nsfw ?? false,
 				domsub: user.profile.domsub,
-				kinks: user.profile.attributes.kink ?? [],
+				kinks: user.profile.kinks ?? [],
 				kinksPrivacy: user.preferences?.privacy.kinks ?? "everyone"
 			}}
 			className="flex flex-col gap-8"
 			onSubmit={async ({ domsub, kinks, kinksPrivacy, nsfw }) => {
 				const [newProfile, newPreferences, newPrivacy] = await Promise.all([
 					Profile.update(user.id, {
-						domsub: domsub ?? "none",
+						domsub: domsub ?? null,
 						kinkId: kinks
 					}),
 					Preferences.update(user.id, { nsfw }),

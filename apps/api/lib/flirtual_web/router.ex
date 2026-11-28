@@ -145,14 +145,11 @@ defmodule FlirtualWeb.Router do
     scope "/v1" do
       get("/config", ConfigController, :get)
 
-      scope "/attributes" do
-        scope "/:attribute_type" do
-          get("/", AttributeController, :list)
+      get("/timezones", DataController, :timezones)
 
-          scope "/:attribute_id" do
-            get("/", AttributeController, :get)
-          end
-        end
+      for module <- Flirtual.Data.modules(),
+          function_exported?(Code.ensure_loaded!(module), :endpoint, 0) do
+        get("/#{module.file()}", DataController, :list, assigns: %{data: module})
       end
 
       scope "/users" do
@@ -407,18 +404,6 @@ defmodule FlirtualWeb.Router do
           post("/:event_id/review", ModerationEventController, :review)
         end
 
-        scope "/attributes" do
-          pipe_through([:require_authenticated_user, :require_valid_user])
-
-          get("/", AttributeController, :index)
-          post("/", AttributeController, :create)
-
-          scope "/:attribute_id" do
-            patch("/", AttributeController, :update)
-            delete("/", AttributeController, :delete)
-          end
-        end
-
         scope "/stats" do
           pipe_through([:require_authenticated_user, :require_valid_user])
 
@@ -445,6 +430,7 @@ defmodule FlirtualWeb.Router do
           pipe_through([:require_authenticated_user, :require_valid_user])
 
           get("/", ConversationController, :list)
+          get("/token", ConversationController, :token)
           delete("/unread", ConversationController, :mark_read)
           post("/observe", ConversationController, :observe)
 

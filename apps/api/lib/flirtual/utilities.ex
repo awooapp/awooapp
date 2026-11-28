@@ -75,25 +75,44 @@ defmodule Flirtual.Utilities do
   end
 
   def filter_by(list, key, values) when is_list(values) do
-    Enum.filter(list, &(&1[key] in values))
+    Enum.filter(list, &(Map.get(&1, key) in values))
   end
 
   def filter_by(list, key, value) do
-    Enum.filter(list, &(&1[key] === value))
+    Enum.filter(list, &(Map.get(&1, key) === value))
   end
 
   def exclude_by(list, key, values) when is_list(values) do
-    Enum.filter(list, &(&1[key] not in values))
+    Enum.filter(list, &(Map.get(&1, key) not in values))
   end
 
   def exclude_by(list, key, value) do
-    Enum.filter(list, &(&1[key] !== value))
+    Enum.filter(list, &(Map.get(&1, key) !== value))
   end
 
   def clamp(number, minimum, maximum) do
     number
     |> max(minimum)
     |> min(maximum)
+  end
+
+  def utf16_length(text) when is_binary(text) do
+    for <<codepoint::utf8 <- text>>, reduce: 0 do
+      length -> if codepoint > 0xFFFF, do: length + 2, else: length + 1
+    end
+  end
+
+  def truncate_bytes(text, max_bytes) when byte_size(text) <= max_bytes, do: text
+
+  def truncate_bytes(text, max_bytes) do
+    text
+    |> String.slice(0, max_bytes)
+    |> String.graphemes()
+    |> Enum.reduce_while("", fn grapheme, kept ->
+      if byte_size(kept) + byte_size(grapheme) <= max_bytes,
+        do: {:cont, kept <> grapheme},
+        else: {:halt, kept}
+    end)
   end
 
   def truncate(text, max_length, ellipsis \\ "…")

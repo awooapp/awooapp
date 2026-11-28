@@ -26,8 +26,9 @@ defmodule Flirtual.Users do
     User
   }
 
+  alias Flirtual.Data.{BanReason, DeleteReason}
+
   alias Flirtual.AgeVerification
-  alias Flirtual.Attribute
   alias Flirtual.User.{Login, Preferences}
   alias Flirtual.User.Profile.Image
 
@@ -158,13 +159,13 @@ defmodule Flirtual.Users do
     do: {:error, {:forbidden, :banned_underage}}
 
   def autoban_underage(%User{} = user, automatic) do
-    case Attribute.get(Attribute.underage_ban_reason_id(), "ban-reason") do
-      %Attribute{} = reason ->
+    case BanReason.get("underage") do
+      %Flirtual.Data.BanReason{} = reason ->
         User.suspend(user, reason, nil, user, automatic: automatic)
         {:error, {:forbidden, :banned_underage}}
 
       _ ->
-        {:error, {:internal_error, :attribute_not_found}}
+        {:error, {:internal_error, :ban_reason_not_found}}
     end
   end
 
@@ -525,14 +526,14 @@ defmodule Flirtual.Users do
   defmodule Delete do
     use Flirtual.EmbeddedSchema
 
-    import Flirtual.Attribute, only: [validate_attribute: 3]
+    import Flirtual.Utilities.Changeset, only: [validate_entry: 3]
     import Flirtual.User, only: [validate_current_password_if_set: 2]
 
     @optional [:comment, :current_password]
 
     embedded_schema do
       field(:reason_id, :string)
-      field(:reason, :map, virtual: true)
+      field(:reason, Flirtual.Entry, of: DeleteReason, virtual: true)
 
       field(:comment, :string, default: "")
 
@@ -541,7 +542,7 @@ defmodule Flirtual.Users do
 
     def changeset(value, _, %{user: user}) do
       value
-      |> validate_attribute(:reason_id, "delete-reason")
+      |> validate_entry(:reason_id, DeleteReason)
       |> validate_current_password_if_set(user)
       |> validate_length(:comment, max: 1_000)
     end
@@ -556,6 +557,7 @@ defmodule Flirtual.Users do
              :ok <- Hash.delete(user.id),
              :ok <- ModerationEvent.delete_user_events(user.id),
              :ok <- Image.delete_user_objects(user.id),
+             {:ok, conversations} <- Flirtual.Chat.delete_user_conversations(user.id),
              {:ok, user} <- Repo.delete(user, timeout: @delete_timeout),
              :ok <- Flirtual.Search.delete_users([user.id]),
              {:ok, _} <- Talkjs.delete_user(user),
@@ -576,7 +578,7 @@ defmodule Flirtual.Users do
                  reason: attrs.reason,
                  comment: attrs.comment
                ) do
-          {:ok, user}
+          {{:ok, user}, conversations}
         else
           {:error, %Ecto.Changeset{} = changeset} -> Repo.rollback(changeset)
           _ -> Repo.rollback({:service_unavailable, :account_deletion_failed})
@@ -584,15 +586,15 @@ defmodule Flirtual.Users do
       end,
       timeout: @delete_timeout
     )
+    |> announce_deleted_conversations(user.id)
   end
 
   defp exit_survey_details(%User{} = user) do
     if user.preferences.privacy.analytics do
       %{
         age: get_years_since(user.born_at),
-        gender_ids: user.profile.attributes |> filter_by(:type, "gender") |> Enum.map(& &1.id),
-        looking_for_ids:
-          user.profile.preferences.attributes |> filter_by(:type, "gender") |> Enum.map(& &1.id)
+        gender_ids: Enum.map(user.profile.genders, & &1.id),
+        looking_for_ids: Enum.map(user.profile.preferences.genders, & &1.id)
       }
     else
       %{}
@@ -606,6 +608,7 @@ defmodule Flirtual.Users do
              :ok <- delete_events(user),
              :ok <- Image.delete_user_objects(user.id),
              :ok <- retain_image_hashes(user),
+             {:ok, conversations} <- Flirtual.Chat.delete_user_conversations(user.id),
              {:ok, user} <- Repo.delete(user, timeout: @delete_timeout),
              :ok <- Flirtual.Search.delete_users([user.id]),
              {:ok, _} <- Talkjs.delete_user(user),
@@ -614,7 +617,7 @@ defmodule Flirtual.Users do
              :ok <- RevenueCat.cancel_subscriptions(user),
              :ok <- RevenueCat.delete_customer(user),
              :ok <- enqueue_revocations(user) do
-          {:ok, user}
+          {{:ok, user}, conversations}
         else
           {:error, %Ecto.Changeset{} = changeset} -> Repo.rollback(changeset)
           _ -> Repo.rollback({:service_unavailable, :account_deletion_failed})
@@ -622,7 +625,15 @@ defmodule Flirtual.Users do
       end,
       timeout: @delete_timeout
     )
+    |> announce_deleted_conversations(user.id)
   end
+
+  defp announce_deleted_conversations({:ok, {result, conversations}}, user_id) do
+    Flirtual.Chat.announce_deleted_conversations(user_id, conversations)
+    {:ok, result}
+  end
+
+  defp announce_deleted_conversations(error, _), do: error
 
   defp delete_hashes(%User{banned_at: nil} = user), do: Hash.delete(user.id)
   defp delete_hashes(%User{}), do: :ok
@@ -670,7 +681,6 @@ defmodule Flirtual.Users do
                  service_agreement: :boolean,
                  notifications: :boolean,
                  captcha: :string,
-                 # language: :string,
                  url: :string
                },
                attrs
@@ -679,11 +689,9 @@ defmodule Flirtual.Users do
                :email,
                :password,
                :service_agreement,
-               # :language,
                :notifications
              ])
              |> validate_acceptance(:service_agreement)
-             # |> validate_inclusion(:language, Languages.list(:preference))
              |> then(
                &if(Keyword.get(options, :captcha, true),
                  do: &1 |> validate_captcha(),

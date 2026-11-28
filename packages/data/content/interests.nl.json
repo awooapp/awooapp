@@ -1,0 +1,449 @@
+{
+	"3d_modeling": {
+		"name": "3D-modelleren"
+	},
+	"3d_printing": {
+		"name": "3D-printen 🖨️"
+	},
+	"420_friendly": {
+		"name": "Wietvriendelijk 🍁"
+	},
+	"acts_of_service": {
+		"name": "Dienstbaarheid 🤝"
+	},
+	"aesthetics": {
+		"name": "A e s t h e t i c ✨"
+	},
+	"airsoft": {
+		"name": "Airsoft"
+	},
+	"alternative": {
+		"name": "Alternatief 🎸"
+	},
+	"always_in_dark_mode": {
+		"name": "Altijd in donkere modus 🌚"
+	},
+	"animals": {
+		"name": "Dieren"
+	},
+	"anime": {
+		"name": "Anime 🌸"
+	},
+	"aquarius": {
+		"name": "Waterman ♒️"
+	},
+	"aries": {
+		"name": "Ram ♈️"
+	},
+	"art": {
+		"name": "Kunst 🎨"
+	},
+	"avatar_creator": {
+		"name": "Avatars maken 🛠️"
+	},
+	"aviation": {
+		"name": "Luchtvaart ✈️"
+	},
+	"board_games": {
+		"name": "Bordspellen 🎲"
+	},
+	"booth_avatars": {
+		"name": "Booth-avatars"
+	},
+	"caffeinated": {
+		"name": "Draait op koffie ☕️"
+	},
+	"call_of_duty": {
+		"name": "Call of Duty"
+	},
+	"camping": {
+		"name": "Kamperen 🏕️"
+	},
+	"cancer": {
+		"name": "Kreeft ♋️"
+	},
+	"capricorn": {
+		"name": "Steenbok ♑️"
+	},
+	"cars": {
+		"name": "Auto’s 🚗"
+	},
+	"cartoons": {
+		"name": "Tekenfilms"
+	},
+	"cats": {
+		"name": "Katten 🐈"
+	},
+	"chess": {
+		"name": "Schaken ♟️"
+	},
+	"chillin_like_a_villain": {
+		"name": "Lekker relaxed 😎"
+	},
+	"clubbing": {
+		"name": "Uitgaan 🪩"
+	},
+	"comedy": {
+		"name": "Comedy"
+	},
+	"comics": {
+		"name": "Strips"
+	},
+	"concerts": {
+		"name": "Concerten"
+	},
+	"content_creator": {
+		"name": "Contentcreator"
+	},
+	"cooking": {
+		"name": "Koken 🍳"
+	},
+	"cosplay": {
+		"name": "Cosplay 👘"
+	},
+	"country": {
+		"name": "Country 🤠"
+	},
+	"cuddles": {
+		"name": "Knuffelen 🥰"
+	},
+	"dancing": {
+		"name": "Dansen 💃"
+	},
+	"dead_by_daylight": {
+		"name": "Dead by Daylight"
+	},
+	"disney": {
+		"name": "Disney"
+	},
+	"diy": {
+		"name": "Doe-het-zelf 🛠️"
+	},
+	"djing": {
+		"name": "DJ’en 🎧"
+	},
+	"dogs": {
+		"name": "Honden 🐶"
+	},
+	"drawing": {
+		"name": "Tekenen 🖋️"
+	},
+	"drinking_buddies": {
+		"name": "Borrelmaatjes 🍻"
+	},
+	"driving_sims": {
+		"name": "Racesimulators 🏎️"
+	},
+	"dungeons_and_dragons": {
+		"name": "Dungeons & Dragons 🏰"
+	},
+	"electronic": {
+		"name": "Elektronisch 🎛️"
+	},
+	"emo": {
+		"name": "Emo 🖤"
+	},
+	"emotional_support_homie": {
+		"name": "Emotioneel steunmaatje"
+	},
+	"esports": {
+		"name": "E-sports"
+	},
+	"exploring_worlds": {
+		"name": "Werelden verkennen 🗺️"
+	},
+	"fantasy": {
+		"name": "Fantasy 🐉"
+	},
+	"femboy": {
+		"name": "Femboy"
+	},
+	"final_fantasy_xiv": {
+		"name": "Final Fantasy XIV"
+	},
+	"fishing": {
+		"name": "Vissen 🎣"
+	},
+	"fitness": {
+		"name": "Fitness 💪"
+	},
+	"five_nights_at_freddys": {
+		"name": "Five Nights at Freddy's"
+	},
+	"food": {
+		"name": "Eten 🍕"
+	},
+	"fortnite": {
+		"name": "Fortnite"
+	},
+	"fps": {
+		"name": "FPS 🔫"
+	},
+	"gacha": {
+		"name": "Gacha 🎰"
+	},
+	"game_dev": {
+		"name": "Gameontwikkeling"
+	},
+	"gaming": {
+		"name": "Gamen 🎮"
+	},
+	"gemini": {
+		"name": "Tweelingen ♊️"
+	},
+	"genshin_impact": {
+		"name": "Genshin Impact"
+	},
+	"gifts": {
+		"name": "Cadeaus 🎁"
+	},
+	"goth": {
+		"name": "Goth 🕷️"
+	},
+	"grand_theft_auto": {
+		"name": "Grand Theft Auto"
+	},
+	"guitar": {
+		"name": "Gitaar 🎸"
+	},
+	"guns": {
+		"name": "Vuurwapens"
+	},
+	"headpats": {
+		"name": "Aaitjes over de bol"
+	},
+	"hiking": {
+		"name": "Wandelen 🥾"
+	},
+	"hip_hop": {
+		"name": "Hiphop 💿"
+	},
+	"history": {
+		"name": "Geschiedenis 📜"
+	},
+	"horror": {
+		"name": "Horror 👻"
+	},
+	"indie_games": {
+		"name": "Indiegames 🕹️"
+	},
+	"karaoke": {
+		"name": "Karaoke 🎤"
+	},
+	"kawaii": {
+		"name": "Kawaii 💖"
+	},
+	"kdrama": {
+		"name": "K-drama 🇰🇷"
+	},
+	"language_learning": {
+		"name": "Talen leren"
+	},
+	"league_of_legends": {
+		"name": "League of Legends"
+	},
+	"leo": {
+		"name": "Leeuw ♌️"
+	},
+	"lgbtq": {
+		"name": "LHBTIQ+ 🏳️‍🌈"
+	},
+	"libra": {
+		"name": "Weegschaal ♎️"
+	},
+	"literally_just_vibing": {
+		"name": "Gewoon lekker aan het viben"
+	},
+	"looking_for_group": {
+		"name": "Zoekt een groep (LFG) 🎮"
+	},
+	"manga": {
+		"name": "Manga 📚"
+	},
+	"manhwa": {
+		"name": "Manhwa 🇰🇷"
+	},
+	"marvel": {
+		"name": "Marvel"
+	},
+	"metal": {
+		"name": "Metal 🤘"
+	},
+	"military": {
+		"name": "Leger"
+	},
+	"mirror_dweller": {
+		"name": "Spiegelbewoner 🪞"
+	},
+	"mmos": {
+		"name": "MMO's 🌐"
+	},
+	"motorcycles": {
+		"name": "Motoren 🏍️"
+	},
+	"movies": {
+		"name": "Films 🍿"
+	},
+	"music": {
+		"name": "Muziek 🎵"
+	},
+	"music_production": {
+		"name": "Muziekproductie 🎧"
+	},
+	"mute": {
+		"name": "Non-verbaal"
+	},
+	"nature": {
+		"name": "Natuur 🌲"
+	},
+	"nerd": {
+		"name": "Nerd 🤓"
+	},
+	"nintendo": {
+		"name": "Nintendo"
+	},
+	"overwatch": {
+		"name": "Overwatch"
+	},
+	"phantom_sense": {
+		"name": "Fantoomgevoel"
+	},
+	"philosophy": {
+		"name": "Filosofie"
+	},
+	"photography": {
+		"name": "Fotografie 📸"
+	},
+	"physical_touch": {
+		"name": "Lichamelijke aanraking 🫂"
+	},
+	"pisces": {
+		"name": "Vissen ♓️"
+	},
+	"pokemon": {
+		"name": "Pokémon"
+	},
+	"pop": {
+		"name": "Pop 🌟"
+	},
+	"programming": {
+		"name": "Programmeren ⌨️"
+	},
+	"psychology": {
+		"name": "Psychologie"
+	},
+	"quality_time": {
+		"name": "Quality time ⏳"
+	},
+	"reading": {
+		"name": "Lezen 📖"
+	},
+	"rhythm_games": {
+		"name": "Ritmegames 🎼"
+	},
+	"rnb": {
+		"name": "R&B 🎤"
+	},
+	"rock": {
+		"name": "Rock 🥁"
+	},
+	"roleplaying": {
+		"name": "Roleplay 🎭"
+	},
+	"rpgs": {
+		"name": "RPG's 🧙"
+	},
+	"sagittarius": {
+		"name": "Boogschutter ♐️"
+	},
+	"scifi": {
+		"name": "Sci-fi 👽"
+	},
+	"scorpio": {
+		"name": "Schorpioen ♏️"
+	},
+	"shy": {
+		"name": "Verlegen 🙈"
+	},
+	"singing": {
+		"name": "Zingen 🎤"
+	},
+	"sleep_calls": {
+		"name": "Slaapcalls"
+	},
+	"social_games": {
+		"name": "Sociale games 💬"
+	},
+	"socially_awkward": {
+		"name": "Sociaal onhandig"
+	},
+	"space": {
+		"name": "Heelal 🪐"
+	},
+	"sports": {
+		"name": "Sport"
+	},
+	"star_wars": {
+		"name": "Star Wars"
+	},
+	"strategy_games": {
+		"name": "Strategiegames ♟️"
+	},
+	"streaming": {
+		"name": "Streamen 🎥"
+	},
+	"student": {
+		"name": "Student 🎓"
+	},
+	"survival_games": {
+		"name": "Survivalgames 🏕️"
+	},
+	"sweets": {
+		"name": "Zoetigheid 🍰"
+	},
+	"tattoos": {
+		"name": "Tatoeages"
+	},
+	"taurus": {
+		"name": "Stier ♉️"
+	},
+	"technology": {
+		"name": "Technologie 💾"
+	},
+	"travel": {
+		"name": "Reizen 🧳"
+	},
+	"tv": {
+		"name": "Tv 📺"
+	},
+	"twitch": {
+		"name": "Twitch"
+	},
+	"valorant": {
+		"name": "Valorant"
+	},
+	"videography": {
+		"name": "Videografie 🎥"
+	},
+	"virgo": {
+		"name": "Maagd ♍️"
+	},
+	"voice_acting": {
+		"name": "Stemacteren 🎙️"
+	},
+	"vtuber": {
+		"name": "VTuber"
+	},
+	"words_of_affirmation": {
+		"name": "Bevestigende woorden 💬"
+	},
+	"writing": {
+		"name": "Schrijven ✍️"
+	},
+	"yandere": {
+		"name": "Yandere 😍"
+	},
+	"youtube": {
+		"name": "YouTube"
+	}
+}

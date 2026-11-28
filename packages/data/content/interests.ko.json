@@ -1,0 +1,449 @@
+{
+	"3d_modeling": {
+		"name": "3D 모델링"
+	},
+	"3d_printing": {
+		"name": "3D 프린팅 🖨️"
+	},
+	"420_friendly": {
+		"name": "대마초 OK 🍁"
+	},
+	"acts_of_service": {
+		"name": "봉사 🤝"
+	},
+	"aesthetics": {
+		"name": "감 성 ✨"
+	},
+	"airsoft": {
+		"name": "에어소프트"
+	},
+	"alternative": {
+		"name": "얼터너티브 🎸"
+	},
+	"always_in_dark_mode": {
+		"name": "항상 다크 모드 🌚"
+	},
+	"animals": {
+		"name": "동물"
+	},
+	"anime": {
+		"name": "애니 🌸"
+	},
+	"aquarius": {
+		"name": "물병자리 ♒️"
+	},
+	"aries": {
+		"name": "양자리 ♈️"
+	},
+	"art": {
+		"name": "미술 🎨"
+	},
+	"avatar_creator": {
+		"name": "아바타 제작자 🛠️"
+	},
+	"aviation": {
+		"name": "항공 ✈️"
+	},
+	"board_games": {
+		"name": "보드게임 🎲"
+	},
+	"booth_avatars": {
+		"name": "Booth 아바타"
+	},
+	"caffeinated": {
+		"name": "카페인 중독 ☕️"
+	},
+	"call_of_duty": {
+		"name": "콜 오브 듀티"
+	},
+	"camping": {
+		"name": "캠핑 🏕️"
+	},
+	"cancer": {
+		"name": "게자리 ♋️"
+	},
+	"capricorn": {
+		"name": "염소자리 ♑️"
+	},
+	"cars": {
+		"name": "자동차 🚗"
+	},
+	"cartoons": {
+		"name": "카툰"
+	},
+	"cats": {
+		"name": "고양이 🐈"
+	},
+	"chess": {
+		"name": "체스 ♟️"
+	},
+	"chillin_like_a_villain": {
+		"name": "여유만만 😎"
+	},
+	"clubbing": {
+		"name": "클럽 🪩"
+	},
+	"comedy": {
+		"name": "코미디"
+	},
+	"comics": {
+		"name": "코믹스"
+	},
+	"concerts": {
+		"name": "콘서트"
+	},
+	"content_creator": {
+		"name": "콘텐츠 크리에이터"
+	},
+	"cooking": {
+		"name": "요리 🍳"
+	},
+	"cosplay": {
+		"name": "코스프레 👘"
+	},
+	"country": {
+		"name": "컨트리 🤠"
+	},
+	"cuddles": {
+		"name": "껴안기 🥰"
+	},
+	"dancing": {
+		"name": "댄스 💃"
+	},
+	"dead_by_daylight": {
+		"name": "Dead by Daylight"
+	},
+	"disney": {
+		"name": "디즈니"
+	},
+	"diy": {
+		"name": "DIY 🛠️"
+	},
+	"djing": {
+		"name": "디제잉 🎧"
+	},
+	"dogs": {
+		"name": "강아지 🐶"
+	},
+	"drawing": {
+		"name": "그림 그리기 🖋️"
+	},
+	"drinking_buddies": {
+		"name": "술친구 🍻"
+	},
+	"driving_sims": {
+		"name": "레이싱 시뮬 🏎️"
+	},
+	"dungeons_and_dragons": {
+		"name": "던전 앤 드래곤 🏰"
+	},
+	"electronic": {
+		"name": "일렉트로닉 🎛️"
+	},
+	"emo": {
+		"name": "에모 🖤"
+	},
+	"emotional_support_homie": {
+		"name": "힐링 담당 친구"
+	},
+	"esports": {
+		"name": "e스포츠"
+	},
+	"exploring_worlds": {
+		"name": "월드 탐험 🗺️"
+	},
+	"fantasy": {
+		"name": "판타지 🐉"
+	},
+	"femboy": {
+		"name": "펨보이"
+	},
+	"final_fantasy_xiv": {
+		"name": "파이널 판타지 14"
+	},
+	"fishing": {
+		"name": "낚시 🎣"
+	},
+	"fitness": {
+		"name": "헬스 💪"
+	},
+	"five_nights_at_freddys": {
+		"name": "Five Nights at Freddy's"
+	},
+	"food": {
+		"name": "맛집 🍕"
+	},
+	"fortnite": {
+		"name": "포트나이트"
+	},
+	"fps": {
+		"name": "FPS 🔫"
+	},
+	"gacha": {
+		"name": "가챠 게임 🎰"
+	},
+	"game_dev": {
+		"name": "게임 개발"
+	},
+	"gaming": {
+		"name": "게임 🎮"
+	},
+	"gemini": {
+		"name": "쌍둥이자리 ♊️"
+	},
+	"genshin_impact": {
+		"name": "원신"
+	},
+	"gifts": {
+		"name": "선물 🎁"
+	},
+	"goth": {
+		"name": "고스 🕷️"
+	},
+	"grand_theft_auto": {
+		"name": "Grand Theft Auto"
+	},
+	"guitar": {
+		"name": "기타 연주 🎸"
+	},
+	"guns": {
+		"name": "총기"
+	},
+	"headpats": {
+		"name": "쓰담쓰담"
+	},
+	"hiking": {
+		"name": "등산 🥾"
+	},
+	"hip_hop": {
+		"name": "힙합 💿"
+	},
+	"history": {
+		"name": "역사 📜"
+	},
+	"horror": {
+		"name": "공포 👻"
+	},
+	"indie_games": {
+		"name": "인디 게임 🕹️"
+	},
+	"karaoke": {
+		"name": "노래방 🎤"
+	},
+	"kawaii": {
+		"name": "카와이 💖"
+	},
+	"kdrama": {
+		"name": "한국 드라마 🇰🇷"
+	},
+	"language_learning": {
+		"name": "외국어 공부"
+	},
+	"league_of_legends": {
+		"name": "리그 오브 레전드"
+	},
+	"leo": {
+		"name": "사자자리 ♌️"
+	},
+	"lgbtq": {
+		"name": "LGBTQ+ 🏳️‍🌈"
+	},
+	"libra": {
+		"name": "천칭자리 ♎️"
+	},
+	"literally_just_vibing": {
+		"name": "그냥 힐링 중"
+	},
+	"looking_for_group": {
+		"name": "파티 구함 🎮"
+	},
+	"manga": {
+		"name": "일본 만화 📚"
+	},
+	"manhwa": {
+		"name": "웹툰 🇰🇷"
+	},
+	"marvel": {
+		"name": "마블"
+	},
+	"metal": {
+		"name": "메탈 🤘"
+	},
+	"military": {
+		"name": "밀리터리"
+	},
+	"mirror_dweller": {
+		"name": "거울 앞 붙박이 🪞"
+	},
+	"mmos": {
+		"name": "MMO 🌐"
+	},
+	"motorcycles": {
+		"name": "오토바이 🏍️"
+	},
+	"movies": {
+		"name": "영화 🍿"
+	},
+	"music": {
+		"name": "음악 🎵"
+	},
+	"music_production": {
+		"name": "음악 제작 🎧"
+	},
+	"mute": {
+		"name": "뮤트"
+	},
+	"nature": {
+		"name": "자연 🌲"
+	},
+	"nerd": {
+		"name": "너드 🤓"
+	},
+	"nintendo": {
+		"name": "닌텐도"
+	},
+	"overwatch": {
+		"name": "오버워치"
+	},
+	"phantom_sense": {
+		"name": "팬텀 센스"
+	},
+	"philosophy": {
+		"name": "철학"
+	},
+	"photography": {
+		"name": "사진 📸"
+	},
+	"physical_touch": {
+		"name": "스킨십 🫂"
+	},
+	"pisces": {
+		"name": "물고기자리 ♓️"
+	},
+	"pokemon": {
+		"name": "포켓몬"
+	},
+	"pop": {
+		"name": "팝 🌟"
+	},
+	"programming": {
+		"name": "프로그래밍 ⌨️"
+	},
+	"psychology": {
+		"name": "심리학"
+	},
+	"quality_time": {
+		"name": "함께하는 시간 ⏳"
+	},
+	"reading": {
+		"name": "독서 📖"
+	},
+	"rhythm_games": {
+		"name": "리듬 게임 🎼"
+	},
+	"rnb": {
+		"name": "R&B 🎤"
+	},
+	"rock": {
+		"name": "록 🥁"
+	},
+	"roleplaying": {
+		"name": "롤플레이 🎭"
+	},
+	"rpgs": {
+		"name": "RPG 🧙"
+	},
+	"sagittarius": {
+		"name": "사수자리 ♐️"
+	},
+	"scifi": {
+		"name": "SF 👽"
+	},
+	"scorpio": {
+		"name": "전갈자리 ♏️"
+	},
+	"shy": {
+		"name": "낯가림 🙈"
+	},
+	"singing": {
+		"name": "노래 🎤"
+	},
+	"sleep_calls": {
+		"name": "잠통"
+	},
+	"social_games": {
+		"name": "소셜 게임 💬"
+	},
+	"socially_awkward": {
+		"name": "사회성 부족"
+	},
+	"space": {
+		"name": "우주 🪐"
+	},
+	"sports": {
+		"name": "스포츠"
+	},
+	"star_wars": {
+		"name": "스타워즈"
+	},
+	"strategy_games": {
+		"name": "전략 게임 ♟️"
+	},
+	"streaming": {
+		"name": "라이브 방송 🎥"
+	},
+	"student": {
+		"name": "학생 🎓"
+	},
+	"survival_games": {
+		"name": "생존 게임 🏕️"
+	},
+	"sweets": {
+		"name": "디저트 🍰"
+	},
+	"tattoos": {
+		"name": "타투"
+	},
+	"taurus": {
+		"name": "황소자리 ♉️"
+	},
+	"technology": {
+		"name": "테크 💾"
+	},
+	"travel": {
+		"name": "여행 🧳"
+	},
+	"tv": {
+		"name": "TV 📺"
+	},
+	"twitch": {
+		"name": "Twitch"
+	},
+	"valorant": {
+		"name": "발로란트"
+	},
+	"videography": {
+		"name": "영상 제작 🎥"
+	},
+	"virgo": {
+		"name": "처녀자리 ♍️"
+	},
+	"voice_acting": {
+		"name": "성우 활동 🎙️"
+	},
+	"vtuber": {
+		"name": "버튜버"
+	},
+	"words_of_affirmation": {
+		"name": "인정하는 말 💬"
+	},
+	"writing": {
+		"name": "글쓰기 ✍️"
+	},
+	"yandere": {
+		"name": "얀데레 😍"
+	},
+	"youtube": {
+		"name": "YouTube"
+	}
+}

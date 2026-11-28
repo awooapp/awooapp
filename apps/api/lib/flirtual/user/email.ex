@@ -1,13 +1,14 @@
 defmodule Flirtual.User.Email do
   use Gettext, backend: Flirtual.Gettext
 
-  alias Flirtual.{Attribute, Brand, Entitlement, Jwt, User}
+  alias Flirtual.{Brand, Entitlement, Jwt, User}
+  alias Flirtual.Data.{BanReason, Locale}
 
-  def deliver(%User{} = user, :suspended, %Attribute{} = reason, message) do
-    language = user.preferences.language || "en"
+  def deliver(%User{} = user, :suspended, %BanReason{} = reason, message) do
+    language = User.locale(user)
 
     Gettext.with_locale(language, fn ->
-      message = (message || ban_reason_details(reason)) |> Plug.HTML.html_escape()
+      message = (message || ban_reason_details(reason, language)) |> Plug.HTML.html_escape()
 
       %{
         "user_id" => user.id,
@@ -24,16 +25,22 @@ defmodule Flirtual.User.Email do
     end)
   end
 
-  # Auto-bans don't store a message, so we resolve in the caller's (recipient
-  # for email, default for webhook) locale from the reason.
-  def ban_reason_details(%Attribute{id: id}) do
-    if id === Attribute.underage_ban_reason_id() do
-      dgettext("notifications", "suspended.reason.underage")
+  # A ban without a message of its own shows the reason's, in the reader's locale (the default
+  # locale's for the Discord post).
+  def ban_reason_details(%BanReason{id: id}, locale) do
+    locale = locale || Locale.default().id
+
+    case BanReason.get(id, locale) do
+      %BanReason{details: details} when is_binary(details) ->
+        Flirtual.ICU.format(details, locale)
+
+      %BanReason{} ->
+        nil
     end
   end
 
   def deliver(%User{} = user, :confirm_email, token) do
-    language = user.preferences.language || "en"
+    language = User.locale(user)
 
     Gettext.with_locale(language, fn ->
       action_url =
@@ -79,7 +86,7 @@ defmodule Flirtual.User.Email do
   end
 
   def deliver(%User{} = user, :reset_password, token) do
-    language = user.preferences.language || "en"
+    language = User.locale(user)
 
     Gettext.with_locale(language, fn ->
       action_url =
@@ -125,7 +132,7 @@ defmodule Flirtual.User.Email do
   end
 
   def deliver(%User{} = user, :verification_code, code) do
-    language = user.preferences.language || "en"
+    language = User.locale(user)
 
     Gettext.with_locale(language, fn ->
       %{
@@ -144,7 +151,7 @@ defmodule Flirtual.User.Email do
   end
 
   def deliver(%User{} = user, :new_match, options) do
-    language = user.preferences.language || "en"
+    language = User.locale(user)
 
     Gettext.with_locale(language, fn ->
       conversation_id = Keyword.fetch!(options, :conversation_id)
@@ -216,8 +223,52 @@ defmodule Flirtual.User.Email do
     end)
   end
 
-  def deliver(%User{} = user, :like_digest, options) do
+  def deliver(%User{} = user, :new_message, options) do
     language = user.preferences.language || "en"
+
+    Gettext.with_locale(language, fn ->
+      conversation_id = Keyword.fetch!(options, :conversation_id)
+      sender = Keyword.fetch!(options, :sender)
+      sender_thumbnail = User.avatar_url(sender, "icon")
+      sender_name = User.display_name(sender)
+      sender_name_html = sender_name |> Plug.HTML.html_escape()
+      name_html = User.display_name(user) |> Plug.HTML.html_escape()
+
+      action_url =
+        Application.fetch_env!(:flirtual, :frontend_origin)
+        |> URI.merge("/matches/" <> conversation_id)
+        |> URI.to_string()
+
+      %{
+        "user_id" => user.id,
+        "type" => "marketing",
+        "kind" => "new_message",
+        "subject" =>
+          dgettext("notifications", "new_message.subject", name: sender_name, app: Brand.name()),
+        "action_url" => action_url,
+        "body_text" => """
+        #{dgettext("notifications", "new_message.body", name: User.display_name(user), sender: sender_name, app: Brand.name())}
+
+        #{action_url}
+        """,
+        "body_html" => """
+        <p>#{dgettext("notifications", "new_message.body", name: name_html, sender: sender_name_html, app: Brand.name()) |> String.replace("\n", "<br />")}</p>
+
+        <p>
+          <a href="#{action_url}" class="btn" style="display: inline-block; padding: 12px 16px; font-size: 18px">
+            <img src="#{sender_thumbnail}" style="margin-right: 10px; width: 38px; height: 38px; border-radius: 50%; vertical-align: middle" />
+            <span style="vertical-align: middle">#{dgettext("notifications", "new_message.action")}</span>
+          </a>
+        </p>
+        """
+      }
+      |> Flirtual.ObanWorkers.Email.new()
+      |> Oban.insert()
+    end)
+  end
+
+  def deliver(%User{} = user, :like_digest, options) do
+    language = User.locale(user)
 
     Gettext.with_locale(language, fn ->
       likes = Keyword.fetch!(options, :likes)
@@ -309,7 +360,7 @@ defmodule Flirtual.User.Email do
   end
 
   def deliver(%User{} = user, :deletion_reminder, days: days) do
-    language = user.preferences.language || "en"
+    language = User.locale(user)
 
     {:ok, token} = Jwt.sign(Jwt.config("magic-login", 30 * 24 * 60 * 60), %{"sub" => user.id})
 
@@ -337,7 +388,7 @@ defmodule Flirtual.User.Email do
   end
 
   def deliver(%User{} = user, :password_changed) do
-    language = user.preferences.language || "en"
+    language = User.locale(user)
 
     action_url =
       Application.fetch_env!(:flirtual, :frontend_origin)
@@ -366,7 +417,7 @@ defmodule Flirtual.User.Email do
   def deliver(%User{previous_email: nil}, :email_changed), do: {:ok, nil}
 
   def deliver(%User{} = user, :email_changed) do
-    language = user.preferences.language || "en"
+    language = User.locale(user)
 
     Gettext.with_locale(language, fn ->
       %{

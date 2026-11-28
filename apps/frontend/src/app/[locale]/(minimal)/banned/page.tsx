@@ -1,11 +1,12 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Trans, useTranslation } from "react-i18next";
 import invariant from "tiny-invariant";
 
+import { banReasonsOptions, byId } from "~/api/data";
 import { resumeOnboardingUrl } from "~/app/[locale]/(minimal)/(session)/onboarding/navigation";
 import { ButtonLink } from "~/components/button";
 import { InlineLink } from "~/components/inline-link";
 import { ModelCard } from "~/components/model-card";
-import { useAttributeTranslation } from "~/hooks/use-attribute";
 import { useOptionalSession, verifyAgeDirect } from "~/hooks/use-session";
 import { i18n, useLocale } from "~/i18n";
 import { intlLocale, isLocale } from "~/i18n/languages";
@@ -29,7 +30,7 @@ export const meta: Route.MetaFunction = (options) => {
 export default function BannedPage() {
 	const { t } = useTranslation();
 	const [locale] = useLocale();
-	const banReasons = useAttributeTranslation("ban-reason");
+	const { data: banReasons } = useSuspenseQuery({ ...banReasonsOptions({ locale }), select: byId });
 	const session = useOptionalSession();
 
 	if (!session) throwRedirect(urls.login(urls.banned));

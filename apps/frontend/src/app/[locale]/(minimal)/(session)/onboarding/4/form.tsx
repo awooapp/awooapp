@@ -1,7 +1,9 @@
+import { useSuspenseQueries } from "@tanstack/react-query";
 import { MoveLeft } from "lucide-react";
 import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 
+import { fursonasOptions, sexualitiesOptions } from "~/api/data";
 import {
 	Profile,
 	ProfileMonopolyList,
@@ -13,21 +15,20 @@ import { FormButton } from "~/components/forms/button";
 import { InputAutocomplete, InputLabel } from "~/components/inputs";
 import { InputCheckboxList } from "~/components/inputs/checkbox-list";
 import { InputLanguageAutocomplete } from "~/components/inputs/specialized";
-import type { AttributeTranslation } from "~/hooks/use-attribute";
-import { useAttributes, useAttributeTranslation } from "~/hooks/use-attribute";
 import { useOptionalSession } from "~/hooks/use-session";
-import { useNavigate } from "~/i18n";
+import { useLocale, useNavigate } from "~/i18n";
 import { mutate, sessionKey } from "~/query";
 
 import { nextOnboardingStepUrl, previousOnboardingStepUrl } from "../navigation";
 
 export const Onboarding4Form: FC = () => {
-	const sexualities = useAttributes("sexuality");
-	const fursonas = useAttributes("fursona");
+	const [locale] = useLocale();
+	const [{ data: sexualities }, { data: fursonas }] = useSuspenseQueries({
+		queries: [sexualitiesOptions({ locale }), fursonasOptions({ locale })]
+	});
 
 	const session = useOptionalSession();
 	const { t } = useTranslation();
-	const tAttribute = useAttributeTranslation();
 
 	const navigate = useNavigate();
 
@@ -41,8 +42,8 @@ export const Onboarding4Form: FC = () => {
 				relationships: profile.relationships ?? [],
 				monopoly: profile.monopoly ?? [],
 				languages: user.profile.languages ?? [],
-				sexualityId: user.profile.attributes.sexuality || [],
-				fursonaId: user.profile.attributes.fursona || []
+				sexualityId: user.profile.sexualities || [],
+				fursonaId: user.profile.fursonas || []
 			}}
 			className="flex flex-col gap-8"
 			requireChange={false}
@@ -93,12 +94,7 @@ export const Onboarding4Form: FC = () => {
 								<InputAutocomplete
 									{...field.props}
 									options={sexualities.map((sexuality) => {
-										const { id, definitionLink } = typeof sexuality === "string" ? { id: sexuality } : sexuality;
-
-										const { name, definition }
-											= (tAttribute[
-												id
-											] as AttributeTranslation<"sexuality">) ?? {};
+										const { id, name, definition, definitionLink } = sexuality;
 
 										return {
 											key: id,
@@ -119,9 +115,9 @@ export const Onboarding4Form: FC = () => {
 								<InputLabel>{t("main_fursona_species")}</InputLabel>
 								<InputAutocomplete
 									{...field.props}
-									options={fursonas.map((id) => ({
+									options={fursonas.map(({ id, name }) => ({
 										key: id,
-										label: tAttribute[id]?.name ?? id
+										label: name
 									}))}
 									limit={3}
 									placeholder={t("select_your_fursona_species")}

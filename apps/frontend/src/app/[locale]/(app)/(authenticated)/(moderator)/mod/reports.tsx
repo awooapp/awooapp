@@ -1,3 +1,4 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
 	Check,
 	ChevronDown,
@@ -21,8 +22,10 @@ import { twMerge } from "tailwind-merge";
 import { withSuspense } from "with-suspense";
 
 import { Conversation } from "~/api/conversations";
+import { byId, reportReasonsOptions } from "~/api/data";
 import { Report } from "~/api/report";
 import type { ListReportOptions } from "~/api/report";
+import { Chat } from "~/components/chat";
 import { ConversationChatbox } from "~/components/conversation-chatbox";
 import { DateTimeRelative } from "~/components/datetime-relative";
 import { Dialog, DialogContent } from "~/components/dialog/dialog";
@@ -32,10 +35,11 @@ import { Link } from "~/components/link";
 import { ProfileDropdown } from "~/components/profile/dropdown";
 import { TimeRelative } from "~/components/time-relative";
 import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/tooltip";
-import { useAttributeTranslation } from "~/hooks/use-attribute";
+import { talkjsAppId } from "~/const";
 import { useOptionalSession } from "~/hooks/use-session";
 import { useToast } from "~/hooks/use-toast";
 import { useUser } from "~/hooks/use-user";
+import { useLocale } from "~/i18n";
 import { invalidate, useMutation, useQuery } from "~/query";
 import { urls } from "~/urls";
 import { newConversationId } from "~/utilities";
@@ -96,6 +100,14 @@ const UserShadowban: FC<{ userId?: string }> = withSuspense(({ userId = "" }) =>
 	}
 });
 
+const ObservedChat: FC<{ conversationId: string; userIds: [string, string] }> = withSuspense(({ conversationId, userIds: [userId, targetId] }) => {
+	const user = useUser(userId);
+	const target = useUser(targetId);
+	if (!user || !target) return null;
+
+	return <Chat conversationId={conversationId} participants={[user, target]} />;
+});
+
 const ProfileReportView: React.FC<ProfileReportViewProps> = ({
 	targetId,
 	reports,
@@ -104,12 +116,13 @@ const ProfileReportView: React.FC<ProfileReportViewProps> = ({
 }) => {
 	const [collapsed, setCollapsed] = useState(!filtered && reports.length >= 2);
 	const [observedConversation, setObservedConversation] = useState<
-		string | null
+		{ id: string; userIds: [string, string] } | null
 	>(null);
 	const toasts = useToast();
 	const session = useOptionalSession();
 	const { t } = useTranslation();
-	const tAttributes = useAttributeTranslation();
+	const [locale] = useLocale();
+	const { data: reportReasons } = useSuspenseQuery({ ...reportReasonsOptions({ locale }), select: byId });
 
 	const CollapseIcon = collapsed ? ChevronRight : ChevronDown;
 
@@ -141,7 +154,9 @@ const ProfileReportView: React.FC<ProfileReportViewProps> = ({
 					}}
 				>
 					<DialogContent className="rounded-2xl">
-						<ConversationChatbox conversationId={observedConversation} />
+						{talkjsAppId
+							? <ConversationChatbox conversationId={observedConversation.id} />
+							: <ObservedChat conversationId={observedConversation.id} userIds={observedConversation.userIds} />}
 					</DialogContent>
 				</Dialog>
 			)}
@@ -215,7 +230,7 @@ const ProfileReportView: React.FC<ProfileReportViewProps> = ({
 											return (
 												<div key={reasonId} className="flex gap-2">
 													<span>{`${reports.length}x`}</span>
-													<span>{tAttributes[reasonId]?.name || reasonId}</span>
+													<span>{reportReasons[reasonId]?.name || reasonId}</span>
 												</div>
 											);
 										})}
@@ -242,7 +257,7 @@ const ProfileReportView: React.FC<ProfileReportViewProps> = ({
 														<DateTimeRelative value={report.createdAt} />
 													</span>
 													<span className="text-lg font-semibold">
-														{tAttributes[report.reasonId]?.name || report.reasonId}
+														{reportReasons[report.reasonId]?.name || report.reasonId}
 													</span>
 													<div className="flex items-baseline gap-1">
 														Reporter:
@@ -288,7 +303,7 @@ const ProfileReportView: React.FC<ProfileReportViewProps> = ({
 																					report.userId!,
 																					report.targetId
 																				);
-																			setObservedConversation(conversationId);
+																			setObservedConversation({ id: conversationId, userIds: [report.userId!, report.targetId] });
 																		}}
 																	>
 																		<MessagesSquare className="size-5" />

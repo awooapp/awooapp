@@ -107,6 +107,10 @@ defmodule Flirtual.User.Session do
     |> Repo.one()
   end
 
+  def active?(id: id, user_id: user_id) when is_binary(id) and is_binary(user_id) do
+    Session |> where(id: ^id, user_id: ^user_id) |> where_not_expired() |> Repo.exists?()
+  end
+
   def delete(user_id: user_id) when is_binary(user_id) do
     Session |> where(user_id: ^user_id) |> delete_all()
   end
@@ -128,8 +132,9 @@ defmodule Flirtual.User.Session do
   end
 
   def delete_all(query) do
-    query
-    |> Repo.delete_all()
+    {count, user_ids} = query |> select([session], session.user_id) |> Repo.delete_all()
+    user_ids |> Enum.uniq() |> Enum.each(&Flirtual.Chat.disconnect/1)
+    {count, nil}
   end
 
   def where_token(query, encoded_token) do

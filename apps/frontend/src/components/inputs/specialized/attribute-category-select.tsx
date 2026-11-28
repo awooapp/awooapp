@@ -1,9 +1,11 @@
+import { useSuspenseQueries } from "@tanstack/react-query";
 import type { Dispatch, FC, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
+import { interestCategoriesOptions, interestsOptions, kinkCategoriesOptions, kinksOptions } from "~/api/data";
 import { InputLabel } from "~/components/inputs";
 import { Pill } from "~/components/profile/pill/pill";
-import { useAttributes, useAttributeTranslation } from "~/hooks/use-attribute";
+import { useLocale } from "~/i18n";
 
 const HighlightedText: FC<{ children: string; snippet: string }> = ({
 	children,
@@ -27,17 +29,16 @@ const HighlightedText: FC<{ children: string; snippet: string }> = ({
 	);
 };
 
-const categoryTypes = {
-	interest: "interest-category",
-	kink: "kink-category"
+const options = {
+	interest: [interestsOptions, interestCategoriesOptions],
+	kink: [kinksOptions, kinkCategoriesOptions]
 } as const;
 
 const noIcons: Record<string, ReactNode> = {};
 
-export type CategorizedAttributeType = keyof typeof categoryTypes;
+export type CategorizedAttributeType = keyof typeof options;
 
-// Pills grouped under their category's heading, sorted by name. An attribute
-// without a category is listed under the first one.
+// Pills grouped under their category's heading, in the data's order.
 export const InputAttributeCategorySelect: FC<{
 	type: CategorizedAttributeType;
 	filter?: string;
@@ -46,44 +47,35 @@ export const InputAttributeCategorySelect: FC<{
 	maximum: number;
 	categoryIcons?: Record<string, ReactNode>;
 }> = ({ type, filter = "", selected, onSelected, maximum, categoryIcons = noIcons }) => {
-	const categories = useAttributes(categoryTypes[type]);
-	const attributes = useAttributes(type);
-
-	const tAttribute = useAttributeTranslation();
-	const name = (id: string) => tAttribute[id]?.name || id;
+	const [locale] = useLocale();
+	const [entriesOptions, categoriesOptions] = options[type];
+	const [{ data: entries }, { data: categories }] = useSuspenseQueries({
+		queries: [entriesOptions({ locale }), categoriesOptions({ locale })]
+	});
 
 	return (
 		<div className="flex flex-col gap-8">
-			{categories.map((categoryId, index) => {
-				const filtered = attributes
-					.filter(({ category }) =>
-						category === categoryId || (index === 0 && !category))
-					.filter((attribute) => {
-						if (!filter) return true;
-						const search = filter.toLowerCase();
-
-						return (
-							name(attribute.id).toLowerCase().includes(search)
-							|| ("synonyms" in attribute
-								&& attribute.synonyms?.some((synonym) =>
-									synonym.toLowerCase().includes(search)
-								))
-						);
-					})
-					.sort(({ id: a }, { id: b }) => name(a).localeCompare(name(b)));
+			{categories.map((category) => {
+				const search = filter.toLowerCase();
+				const filtered = entries
+					.filter((entry) => entry.category === category.id)
+					.filter((entry) => !search
+						|| entry.name.toLowerCase().includes(search)
+						|| ("synonyms" in entry
+							&& !!entry.synonyms?.some((synonym) => synonym.toLowerCase().includes(search))));
 
 				if (filtered.length === 0) return null;
-				const categoryIcon = categoryIcons[categoryId];
+				const categoryIcon = categoryIcons[category.id];
 
 				return (
-					<div key={categoryId} className="flex flex-col gap-4">
+					<div key={category.id} className="flex flex-col gap-4">
 						<InputLabel className="flex flex-row items-center gap-2">
 							{categoryIcon}
 							{categoryIcon && " "}
-							{name(categoryId)}
+							{category.name}
 						</InputLabel>
 						<div className="flex flex-wrap gap-2">
-							{filtered.map(({ id }) => {
+							{filtered.map(({ id, name }) => {
 								const active = selected.includes(id);
 
 								return (
@@ -105,7 +97,7 @@ export const InputAttributeCategorySelect: FC<{
 											)}
 									>
 										<HighlightedText snippet={filter}>
-											{name(id)}
+											{name}
 										</HighlightedText>
 									</Pill>
 								);

@@ -1,10 +1,5 @@
 import { toSnakeCase } from "remeda";
 
-import type {
-	AttributeType,
-	GroupedAttributeCollection
-} from "~/api/attributes";
-
 import { api } from "../../common";
 import type { UpdatedAtModel } from "../../common";
 import { ProfileImage } from "./images";
@@ -13,7 +8,8 @@ import { Personality } from "./personality";
 export type ProfilePreferences = {
 	agemin?: number;
 	agemax?: number;
-	attributes: GroupedAttributeCollection;
+	genders?: Array<string>;
+	kinks?: Array<string>;
 } & UpdatedAtModel;
 
 export const ProfileRelationshipList = [
@@ -27,7 +23,7 @@ export type ProfileRelationship = (typeof ProfileRelationshipList)[number];
 export const ProfileDomsubList = ["dominant", "submissive", "switch"] as const;
 export type ProfileDomsub = (typeof ProfileDomsubList)[number];
 
-export const ProfileMonopolyList = ["monogamous", "nonmonogamous"] as const;
+export const ProfileMonopolyList = ["monogamous", "nonmonogamous", "polyamorous"] as const;
 
 export type ProfileMonopoly = (typeof ProfileMonopolyList)[number];
 
@@ -51,7 +47,13 @@ export type Profile = {
 	timezone?: string;
 	longitude?: number;
 	latitude?: number;
-	attributes: GroupedAttributeCollection;
+	genders?: Array<string>;
+	sexualities?: Array<string>;
+	fursonas?: Array<string>;
+	interests?: Array<string>;
+	games?: Array<string>;
+	platforms?: Array<string>;
+	kinks?: Array<string>;
 	customInterests: Array<string>;
 	preferences?: ProfilePreferences;
 	customWeights?: ProfileCustomWeights;
@@ -62,7 +64,7 @@ export type Profile = {
 	color2?: string;
 } & Partial<UpdatedAtModel>;
 
-export const ProfileAttributes = [
+export const ProfileDataTypes = [
 	"gender",
 	"sexuality",
 	"fursona",
@@ -72,18 +74,20 @@ export const ProfileAttributes = [
 	"interest"
 ] as const;
 
-export type ProfileAttribute = (typeof ProfileAttributes)[number];
+export type ProfileDataType = (typeof ProfileDataTypes)[number];
 
 export type UpdateProfileOptions = {
-	[K in ProfileAttribute as `${K}Id`]?: Array<string>;
+	[K in ProfileDataType as `${K}Id`]?: Array<string>;
 } & {
-	domsub?: "none" | ProfileDomsub;
+	// `null` clears one.
+	country?: string | null;
+	domsub?: ProfileDomsub | null;
 	monopoly?: Array<ProfileMonopoly>;
+	timezone?: string | null;
 } & Partial<
 	Pick<
 		Profile,
 		| "biography"
-		| "country"
 		| "customInterests"
 		| "discord"
 		| "displayName"
@@ -92,7 +96,6 @@ export type UpdateProfileOptions = {
 		| "new"
 		| "playlist"
 		| "relationships"
-		| "timezone"
 		| "vrchat"
 	>
 >;
@@ -158,42 +161,23 @@ export const AdvancedFilterCategories = [
 
 export type AdvancedFilterCategory = (typeof AdvancedFilterCategories)[number];
 
-export const advancedFilterAttributeCategories = [
-	"gender",
-	"sexuality",
-	"interest",
-	"game",
-	"platform",
-	"kink"
-] as const;
-
-export const advancedFilterValueCategories = [
-	"country",
-	"language",
-	"relationships",
-	"monopoly",
-	"personality",
-	"domsub"
-] as const;
-
 export interface AdvancedFilter {
 	kind: "exclude" | "include";
 	category: AdvancedFilterCategory;
-	attributeId?: string | null;
 	value?: string | null;
 }
 
 export type ProfileAdvancedFilters = Array<AdvancedFilter>;
 
 export interface ProfilePrompt {
-	promptId: string;
+	prompt: string;
 	response: string;
 }
 
 export type ProfilePromptList = Array<ProfilePrompt>;
 
 export type UpdateProfilePromptOptions = Array<{
-	promptId: string;
+	prompt: string;
 	response: string;
 }>;
 
@@ -250,14 +234,12 @@ export const Profile = {
 		userId: string,
 		{
 			required,
-			requiredAttributes,
 			...options
 		}: {
 			agemin?: number | null;
 			agemax?: number | null;
-			attributes?: Array<string>;
-			required?: Array<"agemax" | "agemin">;
-			requiredAttributes?: Array<AttributeType>;
+			genders?: Array<string>;
+			required?: Array<"agemax" | "agemin" | "genders">;
 		}
 	) {
 		return api
@@ -265,9 +247,6 @@ export const Profile = {
 			.query({
 				required: Array.isArray(required)
 					? required.map((key) => toSnakeCase(key))
-					: undefined,
-				requiredAttributes: Array.isArray(requiredAttributes)
-					? requiredAttributes.map((key) => toSnakeCase(key))
 					: undefined
 			})
 			.json(options)

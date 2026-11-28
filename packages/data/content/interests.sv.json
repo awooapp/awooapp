@@ -1,0 +1,449 @@
+{
+	"3d_modeling": {
+		"name": "3D-modellering"
+	},
+	"3d_printing": {
+		"name": "3D-utskrift 🖨️"
+	},
+	"420_friendly": {
+		"name": "420-vänlig 🍁"
+	},
+	"acts_of_service": {
+		"name": "Tjänstvillighet 🤝"
+	},
+	"aesthetics": {
+		"name": "E s t e t i k ✨"
+	},
+	"airsoft": {
+		"name": "Airsoft"
+	},
+	"alternative": {
+		"name": "Alternativ musik 🎸"
+	},
+	"always_in_dark_mode": {
+		"name": "Alltid i mörkt läge 🌚"
+	},
+	"animals": {
+		"name": "Djur"
+	},
+	"anime": {
+		"name": "Anime 🌸"
+	},
+	"aquarius": {
+		"name": "Vattumannen ♒️"
+	},
+	"aries": {
+		"name": "Väduren ♈️"
+	},
+	"art": {
+		"name": "Konst 🎨"
+	},
+	"avatar_creator": {
+		"name": "Avatarskapare 🛠️"
+	},
+	"aviation": {
+		"name": "Flyg ✈️"
+	},
+	"board_games": {
+		"name": "Brädspel 🎲"
+	},
+	"booth_avatars": {
+		"name": "Booth-avatarer"
+	},
+	"caffeinated": {
+		"name": "Går på koffein ☕️"
+	},
+	"call_of_duty": {
+		"name": "Call of Duty"
+	},
+	"camping": {
+		"name": "Camping 🏕️"
+	},
+	"cancer": {
+		"name": "Kräftan ♋️"
+	},
+	"capricorn": {
+		"name": "Stenbocken ♑️"
+	},
+	"cars": {
+		"name": "Bilar 🚗"
+	},
+	"cartoons": {
+		"name": "Tecknat"
+	},
+	"cats": {
+		"name": "Katter 🐈"
+	},
+	"chess": {
+		"name": "Schack ♟️"
+	},
+	"chillin_like_a_villain": {
+		"name": "Lugn som en filbunke 😎"
+	},
+	"clubbing": {
+		"name": "Klubbliv 🪩"
+	},
+	"comedy": {
+		"name": "Komedi"
+	},
+	"comics": {
+		"name": "Serier"
+	},
+	"concerts": {
+		"name": "Konserter"
+	},
+	"content_creator": {
+		"name": "Innehållsskapare"
+	},
+	"cooking": {
+		"name": "Matlagning 🍳"
+	},
+	"cosplay": {
+		"name": "Cosplay 👘"
+	},
+	"country": {
+		"name": "Country 🤠"
+	},
+	"cuddles": {
+		"name": "Gos 🥰"
+	},
+	"dancing": {
+		"name": "Dans 💃"
+	},
+	"dead_by_daylight": {
+		"name": "Dead by Daylight"
+	},
+	"disney": {
+		"name": "Disney"
+	},
+	"diy": {
+		"name": "Gör det själv 🛠️"
+	},
+	"djing": {
+		"name": "DJ:ande 🎧"
+	},
+	"dogs": {
+		"name": "Hundar 🐶"
+	},
+	"drawing": {
+		"name": "Teckning 🖋️"
+	},
+	"drinking_buddies": {
+		"name": "Supolare 🍻"
+	},
+	"driving_sims": {
+		"name": "Bilsimulatorer 🏎️"
+	},
+	"dungeons_and_dragons": {
+		"name": "Dungeons & Dragons 🏰"
+	},
+	"electronic": {
+		"name": "Elektronisk musik 🎛️"
+	},
+	"emo": {
+		"name": "Emo 🖤"
+	},
+	"emotional_support_homie": {
+		"name": "Emotionell stödkompis"
+	},
+	"esports": {
+		"name": "E-sport"
+	},
+	"exploring_worlds": {
+		"name": "Utforska världar 🗺️"
+	},
+	"fantasy": {
+		"name": "Fantasy 🐉"
+	},
+	"femboy": {
+		"name": "Femboy"
+	},
+	"final_fantasy_xiv": {
+		"name": "Final Fantasy XIV"
+	},
+	"fishing": {
+		"name": "Fiske 🎣"
+	},
+	"fitness": {
+		"name": "Träning 💪"
+	},
+	"five_nights_at_freddys": {
+		"name": "Five Nights at Freddy's"
+	},
+	"food": {
+		"name": "Mat 🍕"
+	},
+	"fortnite": {
+		"name": "Fortnite"
+	},
+	"fps": {
+		"name": "FPS-spel 🔫"
+	},
+	"gacha": {
+		"name": "Gacha 🎰"
+	},
+	"game_dev": {
+		"name": "Spelutveckling"
+	},
+	"gaming": {
+		"name": "Gaming 🎮"
+	},
+	"gemini": {
+		"name": "Tvillingarna ♊️"
+	},
+	"genshin_impact": {
+		"name": "Genshin Impact"
+	},
+	"gifts": {
+		"name": "Gåvor 🎁"
+	},
+	"goth": {
+		"name": "Goth 🕷️"
+	},
+	"grand_theft_auto": {
+		"name": "Grand Theft Auto"
+	},
+	"guitar": {
+		"name": "Gitarr 🎸"
+	},
+	"guns": {
+		"name": "Vapen"
+	},
+	"headpats": {
+		"name": "Huvudklappar"
+	},
+	"hiking": {
+		"name": "Vandring 🥾"
+	},
+	"hip_hop": {
+		"name": "Hiphop 💿"
+	},
+	"history": {
+		"name": "Historia 📜"
+	},
+	"horror": {
+		"name": "Skräck 👻"
+	},
+	"indie_games": {
+		"name": "Indiespel 🕹️"
+	},
+	"karaoke": {
+		"name": "Karaoke 🎤"
+	},
+	"kawaii": {
+		"name": "Kawaii 💖"
+	},
+	"kdrama": {
+		"name": "K-drama 🇰🇷"
+	},
+	"language_learning": {
+		"name": "Språkinlärning"
+	},
+	"league_of_legends": {
+		"name": "League of Legends"
+	},
+	"leo": {
+		"name": "Lejonet ♌️"
+	},
+	"lgbtq": {
+		"name": "HBTQ+ 🏳️‍🌈"
+	},
+	"libra": {
+		"name": "Vågen ♎️"
+	},
+	"literally_just_vibing": {
+		"name": "Bara vibbar, typ"
+	},
+	"looking_for_group": {
+		"name": "Söker spelgäng 🎮"
+	},
+	"manga": {
+		"name": "Manga 📚"
+	},
+	"manhwa": {
+		"name": "Manhwa 🇰🇷"
+	},
+	"marvel": {
+		"name": "Marvel"
+	},
+	"metal": {
+		"name": "Metal 🤘"
+	},
+	"military": {
+		"name": "Militär"
+	},
+	"mirror_dweller": {
+		"name": "Spegelhängare 🪞"
+	},
+	"mmos": {
+		"name": "MMO 🌐"
+	},
+	"motorcycles": {
+		"name": "Motorcyklar 🏍️"
+	},
+	"movies": {
+		"name": "Film 🍿"
+	},
+	"music": {
+		"name": "Musik 🎵"
+	},
+	"music_production": {
+		"name": "Musikproduktion 🎧"
+	},
+	"mute": {
+		"name": "Icke-verbal"
+	},
+	"nature": {
+		"name": "Natur 🌲"
+	},
+	"nerd": {
+		"name": "Nörd 🤓"
+	},
+	"nintendo": {
+		"name": "Nintendo"
+	},
+	"overwatch": {
+		"name": "Overwatch"
+	},
+	"phantom_sense": {
+		"name": "Fantomkänsla"
+	},
+	"philosophy": {
+		"name": "Filosofi"
+	},
+	"photography": {
+		"name": "Fotografering 📸"
+	},
+	"physical_touch": {
+		"name": "Fysisk beröring 🫂"
+	},
+	"pisces": {
+		"name": "Fiskarna ♓️"
+	},
+	"pokemon": {
+		"name": "Pokémon"
+	},
+	"pop": {
+		"name": "Pop 🌟"
+	},
+	"programming": {
+		"name": "Programmering ⌨️"
+	},
+	"psychology": {
+		"name": "Psykologi"
+	},
+	"quality_time": {
+		"name": "Kvalitetstid ⏳"
+	},
+	"reading": {
+		"name": "Läsning 📖"
+	},
+	"rhythm_games": {
+		"name": "Rytmspel 🎼"
+	},
+	"rnb": {
+		"name": "R&B 🎤"
+	},
+	"rock": {
+		"name": "Rock 🥁"
+	},
+	"roleplaying": {
+		"name": "Rollspel 🎭"
+	},
+	"rpgs": {
+		"name": "RPG 🧙"
+	},
+	"sagittarius": {
+		"name": "Skytten ♐️"
+	},
+	"scifi": {
+		"name": "Sci-fi 👽"
+	},
+	"scorpio": {
+		"name": "Skorpionen ♏️"
+	},
+	"shy": {
+		"name": "Blyg 🙈"
+	},
+	"singing": {
+		"name": "Sång 🎤"
+	},
+	"sleep_calls": {
+		"name": "Sovsamtal"
+	},
+	"social_games": {
+		"name": "Sociala spel 💬"
+	},
+	"socially_awkward": {
+		"name": "Socialt klantig"
+	},
+	"space": {
+		"name": "Rymden 🪐"
+	},
+	"sports": {
+		"name": "Sport"
+	},
+	"star_wars": {
+		"name": "Star Wars"
+	},
+	"strategy_games": {
+		"name": "Strategispel ♟️"
+	},
+	"streaming": {
+		"name": "Livestreamning 🎥"
+	},
+	"student": {
+		"name": "Student 🎓"
+	},
+	"survival_games": {
+		"name": "Överlevnadsspel 🏕️"
+	},
+	"sweets": {
+		"name": "Sötsaker 🍰"
+	},
+	"tattoos": {
+		"name": "Tatueringar"
+	},
+	"taurus": {
+		"name": "Oxen ♉️"
+	},
+	"technology": {
+		"name": "Teknik 💾"
+	},
+	"travel": {
+		"name": "Resor 🧳"
+	},
+	"tv": {
+		"name": "TV 📺"
+	},
+	"twitch": {
+		"name": "Twitch"
+	},
+	"valorant": {
+		"name": "Valorant"
+	},
+	"videography": {
+		"name": "Filmning 🎥"
+	},
+	"virgo": {
+		"name": "Jungfrun ♍️"
+	},
+	"voice_acting": {
+		"name": "Röstskådespeleri 🎙️"
+	},
+	"vtuber": {
+		"name": "VTuber"
+	},
+	"words_of_affirmation": {
+		"name": "Bekräftande ord 💬"
+	},
+	"writing": {
+		"name": "Skrivande ✍️"
+	},
+	"yandere": {
+		"name": "Yandere 😍"
+	},
+	"youtube": {
+		"name": "YouTube"
+	}
+}

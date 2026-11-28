@@ -38,17 +38,17 @@ export function previousOnboardingStepUrl(step: OnboardingStep) {
 }
 
 function incompleteOnboardingStep({ bornAt, profile }: User): OnboardingStep {
-	const { attributes, preferences } = profile;
+	const { preferences } = profile;
 
-	if (!bornAt || !attributes.gender?.length) return "about";
-	if (!preferences?.attributes.gender?.length) return "preferences";
+	if (!bornAt || !profile.genders?.length) return "about";
+	if (!preferences?.genders?.length) return "preferences";
 	if (
 		!profile.displayName
 		|| (profile.biography?.length ?? 0) < 48
 		|| profile.images.length === 0
 	)
 		return "bio";
-	if (!attributes.interest?.length && profile.customInterests.length === 0)
+	if (!profile.interests?.length && profile.customInterests.length === 0)
 		return "interests";
 
 	return "about";

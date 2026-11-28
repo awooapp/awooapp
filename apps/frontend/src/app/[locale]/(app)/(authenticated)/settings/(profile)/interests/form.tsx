@@ -34,17 +34,17 @@ import { useToast } from "~/hooks/use-toast";
 import { mutate, sessionKey } from "~/query";
 
 const categoryIcons: Record<string, React.ReactNode> = {
-	iiCe39JvGQAAtsrTqnLddb: <Star />,
-	TgrEr2C6DAcp69Winej5Q4: <Tags />,
-	aSCFm5P7awrqNKnknWuChQ: <User />,
-	"59oWHt4bZSdQ6tj8f4CWs9": <Gamepad2 />,
-	fQK3RUCYFW4WeSfLkzVP42: <Music />,
-	DAweztCvdXBa5cKvhgNsPY: <Trophy />,
-	"9os9Yxxr6zGR4k7kh5BKrB": <HeartHandshake />,
-	nFiqbX3n6aiEdKe3JbynBL: <MoonStar />,
-	"43i5J3VsKCvU4HGRJHjehn": <Brain />,
-	hR3X5w26ba6M98fVB2kVxX: <Dices />,
-	tmQbiXNw7d9Ys2DG9Ddg28: <Star />
+	popular: <Star />,
+	general: <Tags />,
+	identity: <User />,
+	games: <Gamepad2 />,
+	music: <Music />,
+	sports: <Trophy />,
+	love_languages: <HeartHandshake />,
+	astrology: <MoonStar />,
+	personality_types: <Brain />,
+	alignment: <Dices />,
+	game_genres: <Star />
 };
 
 export const InterestSelectList: FC<{
@@ -146,7 +146,7 @@ export const InterestsForm: FC = () => {
 		<Form
 			fields={{
 				filter: "",
-				defaultInterests: profile.attributes.interest || [],
+				defaultInterests: profile.interests || [],
 				customInterests: customInterestsEnabled ? profile.customInterests : []
 			}}
 			className="flex flex-col gap-8"

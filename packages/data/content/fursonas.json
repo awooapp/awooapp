@@ -1,0 +1,93 @@
+{
+	"bear": {
+		"internal": {
+			"curated": 13
+		}
+	},
+	"bunny": {
+		"internal": {
+			"curated": 7
+		}
+	},
+	"cat": {
+		"internal": {
+			"curated": 3
+		}
+	},
+	"coyote": {
+		"internal": {
+			"curated": 16
+		}
+	},
+	"deer": {
+		"internal": {
+			"curated": 8
+		}
+	},
+	"dog": {
+		"internal": {
+			"curated": 4
+		}
+	},
+	"dragon": {
+		"internal": {
+			"curated": 5
+		}
+	},
+	"fox": {
+		"internal": {
+			"curated": 2
+		}
+	},
+	"husky": {
+		"internal": {
+			"curated": 11
+		}
+	},
+	"hyena": {
+		"internal": {
+			"curated": 9
+		}
+	},
+	"lion": {
+		"internal": {
+			"curated": 14
+		}
+	},
+	"other": {
+		"default": true,
+		"internal": {
+			"curated": 18
+		}
+	},
+	"otter": {
+		"internal": {
+			"curated": 17
+		}
+	},
+	"protogen": {
+		"internal": {
+			"curated": 6
+		}
+	},
+	"raccoon": {
+		"internal": {
+			"curated": 10
+		}
+	},
+	"snow_leopard": {
+		"internal": {
+			"curated": 12
+		}
+	},
+	"tiger": {
+		"internal": {
+			"curated": 15
+		}
+	},
+	"wolf": {
+		"internal": {
+			"curated": 1
+		}
+	}
+}

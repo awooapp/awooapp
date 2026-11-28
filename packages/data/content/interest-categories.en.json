@@ -1,0 +1,26 @@
+{
+	"astrology": {
+		"name": "Astrology"
+	},
+	"game_genres": {
+		"name": "Game genres"
+	},
+	"games": {
+		"name": "Games"
+	},
+	"general": {
+		"name": "General"
+	},
+	"identity": {
+		"name": "Identity"
+	},
+	"love_languages": {
+		"name": "Love languages"
+	},
+	"music": {
+		"name": "Music"
+	},
+	"popular": {
+		"name": "Popular"
+	}
+}

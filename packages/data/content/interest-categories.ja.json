@@ -1,0 +1,26 @@
+{
+	"astrology": {
+		"name": "星座"
+	},
+	"game_genres": {
+		"name": "ゲームジャンル"
+	},
+	"games": {
+		"name": "ゲーム"
+	},
+	"general": {
+		"name": "一般"
+	},
+	"identity": {
+		"name": "アイデンティティ"
+	},
+	"love_languages": {
+		"name": "愛の言語"
+	},
+	"music": {
+		"name": "音楽"
+	},
+	"popular": {
+		"name": "人気"
+	}
+}
