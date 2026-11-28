@@ -1,21 +1,24 @@
+import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { hostname as osHostname } from "node:os";
+import { fileURLToPath } from "node:url";
 
 import reactCompiler from "@acusti/vite-plugin-react-compiler";
+import { svgDir } from "@ffaubert/twemoji";
 import { reactRouter } from "@react-router/dev/vite";
-import { sentryReactRouter } from "@sentry/react-router/vite";
 import tailwindcss from "@tailwindcss/vite";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import sonda from "sonda/vite";
-import info from "unplugin-info/vite";
 import macros from "unplugin-macros/vite";
 import { defineConfig, loadEnv } from "vite";
+import type { Plugin, UserConfig } from "vite";
 import { imagetools } from "vite-imagetools";
 import { ViteImageOptimizer as imageOptimize } from "vite-plugin-image-optimizer";
 
 import { targets } from "./src/targets.ts";
+import { reactRouterHookFilters, withHookFilters } from "./vite-plugin-hook-filters.ts";
 import { hush } from "./vite-plugin-hush.ts";
-import { twemoji } from "./vite-plugin-twemoji.ts";
+import { packageSvgs } from "./vite-plugin-package-svgs.ts";
 
 const mkcertPaths = {
 	cert: "./certificates/localhost.pem",
@@ -24,16 +27,7 @@ const mkcertPaths = {
 
 const mkcertExists = existsSync(mkcertPaths.cert) && existsSync(mkcertPaths.key);
 
-function getManualChunk(moduleId: string) {
-	const [, language] = /(?:\/@uppy\/locales\/lib\/|\/messages\/)([a-z-_]+)\.(?:json|js)$/i.exec(moduleId) || [];
-	if (language) return `languages/${language === "pt_BR" ? "pt-BR" : language.split("_")[0]}`;
-
-	if (/node_modules\/@?(?:react|react-dom|react-router|react-error-boundary)\//i.test(moduleId)) return "react";
-
-	return null;
-}
-
-export default defineConfig((config) => {
+export default defineConfig(async (config): Promise<UserConfig> => {
 	const { mode } = config;
 
 	// eslint-disable-next-line unicorn/prevent-abbreviations
@@ -59,15 +53,25 @@ export default defineConfig((config) => {
 	if (!env.VITE_ORIGIN) process.env.VITE_ORIGIN = origin;
 	if (!env.VITE_API_URL) process.env.VITE_API_URL = apiUrl;
 
-	// tailwind.config.js reads process.env.
+	// tailwind.config.ts reads process.env.
 	for (const [key, value] of Object.entries(env))
 		if (key.startsWith("VITE_BRAND_") && !process.env[key]) process.env[key] = value;
 
 	if (!env.VITE_BRAND_ASSET_DOMAIN) throw new Error("VITE_BRAND_ASSET_DOMAIN is required: the static bucket is served from there");
 	if (!env.VITE_BRAND_REPOSITORY_URL) throw new Error("VITE_BRAND_REPOSITORY_URL is required: you must publish your source code to comply with the AGPL");
 
+	// Tailwind imports its config under a fresh `?id=` for every stylesheet, so the dev server sees edits
+	// (https://github.com/tailwindlabs/tailwindcss/blob/v4.3.5/packages/%40tailwindcss-node/src/compile.ts#L147).
+	// A build reads it once; this hook (L185, also set by Tailwind's standalone CLI) imports it plainly.
+	if (config.command === "build") Object.assign(globalThis, { __tw_load: (url: string) => import(url.replace(/\?id=\d+$/, "")) });
+
+	const commitId = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+
 	return {
 		appType: "mpa",
+		define: {
+			__COMMIT_ID__: JSON.stringify(commitId)
+		},
 		ssr: {
 			noExternal: ["posthog-js"]
 		},
@@ -80,7 +84,8 @@ export default defineConfig((config) => {
 			sourcemap: true,
 			target: targets,
 			chunkSizeWarningLimit: 100,
-			rollupOptions: {
+			rolldownOptions: {
+				experimental: { lazyBarrel: true },
 				// experimentalLogSideEffects: true,
 				treeshake: {
 					unknownGlobalSideEffects: false,
@@ -91,7 +96,9 @@ export default defineConfig((config) => {
 					entryFileNames: "static/[hash:16].js",
 					chunkFileNames: "static/[hash:16].js",
 					assetFileNames: "static/[hash:16].[ext]",
-					manualChunks: getManualChunk
+					codeSplitting: {
+						groups: [{ name: "react", test: /[\\/]node_modules[\\/](?:react|react-dom|react-router|react-error-boundary)[\\/]/ }]
+					}
 				}
 			}
 		},
@@ -114,20 +121,49 @@ export default defineConfig((config) => {
 			})
 		},
 		plugins: [
+			{
+				name: "empty-server-css",
+				apply: "build",
+				enforce: "pre",
+				applyToEnvironment: (environment) => environment.config.consumer === "server",
+				load: { filter: { id: /\.css$/ }, handler: () => "" }
+			} satisfies Plugin,
 			tailwindcss(),
 			hush([
 				"Can't resolve original location of error"
 			]),
-			macros(),
-			info(),
+			withHookFilters(macros(), { transform: { code: /type:\s*["']macro["']/ } }),
 			servesHttps && !mkcertExists && basicSsl({
 				name: "flirtual",
 				domains: [hostname],
 				certDir: "./certificates",
 			}),
-			reactRouter(),
-			reactCompiler({ compiler: { reportDiagnostics: true } }),
-			twemoji(),
+			reactRouter().map((plugin) => withHookFilters(plugin, reactRouterHookFilters[plugin.name] ?? {})),
+			withHookFilters(reactCompiler({ compiler: { reportDiagnostics: true } }), {
+				transform: { id: { include: /\.[jt]sx?(?:\?|$)/, exclude: /[/\\]node_modules[/\\]/ } }
+			}),
+			packageSvgs({
+				name: "twemoji",
+				directory: svgDir,
+				moduleId: "virtual:twemoji",
+				exportName: "twemojiUrl"
+			}),
+			packageSvgs({
+				name: "flag-icons",
+				directory: fileURLToPath(new URL("node_modules/flag-icons/flags/4x3", import.meta.url)),
+				moduleId: "virtual:flag-icons",
+				exportName: "flagUrl",
+				knownNamesOnly: true,
+				// vite-plugin-image-optimizer's own SVGO defaults, which these flags went through as bundled assets.
+				svgo: {
+					multipass: true,
+					plugins: [
+						{ name: "preset-default", params: { overrides: { cleanupNumericValues: false, cleanupIds: { minify: false, remove: false }, convertPathData: false } } },
+						"sortAttrs",
+						{ name: "addAttributesToSVGElement", params: { attributes: [{ xmlns: "http://www.w3.org/2000/svg" }] } }
+					]
+				}
+			}),
 			imageOptimize({
 				cache: true,
 				cacheLocation: "./node_modules/.cache/vite-image-optimizer",
@@ -156,7 +192,7 @@ export default defineConfig((config) => {
 			!!env.ANALYZE && sonda({
 				open: false
 			}),
-			useSentry && sentryReactRouter({
+			useSentry && (await import("@sentry/react-router/vite")).sentryReactRouter({
 				org: sentryOrganization,
 				project: sentryProjectId,
 				authToken: sentryAuthToken,

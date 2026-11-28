@@ -8,7 +8,7 @@ import {
 import type { RouteConfig, RouteConfigEntry } from "@react-router/dev/routes";
 
 import { onboardingStepDirectory, onboardingSteps } from "./app/[locale]/(minimal)/(session)/onboarding/steps";
-import { events, fun, homieMode, landing, news, personality, press } from "./features";
+import { connectionSettings, events, fun, homieMode, landing, news, personality, press } from "./features";
 
 const filePrefix = "./app/[locale]";
 
@@ -72,7 +72,7 @@ export default [
 				layout("(app)/(authenticated)/settings", [
 					page("settings", "(app)/(authenticated)/settings"),
 					page("settings/appearance", "(app)/(authenticated)/settings/(account)/appearance"),
-					page("settings/connections", "(app)/(authenticated)/settings/(account)/connections"),
+					...(connectionSettings ? [page("settings/connections", "(app)/(authenticated)/settings/(account)/connections")] : []),
 					page("settings/deactivate", "(app)/(authenticated)/settings/(account)/deactivate"),
 					page("settings/delete", "(app)/(authenticated)/settings/(account)/delete"),
 					page("settings/email", "(app)/(authenticated)/settings/(account)/email"),

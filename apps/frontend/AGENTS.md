@@ -49,12 +49,12 @@ Do **all three** or the value bakes in as `undefined`:
 
 ## Styling
 
-Tailwind 4 with custom classes and variants. `src/app/index.css` loads `tailwind.config.js` with `@config` and defines the breakpoints with `split:`, `tall:` and `narrow:`, in the order they override each other. Another stylesheet that uses `@apply` must be plain `.css` (Tailwind 4 doesn't process Sass) and start with `@reference` to `index.css`. Lightning CSS lowers the output to `src/targets.ts` when Vite minifies it.
+Tailwind 4 with custom classes and variants. `src/app/index.css` loads `tailwind.config.ts` with `@config`, limits Tailwind's class scan to `src/`, and defines the breakpoints with `split:`, `tall:` and `narrow:`, in the order they override each other. Another stylesheet that uses `@apply` must be plain `.css` (Tailwind 4 doesn't process Sass) and start with `@reference` to `index.css`. Lightning CSS lowers the output to `src/targets.ts` when Vite minifies it.
 
 - **Classes**: `bg-brand-gradient`; shadows `shadow-brand-1`/`shadow-brand-inset`/`text-shadow-brand`; fonts `font-montserrat` (headings), `font-nunito` (body); focus `focused`/`focusable`/`focusable-within`; `touch-callout-default`/`-none` (iOS); `select-children` (children selectable, off by default).
 - **Variants**: `dark:`, `desktop:`, `wide:`, `tall:`, `native:` (iOS/Android app), `vision:` (visionOS), `android:` (native or web), `apple:` (iOS/visionOS/macOS, native or web), `[locale]:` (e.g. `en:`, `ja:`).
 - **Split panes**: `desktop:`/`wide:` follow the screen, but in the split layout (iPad, iPhone Duo) a pane is much narrower (settings is 512px). Use them for the desktop look (card frame, shadows, spacing); switch a layout that needs room (side by side, more grid columns) on its own width instead: `@container` on the section and Tailwind's container sizes (`@lg:` is 32rem) inside it.
-- **Theming**: gradient vars `--theme-1`/`--theme-2`; light/dark brand themes (emitted by `tailwind.config.js` from the brand colours), overridden in Homie Mode (green), by Arc browser theme, or by a Premium user's profile theme (within the profile component).
+- **Theming**: gradient vars `--theme-1`/`--theme-2`; light/dark brand themes (emitted by `tailwind.config.ts` from the brand colours), overridden in Homie Mode (green), by Arc browser theme, or by a Premium user's profile theme (within the profile component).
 - **Rich text**: Quill + sanitize-html for the bio editor.
 - **twMerge()**: for conditional styling.
 
@@ -76,6 +76,9 @@ other locale's file, so never hand-edit `messages/<locale>.json`, `packages/data
 non-English `.po` files. After adding or changing keys, run `/translate` (incremental mode): it
 writes context for the new keys, drafts translations with the translator agents, and uploads
 them to Weblate as "needs editing" or as suggestions, after you approve.
+
+Each locale loads from `src/i18n/locales/<locale>.ts`, which re-exports its `messages/<locale>.json`
+and Uppy's strings for it, so both arrive as one chunk. A new locale needs one of these modules.
 
 `apps/frontend/.env.weblate` (git-ignored) holds `WEBLATE_URL`, `WEBLATE_PROJECT` and
 `WEBLATE_TOKEN` (a project-scoped `wlp_` token). Translation tooling lives in `i18n/`:
