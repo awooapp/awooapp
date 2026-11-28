@@ -38,17 +38,11 @@
 	"art": {
 		"name": "Art 🎨"
 	},
-	"avatar_creator": {
-		"name": "Avatar creator 🛠️"
-	},
 	"aviation": {
 		"name": "Aviation ✈️"
 	},
 	"board_games": {
 		"name": "Board games 🎲"
-	},
-	"booth_avatars": {
-		"name": "Booth avatars"
 	},
 	"caffeinated": {
 		"name": "Caffeinated ☕️"
@@ -148,9 +142,6 @@
 	},
 	"esports": {
 		"name": "eSports"
-	},
-	"exploring_worlds": {
-		"name": "Exploring worlds 🗺️"
 	},
 	"fantasy": {
 		"name": "Fantasy 🐉"
@@ -281,9 +272,6 @@
 	"minecraft": {
 		"name": "Minecraft"
 	},
-	"mirror_dweller": {
-		"name": "Mirror dweller 🪞"
-	},
 	"mmos": {
 		"name": "MMOs 🌐"
 	},
@@ -313,9 +301,6 @@
 	},
 	"overwatch": {
 		"name": "Overwatch"
-	},
-	"phantom_sense": {
-		"name": "Phantom sense"
 	},
 	"philosophy": {
 		"name": "Philosophy"

@@ -38,17 +38,11 @@
 	"art": {
 		"name": "미술 🎨"
 	},
-	"avatar_creator": {
-		"name": "아바타 제작자 🛠️"
-	},
 	"aviation": {
 		"name": "항공 ✈️"
 	},
 	"board_games": {
 		"name": "보드게임 🎲"
-	},
-	"booth_avatars": {
-		"name": "Booth 아바타"
 	},
 	"caffeinated": {
 		"name": "카페인 중독 ☕️"
@@ -148,9 +142,6 @@
 	},
 	"esports": {
 		"name": "e스포츠"
-	},
-	"exploring_worlds": {
-		"name": "월드 탐험 🗺️"
 	},
 	"fantasy": {
 		"name": "판타지 🐉"
@@ -272,9 +263,6 @@
 	"military": {
 		"name": "밀리터리"
 	},
-	"mirror_dweller": {
-		"name": "거울 앞 붙박이 🪞"
-	},
 	"mmos": {
 		"name": "MMO 🌐"
 	},
@@ -304,9 +292,6 @@
 	},
 	"overwatch": {
 		"name": "오버워치"
-	},
-	"phantom_sense": {
-		"name": "팬텀 센스"
 	},
 	"philosophy": {
 		"name": "철학"

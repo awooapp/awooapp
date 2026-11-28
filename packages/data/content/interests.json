@@ -65,7 +65,7 @@
 		"synonyms": ["pets"]
 	},
 	"anime": {
-		"category": "popular",
+		"category": "general",
 		"internal": {
 			"legacy_id": "BTGLoHoCuPjvY2NrRKSWpb"
 		},
@@ -84,18 +84,11 @@
 		}
 	},
 	"art": {
-		"category": "popular",
+		"category": "general",
 		"internal": {
 			"legacy_id": "ZNXNaLMr85qQbKmX2TsrGQ"
 		},
 		"synonyms": ["artist", "drawing", "painting"]
-	},
-	"avatar_creator": {
-		"category": "popular",
-		"internal": {
-			"legacy_id": "yfQMpqdsbfNqCKjzrJT4wR"
-		},
-		"synonyms": ["blender", "unity"]
 	},
 	"aviation": {
 		"category": "general",
@@ -111,14 +104,6 @@
 			"legacy_id": "ba58TDSPbjG9jtZixoneUn"
 		},
 		"synonyms": ["tabletop", "card"]
-	},
-	"booth_avatars": {
-		"category": "identity",
-		"internal": {
-			"legacy_id": "R9vN8EaDE7xTuUFMXA4bkP"
-		},
-		"strength": 2,
-		"synonyms": ["booth.pm"]
 	},
 	"caffeinated": {
 		"category": "identity",
@@ -189,7 +174,7 @@
 		"synonyms": ["chilling", "relaxing"]
 	},
 	"clubbing": {
-		"category": "popular",
+		"category": "general",
 		"internal": {
 			"legacy_id": "Hacqj4nYnvzcbCD8vxPniH"
 		},
@@ -244,7 +229,7 @@
 		"strength": 1
 	},
 	"cuddles": {
-		"category": "popular",
+		"category": "general",
 		"internal": {
 			"legacy_id": "Bmkx6cmyU9kbuA3pdwv43o"
 		},
@@ -349,13 +334,6 @@
 			"legacy_id": "XRjfs5BAZhgeKnofywDX8d"
 		}
 	},
-	"exploring_worlds": {
-		"category": "popular",
-		"internal": {
-			"legacy_id": "4UEEGvGvhyBTRWKUjVAMMe"
-		},
-		"synonyms": ["world hopping"]
-	},
 	"fantasy": {
 		"category": "general",
 		"internal": {
@@ -445,7 +423,7 @@
 		"synonyms": ["game development", "game developer"]
 	},
 	"gaming": {
-		"category": "popular",
+		"category": "games",
 		"internal": {
 			"legacy_id": "PAepdb7ewc4GVEnpWDCbcK"
 		},
@@ -527,7 +505,7 @@
 		}
 	},
 	"horror": {
-		"category": "popular",
+		"category": "general",
 		"internal": {
 			"legacy_id": "HVQvfazU9oX6qSeM8kXvaM"
 		}
@@ -582,7 +560,7 @@
 		}
 	},
 	"lgbtq": {
-		"category": "popular",
+		"category": "identity",
 		"internal": {
 			"legacy_id": "guNDL9je3iot5XcYqaj9uS"
 		},
@@ -648,13 +626,6 @@
 		"category": "games",
 		"strength": 1
 	},
-	"mirror_dweller": {
-		"category": "identity",
-		"internal": {
-			"legacy_id": "QXAV9E84tkhjZKgKqgRjDA"
-		},
-		"strength": 1
-	},
 	"mmos": {
 		"category": "game_genres",
 		"internal": {
@@ -672,14 +643,14 @@
 		"synonyms": ["bikes", "biking"]
 	},
 	"movies": {
-		"category": "popular",
+		"category": "general",
 		"internal": {
 			"legacy_id": "Amq7oATgh6UcQx4SoeJdkD"
 		},
 		"synonyms": ["film"]
 	},
 	"music": {
-		"category": "popular",
+		"category": "music",
 		"internal": {
 			"legacy_id": "fEnnW4XeNnNbqReCryY58R"
 		},
@@ -746,12 +717,6 @@
 		},
 		"strength": 1,
 		"synonyms": ["fps", "shooter", "shooting"]
-	},
-	"phantom_sense": {
-		"category": "identity",
-		"internal": {
-			"legacy_id": "zoEgxZ7KoBNRCrgA3XbdDA"
-		}
 	},
 	"philosophy": {
 		"category": "general",
@@ -853,7 +818,7 @@
 		"synonyms": ["rock n roll", "rock 'n' roll", "rock and roll"]
 	},
 	"roleplaying": {
-		"category": "popular",
+		"category": "general",
 		"internal": {
 			"legacy_id": "znH7NHT6ysUrRHzVcqxNYQ"
 		},

@@ -38,17 +38,11 @@
 	"art": {
 		"name": "アート 🎨"
 	},
-	"avatar_creator": {
-		"name": "アバター制作 🛠️"
-	},
 	"aviation": {
 		"name": "飛行機 ✈️"
 	},
 	"board_games": {
 		"name": "ボードゲーム 🎲"
-	},
-	"booth_avatars": {
-		"name": "BOOTHアバター"
 	},
 	"caffeinated": {
 		"name": "カフェイン中毒 ☕️"
@@ -148,9 +142,6 @@
 	},
 	"esports": {
 		"name": "eスポーツ"
-	},
-	"exploring_worlds": {
-		"name": "ワールド巡り 🗺️"
 	},
 	"fantasy": {
 		"name": "ファンタジー 🐉"
@@ -272,9 +263,6 @@
 	"military": {
 		"name": "ミリタリー"
 	},
-	"mirror_dweller": {
-		"name": "鏡の住人 🪞"
-	},
 	"mmos": {
 		"name": "MMO 🌐"
 	},
@@ -304,9 +292,6 @@
 	},
 	"overwatch": {
 		"name": "オーバーウォッチ"
-	},
-	"phantom_sense": {
-		"name": "ファントムセンス"
 	},
 	"philosophy": {
 		"name": "哲学"

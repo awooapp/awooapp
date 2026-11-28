@@ -38,17 +38,11 @@
 	"art": {
 		"name": "Искусство 🎨"
 	},
-	"avatar_creator": {
-		"name": "Создание аватаров 🛠️"
-	},
 	"aviation": {
 		"name": "Авиация ✈️"
 	},
 	"board_games": {
 		"name": "Настольные игры 🎲"
-	},
-	"booth_avatars": {
-		"name": "Аватары с Booth"
 	},
 	"caffeinated": {
 		"name": "Живу на кофеине ☕️"
@@ -148,9 +142,6 @@
 	},
 	"esports": {
 		"name": "Киберспорт"
-	},
-	"exploring_worlds": {
-		"name": "Исследование миров 🗺️"
 	},
 	"fantasy": {
 		"name": "Фэнтези 🐉"
@@ -272,9 +263,6 @@
 	"military": {
 		"name": "Армия"
 	},
-	"mirror_dweller": {
-		"name": "Тусуюсь у зеркала 🪞"
-	},
 	"mmos": {
 		"name": "MMO 🌐"
 	},
@@ -304,9 +292,6 @@
 	},
 	"overwatch": {
 		"name": "Overwatch"
-	},
-	"phantom_sense": {
-		"name": "Фантомные ощущения"
 	},
 	"philosophy": {
 		"name": "Философия"
