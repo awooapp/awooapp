@@ -11,14 +11,8 @@
 	"favorite_game": {
 		"name": "Mi juego favorito de todos los tiempos"
 	},
-	"favorite_in_vr": {
-		"name": "Lo que más me gusta hacer en VR"
-	},
 	"favorite_movie": {
 		"name": "Mi película favorita es"
-	},
-	"favorite_vrchat_world": {
-		"name": "Mi mundo favorito de VRChat"
 	},
 	"getting_to_know_me": {
 		"name": "El secreto para conocerme es"

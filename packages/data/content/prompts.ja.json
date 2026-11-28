@@ -11,14 +11,8 @@
 	"favorite_game": {
 		"name": "人生で一番好きなゲーム"
 	},
-	"favorite_in_vr": {
-		"name": "VRで一番好きなこと"
-	},
 	"favorite_movie": {
 		"name": "一番好きな映画は"
-	},
-	"favorite_vrchat_world": {
-		"name": "お気に入りのVRChatワールド"
 	},
 	"getting_to_know_me": {
 		"name": "私と仲良くなる秘訣は"
